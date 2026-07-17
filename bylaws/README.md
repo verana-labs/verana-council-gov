@@ -3,7 +3,7 @@
 > **Status:** Pre-incorporation draft placeholder. Founding Members' General
 > Counsel teams review the current draft under NDA; written comments are
 > aggregated by the Nominations & Conduct Committee and incorporated. Final text
-> is ratified by the Q3 2026 Incorporation General Assembly.
+> is ratified by the Q4 2026 Incorporation General Assembly.
 
 The statutes of the Verana Council Association, a non-profit Swiss Verein
 (Art. 60 ZGB).

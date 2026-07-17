@@ -8,7 +8,7 @@ Each version is tracked in git; published versions carry a permanent URL and an
 SRI hash.
 
 > **Status:** Pre-incorporation drafts. Founding Members co-author the text
-> through ratification at the Q3 2026 Incorporation General Assembly.
+> through ratification at the Q4 2026 Incorporation General Assembly.
 
 ## Documents
 
