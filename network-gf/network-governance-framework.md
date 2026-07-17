@@ -1,6 +1,6 @@
 # Verana Network Governance Framework
 
-> **Status: DRAFT 0.1 — first draft for co-authoring by Founding Members.** This document is not yet in force. It is ratified at the Incorporation General Assembly of the Verana Council Association (target Q3 2026). Where this document states protocol facts, the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/) and the [Verifiable Public Registry (VPR) specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/) prevail. Where it states entity facts, the Verana entity definitions and the Council public record prevail. During the pre-incorporation period, 2060 OÜ acts as transitional steward; every steward power carries an event-triggered sunset (chapter [NGF-TRAN]).
+> **Status: DRAFT 0.1 — first draft for co-authoring by Founding Members.** This document is not yet in force. It is ratified at the Incorporation General Assembly of the Verana Council Association (target Q4 2026). Where this document states protocol facts, the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/) and the [Verifiable Public Registry (VPR) specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/) prevail. Where it states entity facts, the Verana entity definitions and the Council public record prevail. During the pre-incorporation period, 2060 OÜ acts as transitional steward; every steward power carries an event-triggered sunset (chapter [NGF-TRAN]).
 
 | Document control | |
 | --- | --- |
@@ -9,7 +9,7 @@
 | Status | Draft — for co-authoring by Founding Members |
 | Governs | The Verana network (the live, validator-secured VPR chain): the constitutional floor every EGF anchored on it must respect, and the network-facing duties of every participant |
 | Governed By | The Verana Council Association (in formation), acting through the mechanisms of chapter [NGF-GOV] |
-| Approved By | Pending — Incorporation General Assembly, target Q3 2026 |
+| Approved By | Pending — Incorporation General Assembly, target Q4 2026 |
 | Approval Date | Pending |
 | License | Creative Commons Attribution-ShareAlike 4.0 International (CC-BY-SA 4.0) |
 | Anchoring | Git history and tagged releases in `verana-labs/verana-council-gov` and a public URL now; on-chain `GovernanceFrameworkDocument` (`url` + `digest_sri`) once the network is live |
@@ -60,7 +60,7 @@ Terms defined in the VT specification and the VPR specification (including *corp
 
 The following local terms are defined for this document. Definitions carry no normative keywords.
 
-- **Council**: the Verana Council Association, a non-profit Swiss Verein (Art. 60 ZGB), in formation with target incorporation Q3 2026; the governance authority of the Verana network in the sense of the VPR specification.
+- **Council**: the Verana Council Association, a non-profit Swiss Verein (Art. 60 ZGB), in formation with target incorporation Q4 2026; the governance authority of the Verana network in the sense of the VPR specification.
 - **Member** (also **Founding Member**): an organization holding a seat in the Council. Member here always means the Verein member; it is distinct from *Participant*, which is a VPR on-chain role.
 - **General Assembly**: the supreme organ of the Verein (Art. 64 ZGB), composed of all seated Members, one vote each. Always spelled out in this document; the abbreviation "GA" is not used, to avoid collision with "governance authority".
 - **Board**: the small body elected by the General Assembly that runs and legally represents the association.
@@ -439,7 +439,7 @@ The following local terms are defined for this document. Definitions carry no no
 
 ### 14.3 Ratification and cutover
 
-- **[NGF-TRAN-5]** This document is submitted for ratification at the Incorporation General Assembly (target Q3 2026), together with the en-bloc ratification of [NGF-TRAN-1](b).
+- **[NGF-TRAN-5]** This document is submitted for ratification at the Incorporation General Assembly (target Q4 2026), together with the en-bloc ratification of [NGF-TRAN-1](b).
 - **[NGF-TRAN-6]** At mainnet launch: the genesis validator set consists of the seated Members that have demonstrated testnet readiness per [NGF-VAL-3], with not-yet-ready seated Members joining per the cure path of [NGF-VAL-3]; the genesis GlobalVariables are the values of Annex A; and the Council MUST anchor the then-current version of this document on-chain within the creation of its own Corporation entry (MOD-CO-MSG-1, whose mandatory v1 governance-framework document parameters carry this document's `url` and `digest_sri`), and the ECS-EGF within the creation of its Ecosystem entry (MOD-ES-MSG-1), as its first governance acts. Subsequent versions publish and activate via MOD-GF-MSG-1 and MOD-GF-MSG-2 ([NGF-AMND-5]).
 - **[NGF-TRAN-7]** Any founding-era distinction (such as the "Founding Member" designation) is historical only and confers no right or power beyond those of any seated Member.
 

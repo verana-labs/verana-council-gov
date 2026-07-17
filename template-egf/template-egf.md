@@ -7,14 +7,14 @@
 | Status | Draft for co-authoring by Founding Members |
 | Governs | Nothing by itself — a voluntary scaffold; the `[TEGF-n]` requirements of section 5 bind only ecosystems that derive their EGF from this template or represent their EGF as conformant with this template |
 | Governed By | The Verana Council Association (in formation), acting through the mechanisms of Network GF chapter [NGF-GOV] |
-| Approved By | Pending — Incorporation General Assembly, target Q3 2026 |
+| Approved By | Pending — Incorporation General Assembly, target Q4 2026 |
 | Approval Date | Pending |
 | License | CC-BY-SA 4.0 |
 | Anchoring | Git history and public URL in `verana-labs/verana-council-gov` now; on-chain `GovernanceFrameworkDocument` (`url` + `digest_sri`) once the network is live |
 
 > **Status: DRAFT 0.1.** This is a first draft prepared for co-authoring by the
 > Founding Members of the Verana Council Association, for ratification at the
-> Q3 2026 Incorporation General Assembly. Where this document states protocol
+> Q4 2026 Incorporation General Assembly. Where this document states protocol
 > facts, the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/)
 > and the [Verifiable Public Registry (VPR) specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/)
 > prevail. Where it states entity facts, the Council's definitions record and

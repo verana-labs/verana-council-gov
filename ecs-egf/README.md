@@ -1,7 +1,7 @@
 # ECS Ecosystem Governance Framework (ECS-EGF)
 
 > **Status:** `DRAFT 0.1` — first draft for co-authoring by Founding Members.
-> Ratified text is adopted at the Q3 2026 Incorporation General Assembly.
+> Ratified text is adopted at the Q4 2026 Incorporation General Assembly.
 
 📄 **[Read the ECS Ecosystem Governance Framework](./ecs-ecosystem-governance-framework.md)**
 

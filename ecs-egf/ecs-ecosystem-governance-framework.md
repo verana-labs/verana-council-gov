@@ -7,14 +7,14 @@
 | Status | Draft for co-authoring by Founding Members |
 | Governs | The ECS ecosystem: the four Essential Credential Schemas (Service, Organization, Persona, UserAgent) and every Participant in their permission trees |
 | Governed By | The Verana Council Association (in formation), acting as the ecosystem governance authority (EGA) of the ECS ecosystem |
-| Approved By | Pending — Incorporation General Assembly, target Q3 2026 |
+| Approved By | Pending — Incorporation General Assembly, target Q4 2026 |
 | Approval Date | Pending |
 | License | [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | Anchoring | Git history and tagged releases in `verana-labs/verana-council-gov` plus a public URL now; on-chain `GovernanceFrameworkDocument` (url + digest_sri) on the ECS Ecosystem entry once the network is live |
 
 > **Status: DRAFT 0.1.** This is a first draft published for co-authoring by the
 > Founding Members of the Verana Council Association (in formation). It is
-> scheduled for ratification at the Q3 2026 Incorporation General Assembly.
+> scheduled for ratification at the Q4 2026 Incorporation General Assembly.
 > Where this document states protocol facts, the
 > [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/)
 > and the
