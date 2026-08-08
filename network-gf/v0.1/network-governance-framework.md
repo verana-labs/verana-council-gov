@@ -1,11 +1,11 @@
 # Verana Network Governance Framework
 
-> **Status: DRAFT 0.2 — draft for co-authoring by Founding Members.** This document is not yet in force. It is ratified at the Incorporation General Assembly of the Verana Council Association (target Q4 2026). Where this document states protocol facts, the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/) and the [Verifiable Public Registry (VPR) specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/) prevail. Where it states entity facts, the Verana entity definitions and the Council public record prevail. During the pre-incorporation period, 2060 OÜ acts as transitional steward; every steward power carries an event-triggered sunset (chapter [NGF-TRAN]).
+> **Status: DRAFT 0.1 — first draft for co-authoring by Founding Members.** This document is not yet in force. It is ratified at the Incorporation General Assembly of the Verana Council Association (target Q4 2026). Where this document states protocol facts, the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/) and the [Verifiable Public Registry (VPR) specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/) prevail. Where it states entity facts, the Verana entity definitions and the Council public record prevail. During the pre-incorporation period, 2060 OÜ acts as transitional steward; every steward power carries an event-triggered sunset (chapter [NGF-TRAN]).
 
 | Document control | |
 | --- | --- |
 | Document Name | Verana Network Governance Framework (Network GF) |
-| Version | DRAFT 0.2 |
+| Version | DRAFT 0.1 |
 | Status | Draft — for co-authoring by Founding Members |
 | Governs | The Verana network (the live, validator-secured VPR chain): the constitutional floor every EGF anchored on it must respect, and the network-facing duties of every participant |
 | Governed By | The Verana Council Association (in formation), acting through the mechanisms of chapter [NGF-GOV] |
@@ -36,7 +36,7 @@ Ecosystems on Verana are autonomous. Anyone can create a Corporation and an Ecos
 | --- | --- | --- |
 | Verifiable Trust specification (VT), VPR specification | Protocol standards, owned and hosted by the Verana Foundation | Sources of truth for all protocol facts; where this document paraphrases them, they prevail |
 | **Network Governance Framework** (this document) | Constitutional layer of the network | Governs the commons; every EGF must respect it |
-| ECS Ecosystem Governance Framework (ECS-EGF) | The Council's own ecosystem (five Essential Credential Schemas) | An EGF like any other; must itself satisfy chapter [NGF-EGF]; the reference implementation of those requirements |
+| ECS Ecosystem Governance Framework (ECS-EGF) | The Council's own ecosystem (four Essential Credential Schemas) | An EGF like any other; must itself satisfy chapter [NGF-EGF]; the reference implementation of those requirements |
 | Template EGF | Voluntary scaffold for ecosystems authoring their own EGF | Offered, never required; using it implies no endorsement |
 | Verana Council Association Statutes, Bylaws, Code of Conduct | Association layer (Swiss law) | Govern the Verein as a legal person; carry no network authority beyond what this document channels through the mechanisms of chapter [NGF-GOV] |
 
@@ -526,5 +526,4 @@ The following local terms are defined for this document. Definitions carry no no
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.2 | 2026-08-08 | Draft | Cross-reference to the ECS-EGF updated to five Essential Credential Schemas (Badge added per Verifiable Trust specification v4). |
-| 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`) |
+| 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members |

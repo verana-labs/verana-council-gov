@@ -3,16 +3,16 @@
 | Field | Value |
 | --- | --- |
 | Document Name | ECS Ecosystem Governance Framework (ECS-EGF) |
-| Version | DRAFT 0.2 |
+| Version | DRAFT 0.1 |
 | Status | Draft for co-authoring by Founding Members |
-| Governs | The ECS ecosystem: the five Essential Credential Schemas (Service, Organization, Persona, UserAgent, Badge) and every Participant in their permission trees |
+| Governs | The ECS ecosystem: the four Essential Credential Schemas (Service, Organization, Persona, UserAgent) and every Participant in their permission trees |
 | Governed By | The Verana Council Association (in formation), acting as the ecosystem governance authority (EGA) of the ECS ecosystem |
 | Approved By | Pending — Incorporation General Assembly, target Q4 2026 |
 | Approval Date | Pending |
 | License | [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | Anchoring | Git history and tagged releases in `verana-labs/verana-council-gov` plus a public URL now; on-chain `GovernanceFrameworkDocument` (url + digest_sri) on the ECS Ecosystem entry once the network is live |
 
-> **Status: DRAFT 0.2.** This is a draft published for co-authoring by the
+> **Status: DRAFT 0.1.** This is a first draft published for co-authoring by the
 > Founding Members of the Verana Council Association (in formation). It is
 > scheduled for ratification at the Q4 2026 Incorporation General Assembly.
 > Where this document states protocol facts, the
@@ -32,7 +32,7 @@
 
 Verifiable Trust inverts the internet's default: verify first, then connect.
 Before any connection is accepted, a relying party must be able to answer, by
-independent cryptographic verification, five questions about a counterpart:
+independent cryptographic verification, four questions about a counterpart:
 
 1. **What service is this?** — answered by a Service credential.
 2. **Who is accountable for it?** — answered by an Organization credential
@@ -40,26 +40,23 @@ independent cryptographic verification, five questions about a counterpart:
    controller).
 3. **What software is the user running?** — answered by a UserAgent
    credential.
-4. **Which human is operating that user agent, and whom do they
-   represent?** — answered by a Badge credential, issued to a human by the
-   Verifiable Service of the organization or persona they represent.
-5. **Under which governance framework is all of the above accredited?** —
+4. **Under which governance framework is all of the above accredited?** —
    answered by trust resolution terminating at an Ecosystem DID and its
    published, digest-anchored governance framework.
 
-The five **Essential Credential Schemas (ECS)** — Service, Organization,
-Persona, UserAgent, Badge — are the minimum schema set that makes those five
+The four **Essential Credential Schemas (ECS)** — Service, Organization,
+Persona, UserAgent — are the minimum schema set that makes those four
 questions resolvable for *any* Verifiable Service (VS) or Verifiable User
 Agent (VUA), regardless of sector. The Verifiable Trust specification defines
-their content ([ECS-SERVICE], [ECS-ORG], [ECS-PERSONA], [ECS-UA],
-[ECS-BADGE]) and requires that an ECS Ecosystem provide all five as
-CredentialSchema entries in a Verifiable Public Registry (VPR).
+their content ([ECS-SERVICE], [ECS-ORG], [ECS-PERSONA], [ECS-UA]) and
+requires that an ECS Ecosystem provide all four as CredentialSchema entries
+in a Verifiable Public Registry (VPR).
 
 ### 1.2 The ECS ecosystem and its trust-root status
 
 This document is the ecosystem governance framework (EGF) of the **ECS
 ecosystem** operated by the Verana Council Association: the ecosystem that
-publishes the five ECS on the Verana network and accredits the Participants
+publishes the four ECS on the Verana network and accredits the Participants
 who issue and verify credentials under them.
 
 The ECS ecosystem holds no protocol privilege. Per the Verifiable Trust
@@ -91,7 +88,7 @@ this framework and, when necessary, applying the financial sanctions the
 protocol provides.
 
 The objective of this framework, in one sentence: **the trustworthiness of
-the five ECS credential chains** — that a credential which verifies against
+the four ECS credential chains** — that a credential which verifies against
 the ECS ecosystem's trust root was issued by an accredited party, about a
 verified subject, under published rules, and that its revocation state is
 reliable.
@@ -100,7 +97,7 @@ reliable.
 
 Chapters 2–3 define conformance language and local terminology. Chapters
 4–5 establish the ecosystem's on-chain footprint and the normative
-configuration of the five schemas. Chapter 6 contains one credential
+configuration of the four schemas. Chapter 6 contains one credential
 framework per schema, on a fixed skeleton. Chapters 7–8 define the
 accreditation machine and the Participant lifecycle. Chapters 9–14 cover
 economics, trust assurance, sanctions and disputes, privacy, amendment, and
@@ -132,7 +129,7 @@ identifier prefixes (for example "chapter [NGF-EGF]"), because the sibling
 documents are versioned independently.
 
 Bracketed anchors of the Verifiable Trust and VPR specifications (for
-example [ECS-SERVICE], [ECS-ORG], [ECS-PERSONA], [ECS-UA], [ECS-BADGE], or
+example [ECS-SERVICE], [ECS-ORG], [ECS-PERSONA], [ECS-UA], or
 [MOD-PP-MSG-3]) are external citations into those specifications. They are
 distinct from this document's own requirement identifiers, whose families
 always carry a numeric suffix (for example [ECS-ORG-14] is a requirement of
@@ -295,7 +292,7 @@ Verana Council Association ([MOD-CO-MSG-1]); the ECS Ecosystem entry
 ([MOD-ES-MSG-1]) with its `did` (the **ECS Ecosystem DID**), carrying
 version 1 of this framework as its governance framework document
 (url + digest_sri, activated at creation; subsequent versions via
-[MOD-GF-MSG-1] / [MOD-GF-MSG-2]); the five ECS CredentialSchema entries
+[MOD-GF-MSG-1] / [MOD-GF-MSG-2]); the four ECS CredentialSchema entries
 ([MOD-CS-MSG-1]) configured per Chapter 5; the root `ECOSYSTEM` Participant
 entries ([MOD-PP-MSG-7]); and, for every (schema, role) pair with role
 `ISSUER` or `VERIFIER` that is subject to accreditation criteria, the
@@ -308,8 +305,7 @@ one `LinkedVerifiablePresentation` service entry per ECS pointing to the
 self-issued Verifiable Trust Json Schema Credential (VTJSC) of that schema,
 with the exact fragment names required by [VT-ECS-ECOSYSTEM-DIDDOC]
 (`#vpr-schemas-service-vtjsc-vp`, `#vpr-schemas-org-vtjsc-vp`,
-`#vpr-schemas-persona-vtjsc-vp`, `#vpr-schemas-ua-vtjsc-vp`,
-`#vpr-schemas-badge-vtjsc-vp`).
+`#vpr-schemas-persona-vtjsc-vp`, `#vpr-schemas-ua-vtjsc-vp`).
 
 [ECS-ROOT-3] The VTJSCs for the Organization and Persona schemas MUST carry
 `validFrom` and `validUntil` properties, as required by
@@ -396,34 +392,34 @@ unrepaid network-level slash ([MOD-TD-MSG-5]).
 from the ECS Ecosystem DID, satisfying TRQP's requirement that the
 ecosystem governance framework be discoverable via the `authority_id`.
 
-[ECS-GEN-15] Permission state for the five ECS MUST be reconstructible
+[ECS-GEN-15] Permission state for the four ECS MUST be reconstructible
 as-of any past time from public chain data, so that TRQP time-scoped
 queries and issuance-time authorization checks yield deterministic answers.
 
-## 5. The Five Essential Credential Schemas
+## 5. The Four Essential Credential Schemas
 
 ### 5.1 Normative configuration
 
-[ECS-GEN-16] The Council MUST create and maintain the five ECS
+[ECS-GEN-16] The Council MUST create and maintain the four ECS
 CredentialSchema entries with exactly the configuration of Table 2; any
 deviation is an amendment to this framework (Chapter 13).
 
 **Table 2 — ECS CredentialSchema configuration (normative):**
 
-| Field | Service | Organization | Persona | UserAgent | Badge |
-| --- | --- | --- | --- | --- | --- |
-| `json_schema` | [ECS-SERVICE] | [ECS-ORG] | [ECS-PERSONA] | [ECS-UA] | [ECS-BADGE] |
-| `issuer_onboarding_mode` | `ECOSYSTEM_ONBOARDING_PROCESS` | `GRANTOR_ONBOARDING_PROCESS` | `GRANTOR_ONBOARDING_PROCESS` | `OPEN` | `OPEN` |
-| `verifier_onboarding_mode` | `OPEN` | `OPEN` | `OPEN` | `OPEN` | `OPEN` |
-| `holder_onboarding_mode` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `PERMISSIONLESS` | `PERMISSIONLESS` |
-| `issuer_grantor_validation_validity_period` | 0 | Annex A | Annex A | 0 | 0 |
-| `verifier_grantor_validation_validity_period` | 0 | 0 | 0 | 0 | 0 |
-| `issuer_validation_validity_period` | Annex A | Annex A | Annex A | Annex A | Annex A |
-| `verifier_validation_validity_period` | Annex A | Annex A | Annex A | Annex A | Annex A |
-| `holder_validation_validity_period` | Annex A | Annex A | Annex A | 0 | 0 |
-| `pricing_asset_type` | `TU` | `TU` | `TU` | `TU` | `TU` |
-| `pricing_asset` | `tu` | `tu` | `tu` | `tu` | `tu` |
-| `digest_algorithm` | `SHA384` | `SHA384` | `SHA384` | `SHA384` | `SHA384` |
+| Field | Service | Organization | Persona | UserAgent |
+| --- | --- | --- | --- | --- |
+| `json_schema` | [ECS-SERVICE] | [ECS-ORG] | [ECS-PERSONA] | [ECS-UA] |
+| `issuer_onboarding_mode` | `ECOSYSTEM_ONBOARDING_PROCESS` | `GRANTOR_ONBOARDING_PROCESS` | `GRANTOR_ONBOARDING_PROCESS` | `OPEN` |
+| `verifier_onboarding_mode` | `OPEN` | `OPEN` | `OPEN` | `OPEN` |
+| `holder_onboarding_mode` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `PERMISSIONLESS` |
+| `issuer_grantor_validation_validity_period` | 0 | Annex A | Annex A | 0 |
+| `verifier_grantor_validation_validity_period` | 0 | 0 | 0 | 0 |
+| `issuer_validation_validity_period` | Annex A | Annex A | Annex A | Annex A |
+| `verifier_validation_validity_period` | Annex A | Annex A | Annex A | Annex A |
+| `holder_validation_validity_period` | Annex A | Annex A | Annex A | 0 |
+| `pricing_asset_type` | `TU` | `TU` | `TU` | `TU` |
+| `pricing_asset` | `tu` | `tu` | `tu` | `tu` |
+| `digest_algorithm` | `SHA384` | `SHA384` | `SHA384` | `SHA384` |
 
 *Non-normative notes on Table 2:*
 
@@ -433,22 +429,14 @@ deviation is an amendment to this framework (Chapter 13).
   role no onboarding path reaches).
 - The `holder_onboarding_mode` values for Service, Organization, and Persona
   are mandated by the Verifiable Trust specification
-  ([VT-ECS-JSON-SCHEMA-VPR-CONFIG]), and so is the **entire Badge
-  configuration on the issuer and holder sides**: [ECS-BADGE] entries MUST
-  set `issuer_onboarding_mode` to `OPEN` and `holder_onboarding_mode` to
-  `PERMISSIONLESS`, so that any Corporation whose service qualifies as a
-  Verifiable Service per [VS-REQ] can self-create its `ISSUER` entry and
-  issue Badges to the humans it stands behind — trust in a Badge derives
-  from trust-resolving its issuer, not from an onboarding gate.
+  ([VT-ECS-JSON-SCHEMA-VPR-CONFIG]).
 - Issuer modes: Service issuers are onboarded directly by the Council
   (`ECOSYSTEM_ONBOARDING_PROCESS`); Organization and Persona issuers are
   onboarded by accredited Issuer Grantors
   (`GRANTOR_ONBOARDING_PROCESS`); UserAgent issuers are software vendors who
-  self-register (`OPEN`), subject to the normative vendor duties of §6.4;
-  Badge issuers are the Verifiable Services themselves, which self-register
-  (`OPEN`, spec-mandated), subject to the normative issuer duties of §6.5.
+  self-register (`OPEN`), subject to the normative vendor duties of §6.5.
 
-> **[DECISION]** *Verifier onboarding mode `OPEN` for all five schemas at
+> **[DECISION]** *Verifier onboarding mode `OPEN` for all four schemas at
 > launch.* Rationale: verifying an ECS credential is the low-risk side of
 > the exchange — a verifier learns only what a holder chooses to present,
 > and gating verification would tax adoption of exactly the parties
@@ -484,8 +472,7 @@ minus `$id`).
 | ServiceCredential | <https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/service.json> | `sha384-0v+BAFGpnBX/RVqH9dUlMglxMrD4AKy4qUtb1lMN4iW9I2gO7XjcUfmGOf0oInP3` |
 | OrganizationCredential | <https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/org.json> | `sha384-UPn4TDqS1nMBAN3FyMzTAZOWp99zBjBD69OjpbhwOKZj7iOrS5qPwJ2SArRz0yzu` |
 | PersonaCredential | <https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/persona.json> | `sha384-VfXTfuks02OkoR5USaTfEdc4NU25m4+vNrLATnjC0r0Pn1S3tFTdOvGCfSYdjE2I` |
-| UserAgentCredential | <https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/ua.json> | `sha384-rIWkh3zBD1Ak7CNGpAwZ/ONSmf+ywOYSF3H60ULc9/a1ZYKv6EqiQMJ2dm8dOfjm` |
-| BadgeCredential | <https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/badge.json> | `sha384-ZxJ2aRpoF/5DJSILWwOES6bmpMg3RZYOfO2CCF8hC/YDNvU+PhCqAnAXq/66nXCq` |
+| UserAgentCredential | <https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/ua.json> | `sha384-yLRK2mCokVjRlGX0nVzdEYQ1o6YWpQqgdg6+HlSxCePP+D7wvs0+70TJACLZfbF/` |
 
 ### 5.3 Schema-change policy
 
@@ -503,7 +490,7 @@ documented security cause.
 
 ## 6. Per-Schema Credential Frameworks
 
-*Non-normative note:* each of the five frameworks below follows one fixed
+*Non-normative note:* each of the four frameworks below follows one fixed
 skeleton — Purpose · Scope · Principles · Issuer policies (eligibility,
 identity verification, issuance, revocation, level of assurance,
 monitoring) · Holder policies · Verifier policies · Credential definition —
@@ -880,118 +867,6 @@ AnonCreds credential definition referencing the UserAgent VTJSC via
 `relatedJsonSchemaCredentialId`, and digests where applicable computed
 with SHA-384.
 
-### 6.5 Badge Credential Framework
-
-#### 6.5.1 Purpose and scope
-
-*This section is non-normative.* The Badge credential identifies a
-**human** — an employee, member, or other natural person the operator of a
-Verifiable Service stands behind — so that a service or peer can know which
-person is operating a user agent and whom that person represents. A Badge is
-issued by a Verifiable Service to a human holder; the organization or
-persona standing behind the holder is obtained by trust-resolving the
-**issuer** DID of the credential, never from the Badge's own attributes.
-Its subject carries an issuer-scoped `badgeNumber`, display `name`, an
-inline `photo`, and optional `title`, `department`, `birthDate` (an integer
-"dateint" enabling zero-knowledge age predicates), and a protected
-`biometricPattern` with its `biometricPatternScheme`.
-
-#### 6.5.2 Principles
-
-*This section is non-normative.* The Badge inverts the accreditation
-pattern of the other schemas: there is no onboarding gate, because trust in
-a Badge is exactly the trust in its issuer's own ECS chain (Service +
-Organization/Persona). Any Verifiable Service can badge its own people;
-whether a relying party accepts the badge is a function of whether it
-trusts the service. Privacy drives the container choice: Badges are
-AnonCreds credentials with selective disclosure, carry **no subject
-identifier** (holder binding is by link secret, the subject is identified
-by the (issuer, `badgeNumber`) pair), and embed their media inline so that
-no dereferenceable tracking URL exists. Badge attributes state facts, never
-permissions: authorization decisions belong to the relying party.
-
-#### 6.5.3 Issuer policies
-
-[ECS-BDG-1] `ISSUER` entries for the Badge schema are self-created under
-`OPEN` mode ([MOD-PP-MSG-14]) by Corporations whose service qualifies as a
-Verifiable Service per the VT specification's [VS-REQ], subject to the
-issuer duties of this section, which are conditions of keeping the
-permission; a Corporation whose service ceases to qualify as a Verifiable
-Service MUST cease issuing Badges until conformance is restored.
-
-[ECS-BDG-2] A Badge issuer MUST issue Badges only to natural persons it
-stands behind (its employees, members, contractors, or equivalent), and
-MUST verify, before issuance, the identity of the holder and the
-holder's affiliation with the issuer through its own personnel or
-membership records.
-
-[ECS-BDG-3] Each `badgeNumber` MUST be unique per issuer, and an issuer
-MUST NOT reassign a `badgeNumber` to a different person.
-
-[ECS-BDG-4] The `name`, `photo`, and, where present, `title`,
-`department`, and `birthDate` attributes MUST accurately describe the
-holder at issuance; the `photo` MUST be an inline `data:` URI
-(`image/png` or `image/jpeg`) suitable as a reference image for
-face-matching challenges, per [ECS-BADGE].
-
-[ECS-BDG-5] Where a `biometricPattern` is included, it MUST be a protected
-biometric template (never a raw biometric), MUST be accompanied by a
-`biometricPatternScheme` identifier drawn from the recognized scheme list
-of the Operational Annex (Annex B), and the issuer MUST record the
-holder's explicit consent to its inclusion; withdrawal of that consent is
-a mandatory revocation trigger.
-
-[ECS-BDG-6] Badge credentials MUST be issued as AnonCreds Verifiable
-Trust Credentials ([VT-ECS-BADGE-CRED-ANON]) with revocation support, and
-MUST NOT be published in any DID Document.
-
-[ECS-BDG-7] A Badge issuer MUST revoke a Badge within 5 days of
-establishing any of: the end of the holder's affiliation with the issuer;
-material inaccuracy of a subject attribute; compromise of the credential;
-withdrawal of the holder's consent under [ECS-BDG-5]; or a verified
-revocation request per [ECS-SANC-9]; and MUST maintain the availability
-of its revocation registry per [ECS-LIFE-11].
-
-#### 6.5.4 Holder policies
-
-There are no holder onboarding requirements for the Badge schema
-(`holder_onboarding_mode` = `PERMISSIONLESS`, spec-mandated; see the
-Table 2 notes): the holder wallet enforces issuer authorization at
-credential reception time, per the Verifiable Trust specification.
-
-[ECS-BDG-8] A Badge holder SHOULD disclose the `photo` and
-`biometricPattern` attributes only when an authentication challenge
-requires them, using selective disclosure for every presentation.
-
-#### 6.5.5 Verifier policies
-
-There are no additional verifier onboarding restrictions for the Badge
-schema.
-
-[ECS-BDG-9] A verifier MUST NOT interpret any Badge attribute (such as
-`title` or `department`) as a role, permission, or authorization
-assertion: Badge attributes identify the holder and carry informative
-facts only, and authorization decisions belong to the relying party,
-per [ECS-BADGE].
-
-[ECS-BDG-10] A verifier MUST NOT request the `photo` or
-`biometricPattern` attributes by default; it MAY request them only for an
-authentication challenge that requires them (for example a face-match
-with liveness check), and MUST NOT retain or correlate them beyond that
-challenge, per [ECS-PRIV-5] and [ECS-PRIV-6].
-
-[ECS-BDG-11] The organization or persona a Badge holder represents MUST
-be determined exclusively by trust resolution of the Badge's issuer DID
-per the VT specification ([VS-REQ], [TR]), never from the Badge's own
-attributes.
-
-#### 6.5.6 Credential definition
-
-[ECS-BDG-12] Badge credentials MUST conform to the VT specification's
-[ECS-BADGE] with the AnonCreds credential definition referencing the
-Badge VTJSC via `relatedJsonSchemaCredentialId`, and digests where
-applicable computed with SHA-384.
-
 ## 7. Accreditation
 
 *Non-normative note:* this chapter is the machine that turns published
@@ -1270,13 +1145,13 @@ how much deposit accrues.
 ### 9.1 Launch fee schedule
 
 [ECS-FEE-1] The `validation_fees`, `issuance_fees`, and
-`verification_fees` for every Council-held Participant entry in the five
+`verification_fees` for every Council-held Participant entry in the four
 ECS trees are set to the Annex A values (0 TU at launch); a Participant
 other than the Council MUST NOT charge fees for ECS operations except per
 [ECS-FEE-5].
 
 > **[DECISION]** *Launch values of 0 TU for validation, issuance, and
-> verification fees on all five schemas.* Rationale: the ECS are the
+> verification fees on all four schemas.* Rationale: the ECS are the
 > bootstrap layer of the entire network — every Verifiable Service needs
 > them before it can do anything else — and pricing the on-ramp would tax
 > adoption exactly when the network needs participants most. Disclosed
@@ -1539,16 +1414,6 @@ presentations beyond the purpose and duration for which it was presented,
 and MUST NOT use UserAgent presentations for cross-context correlation
 ([ECS-UA-7]).
 
-[ECS-PRIV-6] Photographs and biometric templates processed under the Badge
-framework are sensitive personal data: a Badge issuer MUST hold them under
-the holder's recorded consent ([ECS-BDG-5]), MUST embed them inline in the
-credential rather than at any network-dereferenceable URI, and MUST NOT
-publish them; the party that performs biometric matching, the matching
-topology, and the custody of any decryption keys for protected templates
-are defined per scheme in the Operational Annex, and raw (unprotected)
-biometric data MUST NOT be collected, stored, or exchanged under this
-framework.
-
 *Non-normative note on digests:* the network anchors JCS digests of W3C
 credentials to establish objective issuance time. A digest is
 deliberately non-reversible and is anchored without the underlying data;
@@ -1636,12 +1501,12 @@ period at 3650 days (GlobalVariables).
 | # | Parameter | Initial value | Change process |
 | --- | --- | --- | --- |
 | A1 | `issuer_grantor_validation_validity_period` (Organization, Persona) | 365 days | [ECS-AMND-5] + schema config |
-| A2 | `issuer_validation_validity_period` (all five schemas) | 365 days | [ECS-AMND-5] + schema config |
-| A3 | `verifier_validation_validity_period` (all five schemas) | 365 days | [ECS-AMND-5] + schema config |
+| A2 | `issuer_validation_validity_period` (all four schemas) | 365 days | [ECS-AMND-5] + schema config |
+| A3 | `verifier_validation_validity_period` (all four schemas) | 365 days | [ECS-AMND-5] + schema config |
 | A4 | `holder_validation_validity_period` (Service, Organization, Persona) | 365 days | [ECS-AMND-5] + schema config |
-| A5 | `holder_validation_validity_period` (UserAgent, Badge) | 0 (no holder onboarding; `PERMISSIONLESS`) | [ECS-AMND-5] + schema config |
+| A5 | `holder_validation_validity_period` (UserAgent) | 0 (no holder onboarding; `PERMISSIONLESS`) | [ECS-AMND-5] + schema config |
 | A6 | Credential lifetime (`validUntil` − `validFrom`): Organization, Persona, Service | ≤ 365 days | [ECS-AMND-5] |
-| A7 | Credential lifetime: UserAgent, Badge | no fixed expiry; revocation-based | [ECS-AMND-5] |
+| A7 | Credential lifetime: UserAgent | no fixed expiry; revocation-based | [ECS-AMND-5] |
 | A8 | `validation_fees` (all schemas, all roles) | 0 TU | [ECS-AMND-5] |
 | A9 | `issuance_fees` (all schemas) | 0 TU | [ECS-AMND-5] |
 | A10 | `verification_fees` (all schemas) | 0 TU | [ECS-AMND-5] |
@@ -1685,7 +1550,7 @@ listed; each has an owner and a target date.
 | Controlled Document | Charter (one sentence) | Owner | Target |
 | --- | --- | --- | --- |
 | Participant Candidate Agreement | The uniform agreement executed by every applicant for a permissioned ECS role, derived from this framework (replaces the abandoned participant MoU) | Council (accreditation committee drafts) | Q4 2026, before recruitment opens |
-| ECS Onboarding and Identity Verification Operational Annex | Ceremony scripts, challenge formats, recognized registry and eID lists, sanctions-screening levels, slash schedule, the recognized `biometricPatternScheme` identifiers and matching-topology rules for Badge credentials ([ECS-BDG-5], [ECS-PRIV-6]), and the ECS Ecosystem DID key-management procedures | Council (accreditation committee) | Q4 2026, before recruitment opens |
+| ECS Onboarding and Identity Verification Operational Annex | Ceremony scripts, challenge formats, recognized registry and eID lists, sanctions-screening levels, slash schedule, and the ECS Ecosystem DID key-management procedures | Council (accreditation committee) | Q4 2026, before recruitment opens |
 | SchemaAuthorizationPolicy documents, per gated (schema, ISSUER) and (schema, VERIFIER) | The objective accreditation criteria per [ECS-ACC-1](a), published on-chain (url + digest_sri) — the protocol accepts policies only for the `ISSUER` and `VERIFIER` roles | Council | With schema creation; before first application intake |
 | Criteria Controlled Documents, per gated (schema, ISSUER_GRANTOR) and (schema, HOLDER) | The objective accreditation criteria per [ECS-ACC-1](b), digest-anchored and resolvable per [ECS-GEN-7] | Council | Before first application intake |
 | Evidence Checklists, per gated (schema, role) | The uniform evidence instrument whose completed digest is anchored per [ECS-ACC-8] | Council (accreditation committee) | Q4 2026 |
@@ -1695,5 +1560,4 @@ listed; each has an owner and a target date.
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.2 | 2026-08-08 | Draft | Aligned with Verifiable Trust specification v4: added the Badge ECS (five schemas throughout), new §6.5 Badge Credential Framework ([ECS-BDG-1]–[ECS-BDG-12]), Badge VPR configuration in Table 2, Badge VTJSC fragment in [ECS-ROOT-2], Badge schema link and digest in Table 3, biometric-data rule [ECS-PRIV-6], and corrected the UserAgent schema digest in Table 3. |
-| 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`). |
+| 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members. |

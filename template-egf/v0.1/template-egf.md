@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Document Name | Template Ecosystem Governance Framework (Template EGF) |
-| Version | DRAFT 0.2 |
+| Version | DRAFT 0.1 |
 | Status | Draft for co-authoring by Founding Members |
 | Governs | Nothing by itself — a voluntary scaffold; the `[TEGF-n]` requirements of section 5 bind only ecosystems that derive their EGF from this template or represent their EGF as conformant with this template |
 | Governed By | The Verana Council Association (in formation), acting through the mechanisms of Network GF chapter [NGF-GOV] |
@@ -12,7 +12,7 @@
 | License | CC-BY-SA 4.0 |
 | Anchoring | Git history and public URL in `verana-labs/verana-council-gov` now; on-chain `GovernanceFrameworkDocument` (`url` + `digest_sri`) once the network is live |
 
-> **Status: DRAFT 0.2.** This is a draft prepared for co-authoring by the
+> **Status: DRAFT 0.1.** This is a first draft prepared for co-authoring by the
 > Founding Members of the Verana Council Association, for ratification at the
 > Q4 2026 Incorporation General Assembly. Where this document states protocol
 > facts, the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/)
@@ -61,7 +61,7 @@ Three things this template is **not**:
   listed in section 5.
 
 The Council practices what it publishes: the **ECS Ecosystem Governance
-Framework (ECS-EGF)** — the framework governing the five Essential Credential
+Framework (ECS-EGF)** — the framework governing the four Essential Credential
 Schemas — is the worked example of this template. When an instruction below
 feels abstract, read the corresponding section of the ECS-EGF to see it
 filled in for a real ecosystem.
@@ -1095,5 +1095,4 @@ every message named here.*
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.2 | 2026-08-08 | Draft | Cross-reference to the ECS-EGF updated to five Essential Credential Schemas (Badge added per Verifiable Trust specification v4). |
-| 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`) |
+| 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members |
