@@ -1,11 +1,11 @@
 # Verana Network Governance Framework
 
-> **Status: DRAFT 0.3 — draft for co-authoring by Founding Members.** This document is not yet in force. It is ratified at the Incorporation General Assembly of the Verana Council Association (target Q4 2026). Where this document states protocol facts, the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/) and the [Verifiable Public Registry (VPR) specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/) prevail. Where it states entity facts, the Verana entity definitions and the Council public record prevail. During the pre-incorporation period, 2060 OÜ acts as transitional steward; every steward power carries an event-triggered sunset (chapter [NGF-TRAN]).
+> **Status: DRAFT 0.2 — draft for co-authoring by Founding Members.** This document is not yet in force. It is ratified at the Incorporation General Assembly of the Verana Council Association (target Q4 2026). Where this document states protocol facts, the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/) and the [Verifiable Public Registry (VPR) specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/) prevail. Where it states entity facts, the Verana entity definitions and the Council public record prevail. During the pre-incorporation period, 2060 OÜ acts as transitional steward; every steward power carries an event-triggered sunset (chapter [NGF-TRAN]).
 
 | Document control | |
 | --- | --- |
 | Document Name | Verana Network Governance Framework (Network GF) |
-| Version | DRAFT 0.3 |
+| Version | DRAFT 0.2 |
 | Status | Draft — for co-authoring by Founding Members |
 | Governs | The Verana network (the live, validator-secured VPR chain): the constitutional floor every EGF anchored on it must respect, and the network-facing duties of every participant |
 | Governed By | The Verana Council Association (in formation), acting through the mechanisms of chapter [NGF-GOV] |
@@ -526,6 +526,5 @@ The following local terms are defined for this document. Definitions carry no no
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.3 | 2026-08-08 | Draft | Working draft — no changes yet relative to 0.2. |
-| 0.2 | 2026-08-08 | Draft | (Archived under `v0.2/`.) Cross-reference to the ECS-EGF updated to five Essential Credential Schemas (Badge added per Verifiable Trust specification v4). |
+| 0.2 | 2026-08-08 | Draft | Cross-reference to the ECS-EGF updated to five Essential Credential Schemas (Badge added per Verifiable Trust specification v4). |
 | 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`) |
