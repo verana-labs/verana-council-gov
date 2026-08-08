@@ -5,8 +5,8 @@
 
 📄 **[Read the ECS Ecosystem Governance Framework](./ecs-ecosystem-governance-framework.md)**
 
-Previous drafts are archived in versioned subdirectories
-([`v0.1/`](./v0.1/ecs-ecosystem-governance-framework.md)); the document at
+Previous drafts are archived as PDF snapshots in versioned subdirectories
+([`v0.1/`](./v0.1/ecs-ecosystem-governance-framework.pdf)); the document at
 the root of this directory is always the current working draft.
 
 The Council's own ecosystem-level framework. It is itself an EGF and MUST
@@ -42,7 +42,7 @@ amendment.
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
 | DRAFT 0.2 | 2026-08-08 | Draft | Aligned with Verifiable Trust spec v4: added the Badge ECS (fifth schema) with its §6.5 credential framework, spec-mandated `OPEN`/`PERMISSIONLESS` configuration, VTJSC fragment, schema digest, and biometric-data privacy rule; corrected the UserAgent schema digest. |
-| DRAFT 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under [`v0.1/`](./v0.1/ecs-ecosystem-governance-framework.md)). |
+| DRAFT 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived as [`v0.1/` PDF](./v0.1/ecs-ecosystem-governance-framework.pdf)). |
 
 ## License
 
