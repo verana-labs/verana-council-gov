@@ -36,7 +36,7 @@ Ecosystems on Verana are autonomous. Anyone can create a Corporation and an Ecos
 | --- | --- | --- |
 | Verifiable Trust specification (VT), VPR specification | Protocol standards, owned and hosted by the Verana Foundation | Sources of truth for all protocol facts; where this document paraphrases them, they prevail |
 | **Network Governance Framework** (this document) | Constitutional layer of the network | Governs the commons; every EGF must respect it |
-| ECS Ecosystem Governance Framework (ECS-EGF) | The Council's own ecosystem (four Essential Credential Schemas) | An EGF like any other; must itself satisfy chapter [NGF-EGF]; the reference implementation of those requirements |
+| ECS Ecosystem Governance Framework (ECS-EGF) | The Council's own ecosystem (five Essential Credential Schemas) | An EGF like any other; must itself satisfy chapter [NGF-EGF]; the reference implementation of those requirements |
 | Template EGF | Voluntary scaffold for ecosystems authoring their own EGF | Offered, never required; using it implies no endorsement |
 | Verana Council Association Statutes, Bylaws, Code of Conduct | Association layer (Swiss law) | Govern the Verein as a legal person; carry no network authority beyond what this document channels through the mechanisms of chapter [NGF-GOV] |
 

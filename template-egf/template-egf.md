@@ -61,7 +61,7 @@ Three things this template is **not**:
   listed in section 5.
 
 The Council practices what it publishes: the **ECS Ecosystem Governance
-Framework (ECS-EGF)** — the framework governing the four Essential Credential
+Framework (ECS-EGF)** — the framework governing the five Essential Credential
 Schemas — is the worked example of this template. When an instruction below
 feels abstract, read the corresponding section of the ECS-EGF to see it
 filled in for a real ecosystem.
