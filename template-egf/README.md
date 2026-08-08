@@ -1,8 +1,12 @@
 # Template EGF
 
-> **Status:** `DRAFT 0.1` — first draft for co-authoring by Founding Members.
+> **Status:** `DRAFT 0.2` — draft for co-authoring by Founding Members.
 
 📄 **[Read the Template EGF](./template-egf.md)**
+
+Previous drafts are archived in versioned subdirectories
+([`v0.1/`](./v0.1/template-egf.md)); the document at the root of this
+directory is always the current working draft.
 
 A **scaffold, not a gate.** Any organization can author and operate an
 Ecosystem Governance Framework on Verana with no Council approval, and using
@@ -35,7 +39,8 @@ The [ECS-EGF](../ecs-egf/) is the worked example of this template.
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| DRAFT 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members. |
+| DRAFT 0.2 | 2026-08-08 | Draft | Cross-reference to the ECS-EGF updated to five Essential Credential Schemas (Badge added per Verifiable Trust spec v4). |
+| DRAFT 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under [`v0.1/`](./v0.1/template-egf.md)). |
 
 ## License
 
