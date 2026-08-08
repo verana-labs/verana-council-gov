@@ -3,7 +3,7 @@
 | Field | Value |
 | --- | --- |
 | Document Name | ECS Ecosystem Governance Framework (ECS-EGF) |
-| Version | DRAFT 0.3 |
+| Version | DRAFT 0.2 |
 | Status | Draft for co-authoring by Founding Members |
 | Governs | The ECS ecosystem: the five Essential Credential Schemas (Service, Organization, Persona, UserAgent, Badge) and every Participant in their permission trees |
 | Governed By | The Verana Council Association (in formation), acting as the ecosystem governance authority (EGA) of the ECS ecosystem |
@@ -12,7 +12,7 @@
 | License | [CC-BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) |
 | Anchoring | Git history and tagged releases in `verana-labs/verana-council-gov` plus a public URL now; on-chain `GovernanceFrameworkDocument` (url + digest_sri) on the ECS Ecosystem entry once the network is live |
 
-> **Status: DRAFT 0.3.** This is a draft published for co-authoring by the
+> **Status: DRAFT 0.2.** This is a draft published for co-authoring by the
 > Founding Members of the Verana Council Association (in formation). It is
 > scheduled for ratification at the Q4 2026 Incorporation General Assembly.
 > Where this document states protocol facts, the
@@ -1695,6 +1695,5 @@ listed; each has an owner and a target date.
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.3 | 2026-08-08 | Draft | Working draft — no changes yet relative to 0.2. |
-| 0.2 | 2026-08-08 | Draft | (Archived under `v0.2/`.) Aligned with Verifiable Trust specification v4: added the Badge ECS (five schemas throughout), new §6.5 Badge Credential Framework ([ECS-BDG-1]–[ECS-BDG-12]), Badge VPR configuration in Table 2, Badge VTJSC fragment in [ECS-ROOT-2], Badge schema link and digest in Table 3, biometric-data rule [ECS-PRIV-6], and corrected the UserAgent schema digest in Table 3. |
+| 0.2 | 2026-08-08 | Draft | Aligned with Verifiable Trust specification v4: added the Badge ECS (five schemas throughout), new §6.5 Badge Credential Framework ([ECS-BDG-1]–[ECS-BDG-12]), Badge VPR configuration in Table 2, Badge VTJSC fragment in [ECS-ROOT-2], Badge schema link and digest in Table 3, biometric-data rule [ECS-PRIV-6], and corrected the UserAgent schema digest in Table 3. |
 | 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`). |

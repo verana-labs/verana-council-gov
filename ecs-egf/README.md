@@ -1,14 +1,14 @@
 # ECS Ecosystem Governance Framework (ECS-EGF)
 
-> **Status:** `DRAFT 0.2` — draft for co-authoring by Founding Members.
+> **Status:** `DRAFT 0.3` — draft for co-authoring by Founding Members.
 > Ratified text is adopted at the Q4 2026 Incorporation General Assembly.
 
 📄 **[Read the ECS Ecosystem Governance Framework](./ecs-ecosystem-governance-framework.md)**
 
-Previous drafts are archived in versioned subdirectories, each holding the
-frozen [markdown](./v0.1/ecs-ecosystem-governance-framework.md) and a
-[PDF snapshot](./v0.1/ecs-ecosystem-governance-framework.pdf); the document
-at the root of this directory is always the current working draft.
+Previous drafts are archived in versioned subdirectories
+([`v0.1/`](./v0.1/), [`v0.2/`](./v0.2/)), each holding the frozen markdown
+and, where available, a PDF snapshot; the document at the root of this
+directory is always the current working draft.
 
 The Council's own ecosystem-level framework. It is itself an EGF and MUST
 respect the [Network GF](../network-gf/) — it is the reference implementation
@@ -42,7 +42,8 @@ amendment.
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| DRAFT 0.2 | 2026-08-08 | Draft | Aligned with Verifiable Trust spec v4: added the Badge ECS (fifth schema) with its §6.5 credential framework, spec-mandated `OPEN`/`PERMISSIONLESS` configuration, VTJSC fragment, schema digest, and biometric-data privacy rule; corrected the UserAgent schema digest. |
+| DRAFT 0.3 | 2026-08-08 | Draft | Current working draft — no changes yet relative to 0.2. |
+| DRAFT 0.2 | 2026-08-08 | Draft | Aligned with Verifiable Trust spec v4: added the Badge ECS (fifth schema) with its §6.5 credential framework, spec-mandated `OPEN`/`PERMISSIONLESS` configuration, VTJSC fragment, schema digest, and biometric-data privacy rule; corrected the UserAgent schema digest (archived under [`v0.2/`](./v0.2/ecs-ecosystem-governance-framework.md)). |
 | DRAFT 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`: [markdown](./v0.1/ecs-ecosystem-governance-framework.md), [PDF](./v0.1/ecs-ecosystem-governance-framework.pdf)). |
 
 ## License
