@@ -326,6 +326,15 @@ The following local terms are defined for this document. Definitions carry no no
 
 - **[NGF-VAL-12]** Automatic protocol penalties (jailing for downtime, tombstoning for double-signing, and similar consensus-level mechanisms) apply as implemented by the chain and are not Council sanctions. A jailing or tombstoning event MUST be reviewed under chapter [NGF-SANC] to determine whether a duty of this chapter was also breached; persistent or unremedied breach of this chapter is Cause.
 
+### 9.6 Node software and source availability
+
+*This paragraph is non-normative.* The reference node software of the Verana network (`verana-node`, hosted and maintained by the Verana Foundation per [NGF-EVOL-3]) is released under the GNU Affero General Public License version 3.0 (AGPL-3.0). A specification cannot bind independent implementations: the license of the VPR specification reaches its text, not code written to conform to it. The guarantee that the software securing the commons stays open therefore lives here, as a condition of validator service, where it binds whichever software a Member chooses to run.
+
+- **[NGF-VAL-13]** A Member MUST operate its network validator node with software whose complete corresponding source code is publicly available, at no charge, under the GNU Affero General Public License version 3.0 or any later version (AGPL-3.0-or-later), the license of the reference implementation. This applies equally to the reference implementation, to any modified build of it, and to any independent implementation of the VPR specification a Member runs in the validator set.
+- **[NGF-VAL-14]** A Member that runs a build differing from a release adopted under chapter [NGF-EVOL] MUST publish the complete corresponding source of the build it runs, under the terms of [NGF-VAL-13], no later than the moment that build enters or continues in the validator set, and MUST disclose to the Council that it runs a modified build and where its source is published. A modified build MUST remain protocol-compatible with the adopted release and never relaxes [NGF-VAL-4] or [NGF-VAL-8].
+
+> **[DECISION]** The copyleft requirement is placed on validator service ([NGF-VAL-13], [NGF-VAL-14]) and on release adoption ([NGF-EVOL-6]) rather than in the license of the VPR specification, because a specification license cannot reach clean-room implementations; and it is not added to the invariants of [NGF-AMND-9], so that it stays amendable on the standard constitutional tier. Rationale: the software that secures the commons must remain inspectable by anyone ([NGF-PRIN-8]), and no Member may hold a private advantage through a closed fork ([NGF-PRIN-2], [NGF-PRIN-6]). Alternatives: (a) add "network software copyleft" to the [NGF-AMND-9] invariants (stronger entrenchment); (b) accept any OSI-approved license (weaker: permits closed forks). Founding Members should confirm.
+
 ## 10. Network-Level Sanctions
 
 ### 10.1 Scope and enumerated grounds
@@ -393,6 +402,7 @@ The following local terms are defined for this document. Definitions carry no no
 ### 12.2 Release provenance
 
 - **[NGF-EVOL-3]** The Verana Foundation hosts, stewards, and maintains the network's open-source software; the Council decides adoption. The Council MUST adopt only releases whose provenance is verifiable (published source, tagged release, published checksums or signatures), and MUST record the adopted release identity in the adopting proposal.
+- **[NGF-EVOL-6]** The Council MUST adopt only releases of network software licensed under AGPL-3.0-or-later ([NGF-VAL-13]), and MUST NOT adopt a release, patch, or consensus-essential component whose license terms would prevent a Member from satisfying [NGF-VAL-13]. The license of the network software is set by its copyright holders, not by the Council; should the software be offered under any other license, the Council MUST NOT adopt a release under it unless this requirement has first been amended under chapter [NGF-AMND]. Deferred publication of vulnerability details under [NGF-EVOL-4] never defers publication of the source of the patch itself.
 
 ### 12.3 Emergency security patches
 
@@ -526,6 +536,6 @@ The following local terms are defined for this document. Definitions carry no no
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.3 | 2026-08-08 | Draft | Working draft — no changes yet relative to 0.2. |
+| 0.3 | 2026-08-08 | Draft | Working draft. Adds node-software source-availability duties for network validators ([NGF-VAL-13], [NGF-VAL-14], new section 9.6) and the matching AGPL-3.0-or-later release-adoption constraint ([NGF-EVOL-6]). |
 | 0.2 | 2026-08-08 | Draft | (Archived under `v0.2/`.) Cross-reference to the ECS-EGF updated to five Essential Credential Schemas (Badge added per Verifiable Trust specification v4). |
 | 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`) |
