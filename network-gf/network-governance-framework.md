@@ -185,6 +185,7 @@ The following local terms are defined for this document. Definitions carry no no
 - **[NGF-POW-8]** The Council MUST NOT act as a grant-making body and MUST NOT fund, subsidize, or financially guarantee any network participant ([NGF-PRIN-1], [NGF-PRIN-9]).
 - **[NGF-POW-9]** The Council MUST NOT issue, own, or claim ownership of the VNA token. Receiving the protocol-defined on-chain funding allocation of [NGF-ECON-12] does not make the Council the token's issuer or owner ([NGF-PRIN-2]).
 - **[NGF-POW-10]** The Council MUST NOT be controlled by a single company or Related-Party group; [NGF-GOV-13] to [NGF-GOV-15] operationalize this limit ([NGF-PRIN-2], [NGF-PRIN-6]).
+- **[NGF-POW-12]** The Council MUST NOT freeze, seize, or reverse any account balance or transaction, remove any account from the network, or delete any registry entry. The protocol provides no such capability, and none MUST be implemented or activated except through the amendment process of [NGF-POW-4]. The Council's only instrument against a corporation is the graduated withdrawal of its trust standing under chapter [NGF-SANC], which is public and reversible by repayment ([NGF-PRIN-1], [NGF-PRIN-9]).
 
 ### 5.4 The federal boundary
 
@@ -364,6 +365,7 @@ The following local terms are defined for this document. Definitions carry no no
 ### 10.2 The graduated ladder
 
 - **[NGF-SANC-2]** Sanctions MUST proceed through a graduated ladder, applying the least severe rung adequate to the violation: (1) written warning; (2) remediation order with a day-counted cure period; (3) restriction of permissions or functions; (4) suspension; (5) revocation or termination (for Members: removal for Cause); (6) network-level trust-deposit slash (MOD-TD-MSG-5). A rung MAY be skipped only where written reasons establish that lesser measures cannot address the violation.
+- **[NGF-SANC-15]** For a corporation that is not a Member, rungs (3) to (5) have no on-chain instrument; the protocol offers the network slash alone. The Council MUST therefore execute rung (4), suspension, as a **suspension slash**: a network-level slash (MOD-TD-MSG-5) of the nominal suspension amount of Annex A, adopted under [NGF-SANC-8], whose sole purpose is to render the corporation's permissions non-trustable until repaid. The Council MUST state in the decision that the slash is a suspension, MUST NOT refuse repayment, and MUST lift the suspension by accepting repayment once the cure conditions of the decision are met; the no-limbo clock of [NGF-SANC-10] applies. Rung (6) remains reserved for violations where the written reasons establish that a suspension is inadequate, and is graduated by amount.
 - **[NGF-SANC-3]** The default cure period for a remediation order is 30 days, reducible to 5 days for violations threatening network integrity (Initial Parameters).
 - **[NGF-SANC-4]** Recidivism — a repeat of a violation of the same ground within 12 months (Initial Parameter) of a closed sanction — re-enters the ladder at the rung above the previously applied one.
 
@@ -391,6 +393,13 @@ The following local terms are defined for this document. Definitions carry no no
 ### 10.7 Intake
 
 - **[NGF-SANC-14]** The Council MUST maintain a public intake channel through which any person may report suspected network-level violations, and MUST publish aggregate intake statistics annually while keeping case details confidential until decision.
+
+### 10.8 Legal orders
+
+*This paragraph is non-normative.* An order from a court or authority does not enlarge the Council's powers: an order to freeze funds, reverse a transaction, or delete data cannot be executed because no such capability exists ([NGF-POW-12]), and the Council says so; an order to stop a corporation from operating on the registry is answered with the ladder and, ultimately, a slash. The posture is that of infrastructure operators bound by law but not by pressure: act only on a binding order, only through the enumerated powers, and say publicly that it was done.
+
+- **[NGF-SANC-16]** Where a binding order of a competent authority in a jurisdiction to which the Council is subject requires action against a corporation, an ecosystem, or a Member, the Council MUST act only through its enumerated powers of chapter [NGF-POW] and the ladder of this chapter, treating the order as establishing a ground under [NGF-SANC-1](d); the fast path of [NGF-EVOL-7] MAY be used where the order or the harm requires it. The Council MUST NOT act on political, commercial, or diplomatic pressure that is not a binding order ([NGF-PRIN-1], [NGF-PRIN-10]), MAY seek legal review of an order before acting where the law allows, and MUST inform all seated Members of every order received.
+- **[NGF-SANC-17]** The existence of every order received under [NGF-SANC-16] and the act taken in response MUST be published on the public record ([NGF-GOV-2]). Where the order itself lawfully prohibits disclosure, the Council MUST record the existence of a sealed order without its details, and MUST publish the details when the prohibition lapses. The Council MUST publish annually the number of orders received, by jurisdiction and outcome, together with the intake statistics of [NGF-SANC-14].
 
 ## 11. Dispute Resolution
 
@@ -553,6 +562,7 @@ The following local terms are defined for this document. Definitions carry no no
 | Parameter | Requirement | Initial value | Change process |
 | --- | --- | --- | --- |
 | Default cure period | [NGF-SANC-3] | 30 days | Amendment ([NGF-AMND]) |
+| Suspension-slash nominal amount | [NGF-SANC-15] | 1 Trust Unit (or the smallest slashable amount) | Amendment ([NGF-AMND]) |
 | Accelerated cure period (network-integrity threats) | [NGF-SANC-3] | 5 days | Amendment ([NGF-AMND]) |
 | Recidivism window | [NGF-SANC-4] | 12 months | Amendment ([NGF-AMND]) |
 | Sanctions Panel activation threshold | [NGF-SANC-6] | 5 qualifying members | Amendment ([NGF-AMND]) |
@@ -577,7 +587,7 @@ The following local terms are defined for this document. Definitions carry no no
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.4 | 2026-09-30 | Draft | Working draft. Rebased on VPR v5 and tokenomics Model C v2: chapter 7 rewritten (Trust Units non-transferable and decaying, no deposit yield, slash obligations at mint-time cost basis, fixed-order distribution, no emission, bonding without governance weight; [NGF-ECON-1] to [NGF-ECON-4], [NGF-ECON-12], [NGF-ECON-13] amended, [NGF-ECON-14] to [NGF-ECON-18] added), oracle guardrails completed (`validity_duration`, `twap_window`, operator redundancy and eligibility), Annex A.1 and A.2 rebuilt on Model C parameters (`trust_deposit_rate` and agent reward rates 0.05), [NGF-SANC-8] wording aligned, terminology extended. Delegated node operation completed with hosting flow-down, key custody, disclosure and reporting ([NGF-VAL-15]) and hosting diversity ([NGF-VAL-16]), with the [DECISION] box rewritten against the Hedera, Sovrin/Bedrock, Energy Web and EBSI precedents. Emergency path completed: fast path extended to any enumerated power ([NGF-EVOL-7]), automatic conversion to an ordinary proposal on failure ([NGF-EVOL-8]), declared incident and coordinated halt with excused downtime ([NGF-EVOL-9]), emergency governance contacts per Member ([NGF-VAL-17]). DRAFT 0.3 archived under `v0.3/`. |
+| 0.4 | 2026-09-30 | Draft | Working draft. Rebased on VPR v5 and tokenomics Model C v2: chapter 7 rewritten (Trust Units non-transferable and decaying, no deposit yield, slash obligations at mint-time cost basis, fixed-order distribution, no emission, bonding without governance weight; [NGF-ECON-1] to [NGF-ECON-4], [NGF-ECON-12], [NGF-ECON-13] amended, [NGF-ECON-14] to [NGF-ECON-18] added), oracle guardrails completed (`validity_duration`, `twap_window`, operator redundancy and eligibility), Annex A.1 and A.2 rebuilt on Model C parameters (`trust_deposit_rate` and agent reward rates 0.05), [NGF-SANC-8] wording aligned, terminology extended. Delegated node operation completed with hosting flow-down, key custody, disclosure and reporting ([NGF-VAL-15]) and hosting diversity ([NGF-VAL-16]), with the [DECISION] box rewritten against the Hedera, Sovrin/Bedrock, Energy Web and EBSI precedents. Emergency path completed: fast path extended to any enumerated power ([NGF-EVOL-7]), automatic conversion to an ordinary proposal on failure ([NGF-EVOL-8]), declared incident and coordinated halt with excused downtime ([NGF-EVOL-9]), emergency governance contacts per Member ([NGF-VAL-17]). No freeze, seizure, reversal or deletion power stated as a hard limit ([NGF-POW-12]); suspension slash for non-Member corporations ([NGF-SANC-15]); legal orders acted on only through enumerated powers and published ([NGF-SANC-16], [NGF-SANC-17], new section 10.8). DRAFT 0.3 archived under `v0.3/`. |
 | 0.3 | 2026-08-29 | Draft | (Archived under `v0.3/`.) Adds node-software source-availability duties for network validators ([NGF-VAL-13], [NGF-VAL-14], new section 9.6) and the matching AGPL-3.0-or-later release-adoption constraint ([NGF-EVOL-6]). |
 | 0.2 | 2026-08-08 | Draft | (Archived under `v0.2/`.) Cross-reference to the ECS-EGF updated to five Essential Credential Schemas (Badge added per Verifiable Trust specification v4). |
 | 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`) |
