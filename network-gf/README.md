@@ -1,12 +1,12 @@
 # Verana Network Governance Framework (Network GF)
 
-> **Status:** `DRAFT 0.3` — draft for co-authoring by Founding Members.
+> **Status:** `DRAFT 0.4` — draft for co-authoring by Founding Members.
 > Ratified text is adopted at the Q4 2026 Incorporation General Assembly.
 
 📄 **[Read the Network Governance Framework](./network-governance-framework.md)**
 
 Previous drafts are archived in versioned subdirectories
-([`v0.1/`](./v0.1/), [`v0.2/`](./v0.2/)); the document at the root of this
+([`v0.1/`](./v0.1/), [`v0.2/`](./v0.2/), [`v0.3/`](./v0.3/)); the document at the root of this
 directory is always the current working draft.
 
 The **constitutional layer** of the Verana network. Every Ecosystem Governance
@@ -36,7 +36,8 @@ respect this document.
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| DRAFT 0.3 | 2026-08-08 | Draft | Current working draft. Adds node-software source-availability duties for network validators ([NGF-VAL-13], [NGF-VAL-14]) and the AGPL-3.0-or-later release-adoption constraint ([NGF-EVOL-6]). |
+| DRAFT 0.4 | 2026-09-30 | Draft | Current working draft. Rebased on VPR v5 and tokenomics Model C v2: chapter 7 (economics) rewritten, oracle guardrails completed ([NGF-ECON-14] to [NGF-ECON-18]), Annex A rebuilt on Model C parameters. |
+| DRAFT 0.3 | 2026-08-29 | Draft | Adds node-software source-availability duties for network validators ([NGF-VAL-13], [NGF-VAL-14]) and the AGPL-3.0-or-later release-adoption constraint ([NGF-EVOL-6]); archived under [`v0.3/`](./v0.3/network-governance-framework.md). |
 | DRAFT 0.2 | 2026-08-08 | Draft | Cross-reference to the ECS-EGF updated to five Essential Credential Schemas (Badge added per Verifiable Trust spec v4; archived under [`v0.2/`](./v0.2/network-governance-framework.md)). |
 | DRAFT 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under [`v0.1/`](./v0.1/network-governance-framework.md)). |
 
