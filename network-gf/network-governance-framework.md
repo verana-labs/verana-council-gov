@@ -468,11 +468,11 @@ The following local terms are defined for this document. Definitions carry no no
 | `credential_schema_verifier_validation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
 | `credential_schema_holder_validation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
 | `trust_deposit_share_value` | 1 | Governance proposal ([NGF-ECON-10]) |
-| `trust_deposit_rate` | 0.20 | Governance proposal ([NGF-ECON-10]) |
+| `trust_deposit_rate` | 0.05 | Governance proposal ([NGF-ECON-10]) |
 | `trust_deposit_max_yield_rate` | 0.20 | Governance proposal ([NGF-ECON-10]) |
 | `trust_deposit_block_reward_share` | 0.20 | Governance proposal ([NGF-ECON-10]) |
-| `wallet_user_agent_reward_rate` | 0.10 | Governance proposal ([NGF-ECON-10]) |
-| `user_agent_reward_rate` | 0.10 | Governance proposal ([NGF-ECON-10]) |
+| `wallet_user_agent_reward_rate` | 0.05 | Governance proposal ([NGF-ECON-10]) |
+| `user_agent_reward_rate` | 0.05 | Governance proposal ([NGF-ECON-10]) |
 
 ### A.2 Exchange-rate authorization guardrails
 
@@ -536,6 +536,6 @@ The following local terms are defined for this document. Definitions carry no no
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.3 | 2026-08-08 | Draft | Working draft. Adds node-software source-availability duties for network validators ([NGF-VAL-13], [NGF-VAL-14], new section 9.6) and the matching AGPL-3.0-or-later release-adoption constraint ([NGF-EVOL-6]). |
+| 0.3 | 2026-09-30 | Draft | Working draft. Adds node-software source-availability duties for network validators ([NGF-VAL-13], [NGF-VAL-14], new section 9.6) and the matching AGPL-3.0-or-later release-adoption constraint ([NGF-EVOL-6]). Annex A.1 aligned with the VPR specification defaults: `trust_deposit_rate`, `wallet_user_agent_reward_rate` and `user_agent_reward_rate` set to 0.05 (decision of 2026-08-29, tokenomics Model C v2). |
 | 0.2 | 2026-08-08 | Draft | (Archived under `v0.2/`.) Cross-reference to the ECS-EGF updated to five Essential Credential Schemas (Badge added per Verifiable Trust specification v4). |
 | 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`) |
