@@ -1,11 +1,11 @@
 # Verana Network Governance Framework
 
-> **Status: DRAFT 0.3 — draft for co-authoring by Founding Members.** This document is not yet in force. It is ratified at the Incorporation General Assembly of the Verana Council Association (target Q4 2026). Where this document states protocol facts, the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/) and the [Verifiable Public Registry (VPR) specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/) prevail. Where it states entity facts, the Verana entity definitions and the Council public record prevail. During the pre-incorporation period, 2060 OÜ acts as transitional steward; every steward power carries an event-triggered sunset (chapter [NGF-TRAN]).
+> **Status: DRAFT 0.4 — draft for co-authoring by Founding Members.** This document is not yet in force. It is ratified at the Incorporation General Assembly of the Verana Council Association (target Q4 2026). This document is written against the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/) and the [Verifiable Public Registry (VPR) specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/) **version 5** (draft), whose economic model is the Verana tokenomics Model C; where this document states protocol facts, those specifications prevail. Where it states entity facts, the Verana entity definitions and the Council public record prevail. During the pre-incorporation period, 2060 OÜ acts as transitional steward; every steward power carries an event-triggered sunset (chapter [NGF-TRAN]).
 
 | Document control | |
 | --- | --- |
 | Document Name | Verana Network Governance Framework (Network GF) |
-| Version | DRAFT 0.3 |
+| Version | DRAFT 0.4 |
 | Status | Draft — for co-authoring by Founding Members |
 | Governs | The Verana network (the live, validator-secured VPR chain): the constitutional floor every EGF anchored on it must respect, and the network-facing duties of every participant |
 | Governed By | The Verana Council Association (in formation), acting through the mechanisms of chapter [NGF-GOV] |
@@ -34,7 +34,7 @@ Ecosystems on Verana are autonomous. Anyone can create a Corporation and an Ecos
 
 | Document | Layer | Relationship to this document |
 | --- | --- | --- |
-| Verifiable Trust specification (VT), VPR specification | Protocol standards, owned and hosted by the Verana Foundation | Sources of truth for all protocol facts; where this document paraphrases them, they prevail |
+| Verifiable Trust specification (VT), VPR specification v5 | Protocol standards, owned and hosted by the Verana Foundation | Sources of truth for all protocol facts; where this document paraphrases them, they prevail |
 | **Network Governance Framework** (this document) | Constitutional layer of the network | Governs the commons; every EGF must respect it |
 | ECS Ecosystem Governance Framework (ECS-EGF) | The Council's own ecosystem (five Essential Credential Schemas) | An EGF like any other; must itself satisfy chapter [NGF-EGF]; the reference implementation of those requirements |
 | Template EGF | Voluntary scaffold for ecosystems authoring their own EGF | Offered, never required; using it implies no endorsement |
@@ -56,7 +56,7 @@ Each requirement in this document is addressed to a named role. A statement with
 
 ### 2.2 Terminology
 
-Terms defined in the VT specification and the VPR specification (including *corporation*, *ecosystem*, *credential schema*, *participant*, *trust deposit*, *trust unit*, *governance framework*, *governance authority*, *onboarding process*, and the participant roles `ECOSYSTEM`, `ISSUER_GRANTOR`, `VERIFIER_GRANTOR`, `ISSUER`, `VERIFIER`, `HOLDER`) are used with their specification meanings and are not redefined here. Onboarding-mode names are used in their v4 form (`OPEN`, `GRANTOR_ONBOARDING_PROCESS`, `ECOSYSTEM_ONBOARDING_PROCESS`, `ISSUER_ONBOARDING_PROCESS`, `PERMISSIONLESS`).
+Terms defined in the VT specification and the VPR specification (including *corporation*, *ecosystem*, *credential schema*, *participant*, *trust deposit*, *trust unit*, *governance framework*, *governance authority*, *onboarding process*, and the participant roles `ECOSYSTEM`, `ISSUER_GRANTOR`, `VERIFIER_GRANTOR`, `ISSUER`, `VERIFIER`, `HOLDER`) are used with their specification meanings and are not redefined here. Onboarding-mode names are used in their VPR v5 form (`OPEN`, `GRANTOR_ONBOARDING_PROCESS`, `ECOSYSTEM_ONBOARDING_PROCESS`, `ISSUER_ONBOARDING_PROCESS`, `PERMISSIONLESS`). *Trust Unit* (TU) is used in its v5 meaning: the non-transferable, non-convertible, decaying unit held in a trust deposit; the *native token* is VNA.
 
 The following local terms are defined for this document. Definitions carry no normative keywords.
 
@@ -76,6 +76,10 @@ The following local terms are defined for this document. Definitions carry no no
 - **Related Party**: with respect to an organization, any entity that controls it, is controlled by it, or is under common control with it, where control means holding more than 50% of voting rights or the contractual or de facto power to direct management and policies.
 - **Steward Period**: the period from the start of Council formation until mainnet launch during which 2060 OÜ acts as transitional steward (chapter [NGF-TRAN]); individual steward privileges sunset earlier on their own event triggers ([NGF-TRAN-1]).
 - **Provisional Governance Period**: the period before mainnet launch during which Council voting is exercised off-chain under chapter [NGF-TRAN].
+- **epoch**: the protocol's fixed accounting period (`epoch_length`, Annex A) at which the Trust Unit index is updated and the distribution pool is paid out.
+- **distribution pool**: the per-epoch pool of native tokens formed by deposit-bound fee flows, network fees, and slash repayments, paid out in the fixed order of [NGF-ECON-18].
+- **bonded native tokens**: native tokens locked through the protocol's bonding mechanism to earn the capped, fee-funded yield of [NGF-ECON-18]; bonding confers no consensus or governance power.
+- **main fiat currency**: the fiat currency, set at genesis, in which the Trust Unit index, budgets, and slash obligations are denominated.
 
 ## 3. Governance Authority
 
@@ -181,6 +185,7 @@ The following local terms are defined for this document. Definitions carry no no
 - **[NGF-POW-8]** The Council MUST NOT act as a grant-making body and MUST NOT fund, subsidize, or financially guarantee any network participant ([NGF-PRIN-1], [NGF-PRIN-9]).
 - **[NGF-POW-9]** The Council MUST NOT issue, own, or claim ownership of the VNA token. Receiving the protocol-defined on-chain funding allocation of [NGF-ECON-12] does not make the Council the token's issuer or owner ([NGF-PRIN-2]).
 - **[NGF-POW-10]** The Council MUST NOT be controlled by a single company or Related-Party group; [NGF-GOV-13] to [NGF-GOV-15] operationalize this limit ([NGF-PRIN-2], [NGF-PRIN-6]).
+- **[NGF-POW-12]** The Council MUST NOT freeze, seize, or reverse any account balance or transaction, remove any account from the network, or delete any registry entry. The protocol provides no such capability, and none MUST be implemented or activated except through the amendment process of [NGF-POW-4]. The Council's only instrument against a corporation is the graduated withdrawal of its trust standing under chapter [NGF-SANC], which is public and reversible by repayment ([NGF-PRIN-1], [NGF-PRIN-9]).
 
 ### 5.4 The federal boundary
 
@@ -222,39 +227,52 @@ The following local terms are defined for this document. Definitions carry no no
 
 ## 7. Economic Rules of the Commons
 
+*This paragraph is non-normative.* This chapter is written against the economic model of VPR v5 (Verana tokenomics Model C, draft v2): a **fixed-supply native token** (VNA) that carries all transferable value, and a **non-transferable, non-convertible, decaying Trust Unit** (TU) that is the only balance a trust deposit holds. Where the published VPR specification and this chapter differ, the specification prevails (section 1.3); the duties below are stated so that they hold under the model whatever the parameter values.
+
 ### 7.1 Purposes
 
-*This section is non-normative.* Before mechanisms, purposes. Trust deposits exist to make participation economically accountable: they deter abuse, keep departed participants answerable to the ecosystems they used, and sustain demand for the network's native token. Trust fees remunerate the work of validation, issuance, and verification. Agent rewards stimulate wallet and user-agent adoption. The exchange-rate mechanism exists so that fees can be denominated in a stable Trust Unit while settling in the native token. None of these mechanisms confers governance power ([NGF-PRIN-2]).
+*This section is non-normative.* Before mechanisms, purposes. Trust deposits exist to make participation economically accountable: a deposit holds Trust Units minted from a share of every trust fee paid or earned, so a trust score reflects recent paid usage, is earned rather than bought, and fades if not maintained (trust decay). Trust fees remunerate the work of validation, issuance, and verification. Agent rewards stimulate wallet and user-agent adoption. The exchange-rate oracle exists so that fees priced in fiat or stablecoin settle in the native token, and so that Trust Units are minted at a known fiat value. The native tokens spent on deposit-bound flows fund the network at cost (validator, Council, and Foundation budgets), pay a hard-capped yield to bonded token holders, and the residual is burned. None of these mechanisms confers governance power ([NGF-PRIN-2]).
 
-### 7.2 Trust deposits
+### 7.2 Trust deposits and Trust Units
 
-- **[NGF-ECON-1]** Trust deposits are non-withdrawable by protocol design. The Council MUST NOT create, promise, or simulate any mechanism for withdrawing a trust deposit.
-- **[NGF-ECON-2]** Trust deposits grow with usage at the rate `trust_deposit_rate` (Initial Parameter, Annex A) and yield block rewards per `trust_deposit_block_reward_share`, capped at `trust_deposit_max_yield_rate` (Initial Parameters, Annex A). Changes to these values are parameter changes under [NGF-ECON-10].
-- **[NGF-ECON-3]** Slashed trust deposits — ecosystem-level (MOD-PP-MSG-12, burned via MOD-TD-MSG-7) and network-level (MOD-TD-MSG-5) — are burned, never paid to the sanctioning party or to any victim. The Council MUST NOT direct slashed value to any account ([NGF-PRIN-9]).
-- **[NGF-ECON-13]** No economic position grants governance rights: neither a trust deposit, nor fee volume, nor any token holding converts into a vote or any other governance power ([NGF-PRIN-2]).
+- **[NGF-ECON-1]** Trust deposits are non-withdrawable by protocol design, and Trust Units are non-transferable and non-convertible. The Council MUST NOT create, promise, or simulate any mechanism for withdrawing a trust deposit or for converting, redeeming, or transferring Trust Units.
+- **[NGF-ECON-2]** Trust deposits are credited with Trust Units minted from the deposit-bound share of trust fees at `trust_deposit_rate` (payer surcharge and payee share alike), valued at the Trust Unit index `tu_peg_value(t)` and the oracle rate at mint time. The index declines each epoch at `tu_decay_rate` (trust decay); trust deposits earn no yield. Both rates are Initial Parameters (Annex A), changed only under [NGF-ECON-10]. A change to `tu_decay_rate` MUST be prospective only: it applies from the next epoch and never recomputes past index values, past mints, trust scores, or recorded slash obligations.
+- **[NGF-ECON-3]** Slashed Trust Units — ecosystem-level (MOD-PP-MSG-12) and network-level (MOD-TD-MSG-5) — are destroyed, never transferred to the sanctioning party or to any victim, and the repayment obligation is recorded at the mint-time fiat cost basis of the slashed units, not at their decayed value. Repayments (MOD-PP-MSG-13, MOD-TD-MSG-6) enter the distribution pool of section 7.6 like any deposit-bound flow; because the pool's budget lines are fixed cost targets, a repayment increases the burned residual and never the income of the Council, any Member, or any complainant. The Council MUST NOT direct slashed value or repayments to any account ([NGF-PRIN-9]).
+- **[NGF-ECON-13]** No economic position grants governance rights: neither a trust deposit or trust score, nor fee volume, nor any holding of the native token, bonded or not, converts into a vote or any other governance power ([NGF-PRIN-2]).
 
 ### 7.3 Fees
 
-- **[NGF-ECON-4]** Network fees (chain execution fees) and trust fees (validation, issuance, and verification fees defined in Participant entries, in the schema's pricing asset) are distinct and MUST be presented distinctly in any Council communication about network costs.
+- **[NGF-ECON-4]** Network fees (chain execution fees, paid in the native token) and trust fees (validation, issuance, and verification fees defined in Participant entries, priced in the schema's pricing asset — fiat, stablecoin, or the native token — and settled in the native token at the oracle rate) are distinct and MUST be presented distinctly in any Council communication about network costs.
 - **[NGF-ECON-5]** Trust-fee amounts are set by ecosystems and their participants within the protocol's fee mechanics, not by the Council. The Council MUST NOT set, cap, or prescribe any ecosystem's fees.
 - **[NGF-ECON-6]** Agent reward rates (`user_agent_reward_rate`, `wallet_user_agent_reward_rate`) are Initial Parameters (Annex A), changed only under [NGF-ECON-10].
+- **[NGF-ECON-14]** The Trust Unit is a measure of trust, not a currency. The Council MUST NOT configure any credential schema of its own ecosystem with the Trust Unit as pricing asset, and MUST NOT present the Trust Unit publicly as a price label, a currency, or an investment.
 
-### 7.4 Trust Unit and the exchange-rate mechanism
+### 7.4 The exchange-rate oracle
+
+*This paragraph is non-normative.* The oracle is a protocol-level rate between the native token and the main fiat currency on which fee settlement, Trust Unit minting, budget payouts, and slash repayments all depend: an overstated native-token price mints trust too cheaply and underpays every budget; an understated one does the reverse. The VPR specification offers two optional per-authorization guardrails (`min_interval`, an anti-spam floor between updates, and `max_deviation_bps`, a circuit breaker on the relative change per update) and a validity window on the rate itself (`validity_duration`), after which the rate expires and dependent operations halt. This section makes all of them compulsory.
 
 - **[NGF-ECON-7]** The creation of an exchange rate, the enabling or disabling of an exchange rate, and the granting or revocation of an exchange-rate authorization are exercisable only through governance proposals (MOD-XR-MSG-1, -3, -4, -5; see [NGF-POW-1]). Routine rate updates (MOD-XR-MSG-2) are performed by the operators so authorized.
-- **[NGF-ECON-8]** Every exchange-rate authorization granted by the Council MUST identify the authorized operator on the public record and MUST set both protocol guardrails: `min_interval` (anti-spam minimum time between updates) and `max_deviation_bps` (circuit breaker on the relative change per update), at the initial values of Annex A.
+- **[NGF-ECON-8]** Every exchange-rate authorization granted by the Council MUST identify the authorized operator on the public record, MUST set both protocol guardrails, `min_interval` and `max_deviation_bps`, at values no weaker than those of Annex A, and MUST be accompanied by a published description of the operator's feed methodology, including its time-weighted averaging window (`twap_window`, Annex A).
 - **[NGF-ECON-9]** A rate movement exceeding the circuit breaker MUST be effected only through a fresh governance proposal, per the VPR specification.
+- **[NGF-ECON-15]** Every exchange rate created by the Council MUST carry a `validity_duration` (Annex A) longer, with margin, than the `min_interval` of every authorization granted on it, so that an operator meeting its interval can always keep the rate fresh. An expired rate fails closed: dependent operations halt until a fresh value is pushed or governance acts. The Council MUST NOT adopt any mechanism by which an expired rate continues to be used.
+- **[NGF-ECON-16]** For every enabled exchange rate on which fee settlement or Trust Unit minting depends, the Council MUST maintain authorizations held by at least 2 (Initial Parameter) operators that are not Related Parties of each other. If the count falls below that number, the Council MUST restore it by governance proposal without delay, and the shortfall is recorded on the public record.
+- **[NGF-ECON-17]** An exchange-rate operator MUST be a seated Member, and the operator account MUST be disclosed on the public record together with the Member's validator identity. Operating the oracle is a network duty of the same nature as operating a validator node: it MAY be delegated only under the conditions of [NGF-VAL-9].
 
-> **[DECISION]** Initial guardrail values proposed in Annex A: `min_interval` = 1 hour, `max_deviation_bps` = 1000 (10% per update). The VPR specification makes both optional per authorization; this document makes setting them mandatory. Alternative: leave them unset for launch-phase flexibility, at the cost of an unguarded oracle. Founding Members should confirm the values.
+> **[DECISION]** The VPR specification leaves the oracle guardrails optional per authorization; tokenomics Model C v2 lists `min_interval`, `max_deviation_bps`, `validity_duration`, and `twap_window` as genesis parameters, so this document makes them mandatory and the earlier alternative (leave them unset for launch-phase flexibility) is withdrawn: an unguarded oracle at launch, when governance is least practiced and the operator set least diverse, is the worst moment to run one. What Founding Members should confirm are the Annex A values: `min_interval` 1 hour, `max_deviation_bps` 1000 (10% per update: with a time-weighted feed, honest single-step moves are far smaller, while a compromised operator is limited to about 10% per hour), `validity_duration` 6 hours, `twap_window` 1 hour, and an operator redundancy of 2. Alternative: a tighter cap (500 bps) at the cost of slower tracking in a market crash.
+
+> **[DECISION]** Oracle operators are restricted to seated Members ([NGF-ECON-17]), making the feed a validator-like duty under Member accountability; the Foundation cannot hold the role, since it cannot operate the network. Alternative: any operator vetted by the Technical / Validator Committee, which widens the pool but gives a non-member direct influence on protocol pricing. Founding Members should confirm.
 
 ### 7.5 Parameter accountability
 
-- **[NGF-ECON-10]** Every parameter change (any GlobalVariables value, any module parameter, any exchange-rate state or authorization) MUST (a) be adopted by governance proposal under [NGF-GOV-6], (b) be accompanied by a published written justification naming the trade-offs against the principles of chapter [NGF-PRIN], and (c) ship a human-readable description of the change and its expected effect.
+- **[NGF-ECON-10]** Every parameter change (any protocol parameter of Annex A.1, any module parameter, any exchange-rate state or authorization, any budget line of [NGF-ECON-18]) MUST (a) be adopted by governance proposal under [NGF-GOV-6], (b) be accompanied by a published written justification naming the trade-offs against the principles of chapter [NGF-PRIN], and (c) ship a human-readable description of the change and its expected effect.
 - **[NGF-ECON-11]** The Council MUST conduct an open public review of all network parameters and exchange-rate state at least once per year, with the review's inputs and conclusions published.
 
-### 7.6 Council funding
+### 7.6 Distribution, Council funding, and supply
 
-- **[NGF-ECON-12]** After mainnet launch, the Council's operations are funded by a protocol-defined on-chain allocation. The Council MUST publish an annual public accounting of this allocation and its use. Fees otherwise flow as the protocol defines; the Council MUST NOT treat network fee flows as discretionary revenue.
+- **[NGF-ECON-12]** After mainnet launch, the Council's operations are funded by the `council_budget` line of the protocol's per-epoch distribution: a cost budget denominated in the main fiat currency, set by governance proposal ([NGF-ECON-10]) and paid in the native token at the oracle rate. The Council MUST publish an annual public accounting of this budget and its use, MUST justify any budget increase against actual costs, and MUST NOT treat network fee flows as discretionary revenue. Fees otherwise flow as the protocol defines.
+- **[NGF-ECON-18]** The distribution order of the pool is fixed by protocol: validator node budgets docked by uptime, the Council budget, the Foundation budget, the capped yield to bonded native tokens, and the burned residual. The Council MUST NOT propose or adopt any parameter, software release, or governance act that (a) routes the residual anywhere other than burn, (b) mints native tokens or otherwise increases total supply, or (c) gives bonded native tokens any weight in consensus or governance. Uptime docking of validator budgets is an economic consequence computed by the protocol, not a sanction of chapter [NGF-SANC]; persistent under-performance is reviewed under chapter [NGF-VAL].
+
+*This paragraph is non-normative.* While the pool is smaller than the budget lines, the shortfall is covered by the treasuries and vesting grants of the founding allocations, never by emission: the supply is fixed at genesis and only ever shrinks.
 
 ## 8. Requirements for Ecosystem Governance Frameworks
 
@@ -310,12 +328,15 @@ The following local terms are defined for this document. Definitions carry no no
 - **[NGF-VAL-6]** A Member MUST keep its consensus key unique to a single running node at any time, MUST NOT operate two nodes signing with the same consensus key, and SHOULD protect consensus keys with an HSM or remote signer. Consensus keys, node-operator keys, and governance keys MUST be separate keys.
 - **[NGF-VAL-7]** A Member MUST report any suspected compromise of its validator keys or infrastructure to the Council within 24 hours (Initial Parameter) of detection, and MUST report material incidents affecting its node's operation within 72 hours (Initial Parameter).
 - **[NGF-VAL-8]** A Member MUST apply network software upgrades adopted under chapter [NGF-EVOL] within the upgrade window stated in the adopting proposal (default 14 days for non-emergency upgrades, Initial Parameter).
+- **[NGF-VAL-17]** A Member MUST designate at least 2 (Initial Parameter) named persons as emergency governance contacts, each authorized to cast the Member's vote on a fast-path proposal ([NGF-EVOL-4]) and to coordinate a halt under [NGF-EVOL-9], reachable at all times through a channel the Council tests at least quarterly. Changes of contact MUST be notified within 5 business days (Initial Parameter). A Member whose contacts fail two consecutive tests is in breach of this chapter.
 
 ### 9.3 Delegated operation
 
 - **[NGF-VAL-9]** A Member MAY contract the technical operation of its node to a third-party operator, provided the Member discloses the operator to the Council, the operator does not operate nodes for any other Member, and the Member remains fully and non-delegably responsible for every duty of this chapter.
+- **[NGF-VAL-15]** A Member that hosts its node with a third party (a contracted operator under [NGF-VAL-9], a cloud provider, a colocation or bare-metal host) MUST ensure that the third party meets every duty of this chapter that touches the node, MUST keep its consensus, node-operator, and governance keys outside the third party's custody ([NGF-VAL-6]), and MUST disclose to the Council on the public record the hosting form (own data center, colocation, leased hardware, or public cloud), the provider, and the hosting jurisdiction. Any change of operator, provider, or hosting location MUST be reported within 5 business days (Initial Parameter).
+- **[NGF-VAL-16]** No two network validator nodes SHOULD be hosted in the same data center or cloud region, and the validator set SHOULD be spread across hosting providers and jurisdictions so that no single provider hosts more than 3 nodes (Initial Parameter). The Technical / Validator Committee MUST publish the hosting spread of the validator set on the public record at least yearly and MUST weigh it in genesis readiness ([NGF-VAL-3]) and renewal reviews ([NGF-VAL-10]).
 
-> **[DECISION]** Delegated operation is permitted with non-delegable accountability (the Hedera pattern), because several target Members (governments, standards bodies) do not run datacenter operations in-house. The one-operator-per-Member restriction prevents an operator from becoming a de facto multi-seat validator cartel. Alternative: prohibit delegation entirely (stronger decentralization optics, materially smaller candidate pool). Founding Members should confirm.
+> **[DECISION]** Delegated operation is permitted with non-delegable accountability, because several target Members (governments, standards bodies) do not run data-center operations in-house, and because every comparable council-run network does the same: Hedera council members host on their own hardware, colocation, leased bare metal, or public cloud, with the core team hosting transitional nodes for newcomers; Sovrin Stewards and the Sovrin-derived Bedrock framework flow the technical policies down to the hosting provider; Energy Web validators must be member organizations but may use managed cloud operators; EBSI node operators bear "full responsibility" whoever runs the machine. Two choices in this draft go beyond those precedents. First, the one-operator-per-Member restriction of [NGF-VAL-9] (no precedent limits vendors; Hedera limits locations, "at most one node in any given cloud or data center") prevents an operator from becoming a de facto multi-seat validator cartel on a 25-node network; the alternative is a cap of 2 or 3 Members per operator, easing the use of specialist operators at the cost of concentration. Second, the steward can therefore host at most one other Member's node during formation, whereas Hedera's core team hosts several transitional nodes; a time-boxed transitional-hosting clause in chapter [NGF-TRAN] is the alternative. [NGF-VAL-15] and [NGF-VAL-16] adopt the precedents' safeguards (flow-down, key custody, disclosure, hosting diversity). Founding Members should confirm the operator cap and whether a transitional-hosting ramp is wanted.
 
 ### 9.4 Terms, renewal, and exit
 
@@ -328,12 +349,12 @@ The following local terms are defined for this document. Definitions carry no no
 
 ### 9.6 Node software and source availability
 
-*This paragraph is non-normative.* The reference node software of the Verana network (`verana-node`, hosted and maintained by the Verana Foundation per [NGF-EVOL-3]) is released under the GNU Affero General Public License version 3.0 (AGPL-3.0). A specification cannot bind independent implementations: the license of the VPR specification reaches its text, not code written to conform to it. The guarantee that the software securing the commons stays open therefore lives here, as a condition of validator service, where it binds whichever software a Member chooses to run.
+*This paragraph is non-normative.* The reference node software of the Verana network (`verana-node`, hosted and maintained by the Verana Foundation per [NGF-EVOL-3]) is released under the GNU Affero General Public License version 3.0 (AGPL-3.0). The purpose is a guarantee to the users of the infrastructure, not a preference among Members: every relying party, ecosystem, and participant must be able to audit the entirety of the code that produces the ledger they rely on, so that they can verify the network's behavior rather than trust it ([NGF-PRIN-8]). That guarantee is only complete if it covers every node in the validator set, including modified builds and independent implementations, and only durable if it cannot be withdrawn by a Member operating a closed node over the network, which is what the AGPL's network clause addresses. A specification cannot deliver it: the license of the VPR specification reaches its text, not code written to conform to it, and the license of the reference node reaches only derivatives of that node. The guarantee therefore lives here, as a condition of validator service, where it binds whichever software a Member chooses to run.
 
 - **[NGF-VAL-13]** A Member MUST operate its network validator node with software whose complete corresponding source code is publicly available, at no charge, under the GNU Affero General Public License version 3.0 or any later version (AGPL-3.0-or-later), the license of the reference implementation. This applies equally to the reference implementation, to any modified build of it, and to any independent implementation of the VPR specification a Member runs in the validator set.
 - **[NGF-VAL-14]** A Member that runs a build differing from a release adopted under chapter [NGF-EVOL] MUST publish the complete corresponding source of the build it runs, under the terms of [NGF-VAL-13], no later than the moment that build enters or continues in the validator set, and MUST disclose to the Council that it runs a modified build and where its source is published. A modified build MUST remain protocol-compatible with the adopted release and never relaxes [NGF-VAL-4] or [NGF-VAL-8].
 
-> **[DECISION]** The copyleft requirement is placed on validator service ([NGF-VAL-13], [NGF-VAL-14]) and on release adoption ([NGF-EVOL-6]) rather than in the license of the VPR specification, because a specification license cannot reach clean-room implementations; and it is not added to the invariants of [NGF-AMND-9], so that it stays amendable on the standard constitutional tier. Rationale: the software that secures the commons must remain inspectable by anyone ([NGF-PRIN-8]), and no Member may hold a private advantage through a closed fork ([NGF-PRIN-2], [NGF-PRIN-6]). Alternatives: (a) add "network software copyleft" to the [NGF-AMND-9] invariants (stronger entrenchment); (b) accept any OSI-approved license (weaker: permits closed forks). Founding Members should confirm.
+> **[DECISION]** The copyleft requirement is placed on validator service ([NGF-VAL-13], [NGF-VAL-14]) and on release adoption ([NGF-EVOL-6]) rather than in the license of the VPR specification, because a specification license cannot reach clean-room implementations; and it is not added to the invariants of [NGF-AMND-9], so that it stays amendable on the standard constitutional tier (the Council does not set the software's license, its copyright holders do, and an entrenched license clause could leave the Council unable to adopt any release at all). Rationale, in order: the users of the infrastructure must be able to audit one hundred percent of the ledger code and verify, not merely trust, the network ([NGF-PRIN-8]); the software that secures the commons must remain inspectable by anyone; and no Member may hold a private advantage through a closed fork ([NGF-PRIN-2], [NGF-PRIN-6]). The AGPL is chosen over a permissive license because permissive licenses allow closed derivatives, and over the GPL because a validator is software operated over a network rather than distributed, which only the AGPL's network clause reaches. Alternatives: (a) add "network software copyleft" to the [NGF-AMND-9] invariants (stronger entrenchment, deadlock risk); (b) accept any OSI-approved license (weaker: permits closed forks and ends the audit guarantee). The steward's position (2026-09-30) is to keep the AGPL as drafted. Founding Members should confirm.
 
 ## 10. Network-Level Sanctions
 
@@ -344,6 +365,7 @@ The following local terms are defined for this document. Definitions carry no no
 ### 10.2 The graduated ladder
 
 - **[NGF-SANC-2]** Sanctions MUST proceed through a graduated ladder, applying the least severe rung adequate to the violation: (1) written warning; (2) remediation order with a day-counted cure period; (3) restriction of permissions or functions; (4) suspension; (5) revocation or termination (for Members: removal for Cause); (6) network-level trust-deposit slash (MOD-TD-MSG-5). A rung MAY be skipped only where written reasons establish that lesser measures cannot address the violation.
+- **[NGF-SANC-15]** For a corporation that is not a Member, rungs (3) to (5) have no on-chain instrument; the protocol offers the network slash alone. The Council MUST therefore execute rung (4), suspension, as a **suspension slash**: a network-level slash (MOD-TD-MSG-5) of the nominal suspension amount of Annex A, adopted under [NGF-SANC-8], whose sole purpose is to render the corporation's permissions non-trustable until repaid. The Council MUST state in the decision that the slash is a suspension, MUST NOT refuse repayment, and MUST lift the suspension by accepting repayment once the cure conditions of the decision are met; the no-limbo clock of [NGF-SANC-10] applies. Rung (6) remains reserved for violations where the written reasons establish that a suspension is inadequate, and is graduated by amount.
 - **[NGF-SANC-3]** The default cure period for a remediation order is 30 days, reducible to 5 days for violations threatening network integrity (Initial Parameters).
 - **[NGF-SANC-4]** Recidivism — a repeat of a violation of the same ground within 12 months (Initial Parameter) of a closed sanction — re-enters the ladder at the rung above the previously applied one.
 
@@ -355,7 +377,7 @@ The following local terms are defined for this document. Definitions carry no no
 
 ### 10.4 Execution
 
-- **[NGF-SANC-8]** A network-level slash MUST be executed only by a governance proposal adopted under [NGF-GOV-6] (MOD-TD-MSG-5). The slashed amount is burned. While the slash is unrepaid, all permissions linked to the slashed corporation are non-trustable, per the VPR specification; repayment restores standing (repay-to-resume).
+- **[NGF-SANC-8]** A network-level slash MUST be executed only by a governance proposal adopted under [NGF-GOV-6] (MOD-TD-MSG-5). The slashed Trust Units are destroyed and the repayment obligation is recorded at their mint-time fiat cost basis ([NGF-ECON-3]). While the slash is unrepaid, all permissions linked to the slashed corporation are non-trustable, per the VPR specification; repayment restores standing (repay-to-resume).
 - **[NGF-SANC-9]** Sanction proceeds MUST NOT accrue to the Council, any Member, or any complainant ([NGF-PRIN-9]).
 
 ### 10.5 No limbo
@@ -371,6 +393,13 @@ The following local terms are defined for this document. Definitions carry no no
 ### 10.7 Intake
 
 - **[NGF-SANC-14]** The Council MUST maintain a public intake channel through which any person may report suspected network-level violations, and MUST publish aggregate intake statistics annually while keeping case details confidential until decision.
+
+### 10.8 Legal orders
+
+*This paragraph is non-normative.* An order from a court or authority does not enlarge the Council's powers: an order to freeze funds, reverse a transaction, or delete data cannot be executed because no such capability exists ([NGF-POW-12]), and the Council says so; an order to stop a corporation from operating on the registry is answered with the ladder and, ultimately, a slash. The posture is that of infrastructure operators bound by law but not by pressure: act only on a binding order, only through the enumerated powers, and say publicly that it was done.
+
+- **[NGF-SANC-16]** Where a binding order of a competent authority in a jurisdiction to which the Council is subject requires action against a corporation, an ecosystem, or a Member, the Council MUST act only through its enumerated powers of chapter [NGF-POW] and the ladder of this chapter, treating the order as establishing a ground under [NGF-SANC-1](d); the fast path of [NGF-EVOL-7] MAY be used where the order or the harm requires it. The Council MUST NOT act on political, commercial, or diplomatic pressure that is not a binding order ([NGF-PRIN-1], [NGF-PRIN-10]), MAY seek legal review of an order before acting where the law allows, and MUST inform all seated Members of every order received.
+- **[NGF-SANC-17]** The existence of every order received under [NGF-SANC-16] and the act taken in response MUST be published on the public record ([NGF-GOV-2]). Where the order itself lawfully prohibits disclosure, the Council MUST record the existence of a sealed order without its details, and MUST publish the details when the prohibition lapses. The Council MUST publish annually the number of orders received, by jurisdiction and outcome, together with the intake statistics of [NGF-SANC-14].
 
 ## 11. Dispute Resolution
 
@@ -408,8 +437,11 @@ The following local terms are defined for this document. Definitions carry no no
 
 - **[NGF-EVOL-4]** Where a vulnerability threatens network integrity or user funds, the Council MAY adopt an emergency patch through a fast path: approval by ⅔ of seated members with the voting window shortened to no less than 48 hours (Initial Parameter), and deferred publication of vulnerability details until remediation is deployed.
 - **[NGF-EVOL-5]** Every emergency act under [NGF-EVOL-4] MUST be submitted for retroactive ratification at the next ordinary Council vote, and no later than 30 days after the act (Initial Parameter), with full written reasons published at ratification. An emergency act not ratified by that deadline lapses; at the same vote the Council MUST adopt and schedule any reverting or replacing measure the lapse requires, with written reasons published.
+- **[NGF-EVOL-7]** The fast path of [NGF-EVOL-4] and the ratification duty of [NGF-EVOL-5] apply to any emergency exercise of an enumerated power of chapter [NGF-POW], not only to software patches: in particular to disabling an exchange rate or revoking an exchange-rate authorization ([NGF-ECON-7]), to a network-level slash ([NGF-SANC-8]), and to a parameter change needed to stop an ongoing attack. The threshold and denominator of [NGF-GOV-6] to [NGF-GOV-8] are never reduced by the fast path.
+- **[NGF-EVOL-8]** A fast-path proposal that has not reached the ⅔ threshold by the end of its shortened window MUST NOT fail outright: it converts automatically into an ordinary proposal under the standard voting window of [NGF-GOV-9], with the votes already cast retained, so that an emergency is never worse placed for having attempted the fast path.
+- **[NGF-EVOL-9]** The Technical / Validator Committee MAY declare an integrity incident when it has reasonable grounds to believe that continued block production threatens the integrity of the ledger or user funds, and MUST publish the declaration on the public record with its grounds and, when the incident is closed, its lifting. During a declared incident a Member MAY halt its network validator node in coordination with the Committee; downtime so caused does not count against the availability floor of [NGF-VAL-5] and is not a breach of chapter [NGF-VAL]. A declaration lasts at most 72 hours (Initial Parameter) unless extended by a fast-path vote under [NGF-EVOL-4]; it confers no power other than the excuse of downtime, and every act taken during it remains subject to [NGF-EVOL-5].
 
-> **[DECISION]** The emergency fast path keeps the full ⅔ threshold and shortens only the deliberation window (48 hours minimum), rather than lowering the threshold to a smaller emergency committee. Rationale: a lower threshold is the single most abusable clause in any constitution; a 25-member body can realistically clear ⅔ within 48 hours for a genuine emergency. Alternative: a security committee empowered to act with retroactive ratification, which is faster but concentrates power. Founding Members should confirm.
+> **[DECISION]** The emergency fast path keeps the full ⅔ threshold and shortens only the deliberation window (48 hours minimum), rather than lowering the threshold to a smaller emergency committee. Rationale: a lower threshold is the single most abusable clause in any constitution; a 25-member body can realistically clear ⅔ within 48 hours for a genuine emergency, provided every Member keeps a reachable governance signer ([NGF-VAL-17]). The Cosmos SDK governance module the reference node is built on provides this pattern natively (expedited proposals: shortened window, higher threshold, automatic conversion to a regular proposal on failure); this document is stricter on time (48 hours rather than the module's 24-hour default) and identical on threshold. Hedera's 2023 exploit response showed the missing layer, operational containment by engineers before the council signed the fix; on a network of independent nodes that layer is the declared incident and coordinated halt of [NGF-EVOL-9], which excuses downtime and confers no other power. Alternative: a security committee empowered to act with retroactive ratification, which is faster but concentrates the one power that matters most at the moment scrutiny is weakest. Founding Members should confirm.
 
 ## 13. Amendment
 
@@ -457,7 +489,7 @@ The following local terms are defined for this document. Definitions carry no no
 
 *Normative.* Each parameter below is an Initial Parameter of this framework. On-chain parameters take these values at genesis and change only by governance proposal per [NGF-ECON-10]. Document parameters change by amendment of this document per chapter [NGF-AMND].
 
-### A.1 Protocol GlobalVariables (VPR [GLO])
+### A.1 Protocol parameters (VPR v5, tokenomics Model C v2)
 
 | Parameter | Initial value | Change process |
 | --- | --- | --- |
@@ -467,19 +499,33 @@ The following local terms are defined for this document. Definitions carry no no
 | `credential_schema_issuer_validation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
 | `credential_schema_verifier_validation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
 | `credential_schema_holder_validation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
-| `trust_deposit_share_value` | 1 | Governance proposal ([NGF-ECON-10]) |
-| `trust_deposit_rate` | 0.20 | Governance proposal ([NGF-ECON-10]) |
-| `trust_deposit_max_yield_rate` | 0.20 | Governance proposal ([NGF-ECON-10]) |
-| `trust_deposit_block_reward_share` | 0.20 | Governance proposal ([NGF-ECON-10]) |
-| `wallet_user_agent_reward_rate` | 0.10 | Governance proposal ([NGF-ECON-10]) |
-| `user_agent_reward_rate` | 0.10 | Governance proposal ([NGF-ECON-10]) |
+| `trust_deposit_rate` (deposit-bound share of trust fees) | 0.05 | Governance proposal ([NGF-ECON-10]) |
+| `tu_decay_rate` (per-epoch decline of the Trust Unit index) | half-life 24 months | Governance proposal ([NGF-ECON-10]); prospective only ([NGF-ECON-2]) |
+| `wallet_user_agent_reward_rate` | 0.05 | Governance proposal ([NGF-ECON-10]) |
+| `user_agent_reward_rate` | 0.05 | Governance proposal ([NGF-ECON-10]) |
+| `vna_total_supply` | 1,000,000,000 VNA | Immutable (genesis) |
+| `main_fiat_currency` | set at genesis | Immutable (genesis) |
+| `tu_peg_value(0)` (genesis value of one Trust Unit) | 0.01 main fiat currency | Immutable (genesis; the index then moves only by decay) |
+| `epoch_length` | 1 day | Governance proposal ([NGF-ECON-10]) |
+| `vna_holder_max_yield_rate` (yearly cap on the yield to bonded native tokens) | set at genesis | Governance proposal ([NGF-ECON-10]) |
+| `unbonding_period` | 28 days | Governance proposal ([NGF-ECON-10]) |
+| `validator_node_budget` (cost target per active node per epoch, main fiat currency) | set at genesis | Governance proposal ([NGF-ECON-10]) |
+| `validator_target_uptime` (signed-block ratio for full payment) | 99% | Governance proposal ([NGF-ECON-10]) |
+| `validator_min_uptime` (floor below which the epoch payment is zero) | 90% | Governance proposal ([NGF-ECON-10]) |
+| `council_budget` (per epoch, main fiat currency) | set at genesis | Governance proposal ([NGF-ECON-10]) |
+| `foundation_budget` (per epoch, main fiat currency) | set at genesis | Governance proposal ([NGF-ECON-10]) |
 
-### A.2 Exchange-rate authorization guardrails
+> **[DECISION]** Tokenomics Model C v2 gives `tu_decay_rate` as a half-life of 18 to 24 months; this document proposes 24 months (slower decay: a trust score built over two years keeps half its value, which suits institutional participants with yearly budget cycles). Alternative: 18 months, favoring scores that track recent behavior more closely. Founding Members should confirm before genesis. Budget lines and the yield cap marked "set at genesis" are fixed by the Council in the genesis proposal on the basis of published cost estimates, and reviewed yearly under [NGF-ECON-11].
 
-| Parameter | Initial value | Change process |
-| --- | --- | --- |
-| `min_interval` (per authorization) | 1 hour | Governance proposal ([NGF-ECON-8]) |
-| `max_deviation_bps` (per authorization) | 1000 (10%) | Governance proposal ([NGF-ECON-8]) |
+### A.2 Exchange-rate oracle parameters
+
+| Parameter | Requirement | Initial value | Change process |
+| --- | --- | --- | --- |
+| `min_interval` (per authorization) | [NGF-ECON-8] | 1 hour | Governance proposal ([NGF-ECON-8]) |
+| `max_deviation_bps` (per authorization) | [NGF-ECON-8] | 1000 (10%) | Governance proposal ([NGF-ECON-8]) |
+| `validity_duration` (per exchange rate) | [NGF-ECON-15] | 6 hours | Governance proposal ([NGF-ECON-10]) |
+| `twap_window` (per operator feed) | [NGF-ECON-8] | 1 hour | Governance proposal ([NGF-ECON-8]) |
+| Operator redundancy per enabled rate | [NGF-ECON-16] | 2 operators | Amendment ([NGF-AMND]) |
 
 ### A.3 Governance process parameters
 
@@ -505,6 +551,9 @@ The following local terms are defined for this document. Definitions carry no no
 | Material-incident report clock | [NGF-VAL-7] | 72 hours | Amendment ([NGF-AMND]) |
 | Default upgrade window (non-emergency) | [NGF-VAL-8] | 14 days | Amendment ([NGF-AMND]) |
 | Validator term | [NGF-VAL-10] | 3 years | Amendment ([NGF-AMND]) |
+| Hosting-change report clock | [NGF-VAL-15] | 5 business days | Amendment ([NGF-AMND]) |
+| Maximum nodes per hosting provider | [NGF-VAL-16] | 3 | Amendment ([NGF-AMND]) |
+| Emergency governance contacts per Member | [NGF-VAL-17] | 2 persons, tested quarterly | Amendment ([NGF-AMND]) |
 
 > **[DECISION]** Validator terms are set at 3 years with formal renewal (defs fixes "fixed validator terms with formal renewal" without a number; 3 years matches the Hedera minimum term and gives institutional members procurement-compatible planning horizons). Alternative: 2 years, favoring faster rotation. Founding Members should confirm.
 
@@ -513,6 +562,7 @@ The following local terms are defined for this document. Definitions carry no no
 | Parameter | Requirement | Initial value | Change process |
 | --- | --- | --- | --- |
 | Default cure period | [NGF-SANC-3] | 30 days | Amendment ([NGF-AMND]) |
+| Suspension-slash nominal amount | [NGF-SANC-15] | 1 Trust Unit (or the smallest slashable amount) | Amendment ([NGF-AMND]) |
 | Accelerated cure period (network-integrity threats) | [NGF-SANC-3] | 5 days | Amendment ([NGF-AMND]) |
 | Recidivism window | [NGF-SANC-4] | 12 months | Amendment ([NGF-AMND]) |
 | Sanctions Panel activation threshold | [NGF-SANC-6] | 5 qualifying members | Amendment ([NGF-AMND]) |
@@ -523,6 +573,7 @@ The following local terms are defined for this document. Definitions carry no no
 | Bilateral negotiation period | [NGF-DISP-3] | 30 days | Amendment ([NGF-AMND]) |
 | Emergency fast-path minimum voting window | [NGF-EVOL-4] | 48 hours | Amendment ([NGF-AMND]) |
 | Retroactive ratification deadline | [NGF-EVOL-5] | 30 days | Amendment ([NGF-AMND]) |
+| Declared-incident maximum duration | [NGF-EVOL-9] | 72 hours (extendable by fast-path vote) | Amendment ([NGF-AMND]) |
 
 ## 16. Annex B — Schedule of Controlled Documents
 
@@ -536,6 +587,7 @@ The following local terms are defined for this document. Definitions carry no no
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.3 | 2026-08-08 | Draft | Working draft. Adds node-software source-availability duties for network validators ([NGF-VAL-13], [NGF-VAL-14], new section 9.6) and the matching AGPL-3.0-or-later release-adoption constraint ([NGF-EVOL-6]). |
+| 0.4 | 2026-09-30 | Draft | Working draft. Rebased on VPR v5 and tokenomics Model C v2: chapter 7 rewritten (Trust Units non-transferable and decaying, no deposit yield, slash obligations at mint-time cost basis, fixed-order distribution, no emission, bonding without governance weight; [NGF-ECON-1] to [NGF-ECON-4], [NGF-ECON-12], [NGF-ECON-13] amended, [NGF-ECON-14] to [NGF-ECON-18] added), oracle guardrails completed (`validity_duration`, `twap_window`, operator redundancy and eligibility), Annex A.1 and A.2 rebuilt on Model C parameters (`trust_deposit_rate` and agent reward rates 0.05), [NGF-SANC-8] wording aligned, terminology extended. Delegated node operation completed with hosting flow-down, key custody, disclosure and reporting ([NGF-VAL-15]) and hosting diversity ([NGF-VAL-16]), with the [DECISION] box rewritten against the Hedera, Sovrin/Bedrock, Energy Web and EBSI precedents. Emergency path completed: fast path extended to any enumerated power ([NGF-EVOL-7]), automatic conversion to an ordinary proposal on failure ([NGF-EVOL-8]), declared incident and coordinated halt with excused downtime ([NGF-EVOL-9]), emergency governance contacts per Member ([NGF-VAL-17]). No freeze, seizure, reversal or deletion power stated as a hard limit ([NGF-POW-12]); suspension slash for non-Member corporations ([NGF-SANC-15]); legal orders acted on only through enumerated powers and published ([NGF-SANC-16], [NGF-SANC-17], new section 10.8). DRAFT 0.3 archived under `v0.3/`. |
+| 0.3 | 2026-08-29 | Draft | (Archived under `v0.3/`.) Adds node-software source-availability duties for network validators ([NGF-VAL-13], [NGF-VAL-14], new section 9.6) and the matching AGPL-3.0-or-later release-adoption constraint ([NGF-EVOL-6]). |
 | 0.2 | 2026-08-08 | Draft | (Archived under `v0.2/`.) Cross-reference to the ECS-EGF updated to five Essential Credential Schemas (Badge added per Verifiable Trust specification v4). |
 | 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`) |
