@@ -607,7 +607,7 @@ VPR specification:
   [MOD-CS-MSG-6]), url + digest_sri⟩.
 - [⟨PREFIX⟩-LIFE-14] ⟨Optional.⟩ A VERIFIER SchemaAuthorizationPolicy MAY set
   a presentation validity period (VPR `presentation_validity_period`,
-  ⟨days⟩). While such a version is active, every presentation of a
+  ⟨duration in seconds⟩). While such a version is active, every presentation of a
   credential of the schema is anchored in its verification session and the
   receipt is stamped with a `presentation_valid_until`: the presentation is
   valid evidence of a verification only until that time, and a verifier that
