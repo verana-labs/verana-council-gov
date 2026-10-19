@@ -172,8 +172,10 @@ normative keywords.
   brackets⟩.
 - **Suggested text**: template prose an ecosystem may keep or edit.
 - **Grace Period**: a defined time window following an involuntary
-  revocation during which already-issued credentials remain verifiable while
-  affected parties migrate.
+  revocation during which already-issued credentials of anchored schemas
+  (`credential_anchoring` = `DIGEST`) remain verifiable while affected
+  parties migrate (credentials of non-anchored schemas stop verifying at
+  termination, since their trust requires a currently authorized issuer).
 - **Controlled Document**: a separately versioned document referenced from an
   EGF, revisable through the EGF's stated amendment process.
 - **Member**: a member of the Verana Council Association (a Swiss Verein).
@@ -437,12 +439,10 @@ The ⟨Ecosystem Name⟩ ecosystem exists on the Verana VPR as:
   Participant [MOD-PP-MSG-7], anchoring the permission tree of section T7.
 
 > *Instruction:* Annex B gives the exact message sequence with explanations.
-> If you publish objective accreditation criteria as on-chain
-> SchemaAuthorizationPolicy documents ([MOD-CS-MSG-5]/[MOD-CS-MSG-6]),
-> reference them here and in section T8; once a policy is active, the VPR
-> obliges the granting corporation to issue an Issuer Authorization
-> Credential (IAC) or Verifier Authorization Credential (VAC) to each
-> successfully onboarded candidate.
+> Publish your objective accreditation criteria as digest-anchored
+> Controlled Documents and reference them here and in section T8 (the VPR's
+> on-chain SchemaAuthorizationPolicy and the accreditation credentials it
+> implies are deferred to a later protocol version).
 
 ## T6. Credential Schemas
 
@@ -491,7 +491,17 @@ The ⟨Ecosystem Name⟩ ecosystem exists on the Verana VPR as:
 >   happens off-chain). Trust deposits are always handled in the native
 >   denom regardless of this choice.
 > - `digest_algorithm` for credentials issued under the schema, per the VT
->   specification (SHA384 or SHA512).
+>   specification (`sha384` or `sha512`, lowercase tokens).
+> - `credential_anchoring` (`DIGEST` or `NONE`): whether the digest of every
+>   credential is anchored in the VPR at issuance. The VPR fixes `DIGEST` for
+>   W3C JSON-LD schemas and `NONE` for AnonCreds schemas; for SD-JWT schemas
+>   you choose. `DIGEST` gives dated issuance, credentials that survive the
+>   issuer's termination (Grace Period, T8.7), revocation on the VPR with the
+>   ancestor path of T11, and issuance fees enforced by the digest. `NONE`
+>   gives herd privacy of revocation checks (Token Status List), cheap bulk
+>   revocation and compatibility with existing SD-JWT deployments, at the
+>   price of credentials that stop verifying when the issuer's entry ends.
+>   Immutable: decide before creating the schema.
 
 ### T6.⟨n⟩ ⟨Schema Name⟩ Credential
 
@@ -520,7 +530,8 @@ canonical form) is authoritative.
 | `holder_validation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
 | `pricing_asset_type` | ⟨TU / COIN / FIAT — suggested: TU⟩ |
 | `pricing_asset` | ⟨"tu", denom, or currency code⟩ |
-| `digest_algorithm` | ⟨SHA384 / SHA512⟩ |
+| `digest_algorithm` | ⟨sha384 / sha512⟩ |
+| `credential_anchoring` | ⟨DIGEST / NONE — fixed by the format except for SD-JWT⟩ |
 
 > **[DECISION]** The template suggests 365-day validity periods for every
 > role and TU as the pricing asset. Neither the specs nor the Network GF fix
@@ -602,9 +613,19 @@ VPR specification:
 ### T8.1 Qualification
 
 - [⟨PREFIX⟩-LIFE-1] The EGA MUST publish objective eligibility criteria per
-  role and per schema before accepting applications, ⟨optionally: as
-  on-chain SchemaAuthorizationPolicy documents ([MOD-CS-MSG-5] /
-  [MOD-CS-MSG-6]), url + digest_sri⟩.
+  role and per schema before accepting applications, as digest-anchored
+  Controlled Documents resolvable from this framework.
+- [⟨PREFIX⟩-LIFE-14] ⟨Optional.⟩ The EGA MAY set a presentation validity
+  period on a schema (VPR `presentation_validity_period` of the
+  CredentialSchema entry, ⟨duration in seconds⟩, set at creation or through
+  Update Credential Schema). While the period is greater than 0, every
+  presentation of a credential of the schema is anchored in its verification
+  session and the receipt is stamped with a `presentation_valid_until`: the
+  presentation is valid evidence of a verification only until that time, and
+  a verifier that relies on the credential afterwards MUST obtain a new
+  presentation and pay the applicable fees again. This framework MUST state
+  this effect as its terms of reliance; a change of the period applies to the
+  verifications that follow it.
 - [⟨PREFIX⟩-LIFE-2] The validating party (the EGA or the responsible
   grantor) MUST evaluate applicants against the published criteria only, and
   MUST NOT refuse an applicant that meets them. An applicant that meets all
@@ -675,12 +696,17 @@ VPR specification:
   ⟨Grace Period days — suggested: 90⟩ days; archive its qualification and
   issuance evidence; and destroy role keys after the archive is secured. If
   the leaving participant defaults on notification, the EGA MUST take over
-  notification and MAY hold the participant liable.
+  notification and MAY hold the participant liable; if it defaults on
+  revocation, the EGA MAY revoke its unexpired credentials of anchored
+  schemas itself at the end of the Grace Period through the ancestor path
+  of the VPR's Revoke Digest, under [⟨PREFIX⟩-SANC-11] (credentials of
+  non-anchored schemas carry no digest and stop verifying at termination).
 
 > **[DECISION]** The 90-day Grace Period default follows GLEIF's
 > production-tested `gracePeriod ≥ 90 days` (disable-then-migrate: the
-> terminated party is disabled immediately; downstream credentials keep
-> verifying while holders migrate). Shorter periods punish innocent holders;
+> terminated party is disabled immediately; downstream credentials of
+> anchored schemas keep verifying while holders migrate, those of
+> non-anchored schemas stop at termination). Shorter periods punish innocent holders;
 > longer ones prolong reliance on a terminated party. Founding Members
 > should confirm the default.
 
@@ -706,7 +732,7 @@ credential concerned; higher rungs are added, not substituted.
 | Financially backed pledge | Every participant's non-withdrawable trust deposit, growing with usage and slashable on violation | Trust deposit per Participant entry |
 | Vetting | Evaluation of the applicant against published criteria in a live validation session | DIDComm onboarding validation ([MOD-PP-MSG-1]/[MOD-PP-MSG-3]) |
 | Registration | The public, queryable record that a party holds a role under this framework | VALIDATED Participant entry with validity window |
-| Certification | A revocable credential attesting accreditation against published criteria | IAC/VAC issued under an active SchemaAuthorizationPolicy |
+| Certification | A revocable credential attesting accreditation against published criteria | Deferred: the VALIDATED Participant entry is the accreditation until the VPR's accreditation credentials are available |
 | Discontinuance | Removal of a non-conforming party's status, visible to every relying party | Revocation [MOD-PP-MSG-9]; slash [MOD-PP-MSG-12]; repay [MOD-PP-MSG-13] |
 | Referential trust | Recognition of this ecosystem by relying parties that choose to trust it | Whitelisting of the Ecosystem DID by Verifiable Services and User Agents |
 
@@ -870,6 +896,19 @@ user-agent and wallet-user-agent reward shares on pay-per operations.
   competent issuer or the EGA MUST verify the identity and standing of the
   requester and the stated ground, and MUST respond to the requester with a
   reasoned decision within ⟨days — suggested: 15⟩ days.
+- [⟨PREFIX⟩-SANC-11] The VPR lets the EGA, as controller of the root
+  `ECOSYSTEM` entries, and a grantor, as validator above an issuer and while
+  its own entry is active, revoke the digest of an individual credential of
+  an anchored schema, anchored under an issuer of their branch (Revoke
+  Digest, ancestor path; credentials of non-anchored schemas carry no
+  digest). The EGA and grantors MUST use this
+  power only ⟨on enumerated grounds — e.g. a verified revocation request
+  the issuer has not honoured within the deadline of [⟨PREFIX⟩-SANC-10];
+  the unexpired credentials of a terminated issuer that defaulted on
+  [⟨PREFIX⟩-LIFE-12]; a credential whose issuance breached this framework,
+  after the due process of T11.3⟩, with written reasons and an entry on the
+  public record, appealable per T11.4. Such a revocation leaves the
+  holder's `HOLDER` entry untouched.
 
 ## T12. Privacy and Data Handling
 
@@ -1030,13 +1069,12 @@ every message named here.*
    Participant entry that anchors each schema's permission tree; all
    grantor, issuer, and verifier permissions descend from it through
    onboarding processes.
-6. **Optional — Create / Activate Schema Authorization Policy
-   ([MOD-CS-MSG-5] / [MOD-CS-MSG-6]).** Publish your objective accreditation
-   criteria per (schema, role) as versioned on-chain policy documents
-   (url + digest_sri) and activate them. While a policy is active, the
-   granting corporation must issue an Issuer Authorization Credential (IAC)
-   or Verifier Authorization Credential (VAC) to each successfully onboarded
-   candidate.
+6. **Publish your accreditation criteria.** Publish the objective
+   accreditation criteria per (schema, role) as digest-anchored Controlled
+   Documents referenced from your framework. (The VPR's on-chain Schema
+   Authorization Policy, [MOD-CS-MSG-5] / [MOD-CS-MSG-6], and the
+   accreditation credentials it implies are deferred to a later protocol
+   version.)
 
 ## Annex C. Parameter Collection Sheet (Initial Parameters)
 
