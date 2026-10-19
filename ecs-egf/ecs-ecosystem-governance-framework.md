@@ -147,7 +147,7 @@ and the
 [VPR specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/)
 are used with their spec meanings and are not redefined here — in
 particular: *Corporation*, *Ecosystem*, *Participant*, *onboarding process*,
-*CredentialSchema*, *SchemaAuthorizationPolicy*, *trust deposit*, *trust
+*CredentialSchema*, *trust deposit*, *trust
 unit (TU)*, the participant roles (`ECOSYSTEM`, `ISSUER_GRANTOR`,
 `VERIFIER_GRANTOR`, `ISSUER`, `VERIFIER`, `HOLDER`), and the onboarding
 modes (`OPEN`, `GRANTOR_ONBOARDING_PROCESS`, `ECOSYSTEM_ONBOARDING_PROCESS`,
@@ -179,8 +179,10 @@ normative keywords.
 - **General Assembly** — the supreme organ of the Verana Council Association
   under its statutes. Always spelled out; never "GA".
 - **Grace Period** — the defined transition window after an involuntary
-  termination of an issuer during which credentials it issued continue to
-  verify while holders migrate (see [ECS-LIFE-16]).
+  termination of an issuer during which the W3C credentials it issued
+  (Service, Organization, Persona) continue to verify while holders
+  migrate; AnonCreds credentials (UserAgent, Badge) stop verifying at
+  termination (see [ECS-LIFE-16]).
 - **Member** — an organization holding a seat in the Verana Council
   Association (a Verein member); per the Network GF ([NGF-TRAN-7]), the
   "Founding" designation is historical only and confers no right or power.
@@ -297,11 +299,8 @@ version 1 of this framework as its governance framework document
 (url + digest_sri, activated at creation; subsequent versions via
 [MOD-GF-MSG-1] / [MOD-GF-MSG-2]); the five ECS CredentialSchema entries
 ([MOD-CS-MSG-1]) configured per Chapter 5; the root `ECOSYSTEM` Participant
-entries ([MOD-PP-MSG-7]); and, for every (schema, role) pair with role
-`ISSUER` or `VERIFIER` that is subject to accreditation criteria, the
-corresponding SchemaAuthorizationPolicy documents ([MOD-CS-MSG-5] /
-[MOD-CS-MSG-6]); criteria for other gated roles are published per
-[ECS-ACC-1].
+entries ([MOD-PP-MSG-7]); and the accreditation criteria of every gated
+(schema, role) pair, published per [ECS-ACC-1].
 
 [ECS-ROOT-2] The Council MUST publish, in the ECS Ecosystem DID Document,
 one `LinkedVerifiablePresentation` service entry per ECS pointing to the
@@ -423,7 +422,7 @@ deviation is an amendment to this framework (Chapter 13).
 | `holder_validation_validity_period` | Annex A | Annex A | Annex A | 0 | 0 |
 | `pricing_asset_type` | `TU` | `TU` | `TU` | `TU` | `TU` |
 | `pricing_asset` | `tu` | `tu` | `tu` | `tu` | `tu` |
-| `digest_algorithm` | `SHA384` | `SHA384` | `SHA384` | `SHA384` | `SHA384` |
+| `digest_algorithm` | `sha384` | `sha384` | `sha384` | `sha384` | `sha384` |
 
 *Non-normative notes on Table 2:*
 
@@ -637,8 +636,8 @@ MUST accredit Issuer Grantors per jurisdiction or region against the
 published Issuer Grantor criteria Controlled Document for the Organization
 schema ([ECS-ACC-1], Annex B), and each Issuer Grantor acts as the
 onboarding validator for issuer applicants within its published scope,
-evaluating them against the active SchemaAuthorizationPolicy for
-(Organization, ISSUER).
+evaluating them against the published criteria for (Organization,
+ISSUER) ([ECS-ACC-1]).
 
 > **[DECISION]** *Issuer Grantor scopes are non-exclusive.* More than one
 > Issuer Grantor may be accredited for the same jurisdiction or region;
@@ -748,8 +747,8 @@ and the consent rules of Chapter 12.
 accredited Issuer Grantors (`GRANTOR_ONBOARDING_PROCESS`) under the same
 structure, criteria publication, and neutrality duties as §6.2.3 applied
 to the Persona schema's criteria instruments per [ECS-ACC-1] (the
-(Persona, ISSUER) SchemaAuthorizationPolicy and the Persona Issuer Grantor
-criteria Controlled Document).
+(Persona, ISSUER) and (Persona, ISSUER_GRANTOR) criteria Controlled
+Documents).
 
 #### 6.3.4 Identity verification
 
@@ -880,6 +879,14 @@ AnonCreds credential definition referencing the UserAgent VTJSC via
 `relatedJsonSchemaCredentialId`, and digests where applicable computed
 with SHA-384.
 
+[ECS-UA-9] UserAgent presentations are free of charge and never create a
+`ParticipantSession`: the `verification_fees` of every UserAgent
+Participant entry MUST be 0 whatever Annex A sets for other schemas, the
+schema's `presentation_validity_period` MUST be 0, and a verifier MUST NOT
+ask that a UserAgent presentation be anchored, since a verifying User Agent
+holds no Participant entry and cannot create a session (Verifiable Trust
+specification, [VT-ECS-JSON-SCHEMA-VPR-CONFIG]).
+
 ### 6.5 Badge Credential Framework
 
 #### 6.5.1 Purpose and scope
@@ -1004,18 +1011,13 @@ day-counted and runs against the Council as much as against the applicant.
 
 [ECS-ACC-1] For every (schema, role) pair gated by an onboarding process
 under Table 2, the Council MUST publish objective accreditation criteria
-before accepting any application for that pair: (a) for pairs with role
-`ISSUER` or `VERIFIER`, as SchemaAuthorizationPolicy documents on-chain
-(url + digest_sri, created via [MOD-CS-MSG-5] and activated via
-[MOD-CS-MSG-6] — the only roles the protocol accepts for such policies);
-(b) for pairs with role `ISSUER_GRANTOR` or `HOLDER`, as digest-anchored
-criteria Controlled Documents (Annex B) resolvable per [ECS-GEN-7].
-References elsewhere in this framework to the published criteria of the
-active SchemaAuthorizationPolicy for a (schema, role) are read, for pairs
-under (b), as references to the corresponding criteria Controlled
-Document.
+before accepting any application for that pair, as digest-anchored
+criteria Controlled Documents (Annex B) resolvable per [ECS-GEN-7]. The
+VPR's on-chain SchemaAuthorizationPolicy is deferred to a later protocol
+version; when it becomes available, the criteria documents of the `ISSUER`
+and `VERIFIER` roles MAY be anchored through it without change of content.
 
-[ECS-ACC-2] Each SchemaAuthorizationPolicy document MUST be structured as
+[ECS-ACC-2] Each criteria Controlled Document MUST be structured as
 mandate → addressed role → control practice → required evidence →
 verification method (on-chain state, cryptographic proof, DIDComm evidence
 exchange, or human review), so that an onboarding validator can evaluate
@@ -1028,24 +1030,30 @@ they MUST include a catch-all category admitting applicants outside the
 named categories on escalated evidence, so that no legitimate applicant is
 structurally excluded.
 
-[ECS-ACC-16] A VERIFIER SchemaAuthorizationPolicy MAY set a presentation
-validity period (the VPR `presentation_validity_period` of the policy
-version). While such a version is active, the VPR requires the digest of
-every presentation of a credential of the schema to be anchored in the
-verification session and stamps the receipt with a
+[ECS-ACC-16] The Council MAY set a presentation validity period on a schema
+(the VPR `presentation_validity_period` attribute of the CredentialSchema
+entry, in seconds, set at creation or through Update Credential Schema,
+[MOD-CS-MSG-2]). While the period is greater than 0, the VPR requires the
+digest of every presentation of a credential of the schema to be anchored
+in the verification session and stamps the receipt with a
 `presentation_valid_until`; a presentation is valid evidence of a
 verification only until that time, and a verifier that relies on the
 credential afterwards MUST obtain a new presentation and pay the
-applicable fees again. The policy document MUST state this effect in its
-terms of reliance. The period is an Annex A parameter per schema; at launch
-no ECS schema sets one, the Service, Organization and Persona schemas being
-PUBLIC and producing no receipts.
+applicable fees again. These are the terms of reliance of this framework
+for the schema. A change of the period is an Annex A amendment
+([ECS-AMND-5]) executed on-chain by Update Credential Schema; it applies
+to the verifications that follow it and does not change receipts already
+stamped. The period is an Annex A parameter per schema; at launch no ECS
+schema sets one. The Service, Organization and Persona schemas are PUBLIC
+and produce no receipts, and the UserAgent schema MUST never set a period
+([ECS-UA-9]); the Badge schema is the only ECS schema on which one can
+apply.
 
-[ECS-ACC-3] Where an active SchemaAuthorizationPolicy exists for a
-(schema, role), the granting corporation MUST issue the corresponding
-Issuer Authorization Credential (IAC) or Verifier Authorization Credential
-(VAC) to the candidate upon successful completion of the onboarding
-process, as the VPR specification requires.
+[ECS-ACC-3] Accreditation is the on-chain `VALIDATED` Participant entry
+([ECS-LIFE-5]); no accreditation credential (IAC or VAC) is issued under
+this version of the framework, the VPR's SchemaAuthorizationPolicy and the
+accreditation credentials it implies being deferred to a later protocol
+version.
 
 ### 7.2 Evaluation and decision
 
@@ -1061,7 +1069,7 @@ vacancy is cured.
 
 [ECS-ACC-6] Admission is non-discretionary: the Council (or, for issuer
 applications, the competent Issuer Grantor) MUST accredit an applicant
-that meets all published criteria of the active SchemaAuthorizationPolicy,
+that meets all published criteria for the (schema, role) ([ECS-ACC-1]),
 and MUST NOT apply criteria that were not published at the time the
 application was filed.
 
@@ -1105,8 +1113,8 @@ disinterested members per [ECS-SANC-6] applied by analogy.
 
 [ECS-ACC-13] A fee-earning grantor or onboarding validator (an Issuer
 Grantor, or the Council when collecting validation fees) MUST evaluate
-every applicant only against the published criteria of the active
-SchemaAuthorizationPolicy, MUST NOT refuse or delay a qualifying
+every applicant only against the published criteria for the (schema,
+role) ([ECS-ACC-1]), MUST NOT refuse or delay a qualifying
 applicant on any other ground, and MUST retain its conformance evidence
 for each validation for the full validity period of that validation.
 
@@ -1128,7 +1136,7 @@ Agreement executes within the Application stage (§8.2).
 ### 8.1 Qualification and application
 
 [ECS-LIFE-1] Before applying, a candidate SHOULD self-assess against the
-published SchemaAuthorizationPolicy criteria and the Evidence Checklist
+published criteria ([ECS-ACC-1]) and the Evidence Checklist
 for the targeted (schema, role); the Council MUST keep both publicly
 resolvable per [ECS-GEN-7].
 
@@ -1152,9 +1160,8 @@ participant status attaches only at activation.
 Participant OP to Validated ([MOD-PP-MSG-3]), setting the `VALIDATED`
 state with `effective_from` / `effective_until` per the schema's validity
 periods, anchoring the completed Evidence Checklist digest per
-[ECS-ACC-8], and — where an active SchemaAuthorizationPolicy exists —
-accompanied by IAC/VAC issuance per [ECS-ACC-3]; the on-chain `VALIDATED`
-state is the constitutive act of accreditation.
+[ECS-ACC-8]; the on-chain `VALIDATED` state is the constitutive act of
+accreditation ([ECS-ACC-3]).
 
 [ECS-LIFE-6] An onboarding process that has not reached `VALIDATED` state
 within the Annex A activation window lapses: the onboarding validator MUST
@@ -1164,7 +1171,7 @@ close it, and the applicant may re-apply without prejudice.
 
 [ECS-LIFE-7] A validated Participant MUST operate in conformance with this
 framework, its Participant Candidate Agreement, and the
-SchemaAuthorizationPolicy under which it was accredited, for the entire
+published criteria under which it was accredited, for the entire
 validity of its permission.
 
 [ECS-LIFE-8] A Participant whose validation is due to expire MUST renew it
@@ -1232,10 +1239,13 @@ Participant ([MOD-PP-MSG-9]) by an authorized actor (an ancestor
 onboarding validator in the branch, the grantee itself, or the Council as
 ecosystem controller); an involuntary termination of an issuer opens the
 Grace Period of Annex A, during which: the terminated issuer's permission
-is dead immediately ("write death first" — it MUST NOT issue), credentials
-it issued continue to verify, holders migrate to a surviving issuer, and
-at the end of the Grace Period the issuer's unexpired credentials are
-revoked.
+is dead immediately ("write death first" — it MUST NOT issue), the W3C
+credentials it issued (Service, Organization, Persona) continue to verify
+while holders migrate to a surviving issuer, and at the end of the Grace
+Period the issuer's unexpired credentials are revoked. AnonCreds
+credentials (UserAgent, Badge) stop verifying at termination, since their
+trust requires a currently authorized issuer: their holders obtain a new
+credential from a surviving issuer, without a migration window.
 
 [ECS-LIFE-17] Where a termination is grounded in fraud or in damage
 quantifiable against the Participant's trust deposit, the Council or the
@@ -1260,7 +1270,9 @@ the defaulting issuer liable for the cost. If it defaults on its duty to
 revoke its unexpired credentials, the Council MAY revoke them itself at the
 end of the Grace Period, credential by credential, through the ancestor
 path of the VPR's Revoke Digest ([MOD-DI-MSG-2]), under the conditions of
-[ECS-SANC-14].
+[ECS-SANC-14]. This reaches W3C credentials only, whose digests are
+anchored under the issuer's entry; AnonCreds credentials carry no digest
+and are already out of trust once the issuer's entry is revoked.
 
 [ECS-LIFE-20] An issuer MUST NOT transfer its holder portfolio to another
 issuer on its own initiative; migration is each holder's choice among
@@ -1291,7 +1303,10 @@ how much deposit accrues.
 `verification_fees` for every Council-held Participant entry in the five
 ECS trees are set to the Annex A values (0 TU at launch); a Participant
 other than the Council MUST NOT charge fees for ECS operations except per
-[ECS-FEE-5].
+[ECS-FEE-5]. Verification fees can be collected on presented credentials
+only: Service, Organization and Persona credentials are published, not
+presented, and UserAgent presentations are free ([ECS-UA-9]), so
+verification fees concern the Badge schema alone.
 
 > **[DECISION]** *Launch values of 0 TU for validation, issuance, and
 > verification fees on all five schemas.* Rationale: the ECS are the
@@ -1495,9 +1510,11 @@ issuer or the Council MUST verify the requester's identity and the ground,
 and MUST respond with a reasoned decision within 15 days.
 
 [ECS-SANC-14] The VPR lets the Council, as controller of the root
-`ECOSYSTEM` entries, and an Issuer Grantor, as validator above an issuer,
-revoke the digest of an individual credential anchored under an issuer of
-their branch (Revoke Digest, [MOD-DI-MSG-2], ancestor path). The Council
+`ECOSYSTEM` entries, and an Issuer Grantor, as validator above an issuer
+and while its own entry is active, revoke the digest of an individual W3C
+credential anchored under an issuer of their branch (Revoke Digest,
+[MOD-DI-MSG-2], ancestor path; AnonCreds credentials carry no digest and
+follow the issuer's revocation registry). The Council
 and Issuer Grantors MUST use this power only: (a) to execute a verified
 revocation request per [ECS-SANC-9] that the competent issuer has not
 honoured within the Annex A response deadline; (b) to revoke the unexpired
@@ -1699,7 +1716,7 @@ period at 3650 days (GlobalVariables).
 | A29 | Key-rotation announcement deadline ([ECS-ROOT-7]) | 7 days | [ECS-AMND-5] |
 | A30 | Public-claim removal deadline ([ECS-TA-5]) | 5 days | [ECS-AMND-5] |
 | A31 | Sanction / appeal decision deadline ([ECS-SANC-13]) | 60 days | [ECS-AMND-5] |
-| A32 | Presentation validity period (VERIFIER policies, per schema, [ECS-ACC-16]) | none (0) | [ECS-AMND-5] + policy version |
+| A32 | Presentation validity period (`presentation_validity_period`, per schema, [ECS-ACC-16]) | none (0); seconds when set, max 315,360,000 | [ECS-AMND-5] + [MOD-CS-MSG-2] |
 
 > **[DECISION]** *Annex A values A1–A7, A12–A31.* The validity periods
 > (365 days), Grace Period (90 days), proofing recency (30 days), and the
@@ -1720,8 +1737,7 @@ listed; each has an owner and a target date.
 | --- | --- | --- | --- |
 | Participant Candidate Agreement | The uniform agreement executed by every applicant for a permissioned ECS role, derived from this framework (replaces the abandoned participant MoU) | Council (accreditation committee drafts) | Q4 2026, before recruitment opens |
 | ECS Onboarding and Identity Verification Operational Annex | Ceremony scripts, challenge formats, recognized registry and eID lists, sanctions-screening levels, slash schedule, the recognized `biometricPatternScheme` identifiers and matching-topology rules for Badge credentials ([ECS-BDG-5], [ECS-PRIV-6]), and the ECS Ecosystem DID key-management procedures | Council (accreditation committee) | Q4 2026, before recruitment opens |
-| SchemaAuthorizationPolicy documents, per gated (schema, ISSUER) and (schema, VERIFIER) | The objective accreditation criteria per [ECS-ACC-1](a), published on-chain (url + digest_sri) — the protocol accepts policies only for the `ISSUER` and `VERIFIER` roles | Council | With schema creation; before first application intake |
-| Criteria Controlled Documents, per gated (schema, ISSUER_GRANTOR) and (schema, HOLDER) | The objective accreditation criteria per [ECS-ACC-1](b), digest-anchored and resolvable per [ECS-GEN-7] | Council | Before first application intake |
+| Criteria Controlled Documents, per gated (schema, role) | The objective accreditation criteria per [ECS-ACC-1], digest-anchored and resolvable per [ECS-GEN-7] | Council | Before first application intake |
 | Evidence Checklists, per gated (schema, role) | The uniform evidence instrument whose completed digest is anchored per [ECS-ACC-8] | Council (accreditation committee) | Q4 2026 |
 | Trust Assurance Matrix (derived, non-normative) | Mapping of every requirement identifier to assurance class, responsible role, and evidence ([ECS-TA-1]) | Council | Before mainnet (Q1 2027) |
 
