@@ -172,10 +172,10 @@ normative keywords.
   brackets⟩.
 - **Suggested text**: template prose an ecosystem may keep or edit.
 - **Grace Period**: a defined time window following an involuntary
-  revocation during which already-issued W3C credentials remain verifiable
-  while affected parties migrate (AnonCreds and SD-JWT credentials stop
-  verifying at termination, since their trust requires a currently
-  authorized issuer).
+  revocation during which already-issued credentials of anchored schemas
+  (`credential_anchoring` = `DIGEST`) remain verifiable while affected
+  parties migrate (credentials of non-anchored schemas stop verifying at
+  termination, since their trust requires a currently authorized issuer).
 - **Controlled Document**: a separately versioned document referenced from an
   EGF, revisable through the EGF's stated amendment process.
 - **Member**: a member of the Verana Council Association (a Swiss Verein).
@@ -492,6 +492,16 @@ The ⟨Ecosystem Name⟩ ecosystem exists on the Verana VPR as:
 >   denom regardless of this choice.
 > - `digest_algorithm` for credentials issued under the schema, per the VT
 >   specification (`sha384` or `sha512`, lowercase tokens).
+> - `credential_anchoring` (`DIGEST` or `NONE`): whether the digest of every
+>   credential is anchored in the VPR at issuance. The VPR fixes `DIGEST` for
+>   W3C JSON-LD schemas and `NONE` for AnonCreds schemas; for SD-JWT schemas
+>   you choose. `DIGEST` gives dated issuance, credentials that survive the
+>   issuer's termination (Grace Period, T8.7), revocation on the VPR with the
+>   ancestor path of T11, and issuance fees enforced by the digest. `NONE`
+>   gives herd privacy of revocation checks (Token Status List), cheap bulk
+>   revocation and compatibility with existing SD-JWT deployments, at the
+>   price of credentials that stop verifying when the issuer's entry ends.
+>   Immutable: decide before creating the schema.
 
 ### T6.⟨n⟩ ⟨Schema Name⟩ Credential
 
@@ -521,6 +531,7 @@ canonical form) is authoritative.
 | `pricing_asset_type` | ⟨TU / COIN / FIAT — suggested: TU⟩ |
 | `pricing_asset` | ⟨"tu", denom, or currency code⟩ |
 | `digest_algorithm` | ⟨sha384 / sha512⟩ |
+| `credential_anchoring` | ⟨DIGEST / NONE — fixed by the format except for SD-JWT⟩ |
 
 > **[DECISION]** The template suggests 365-day validity periods for every
 > role and TU as the pricing asset. Neither the specs nor the Network GF fix
@@ -686,16 +697,16 @@ VPR specification:
   issuance evidence; and destroy role keys after the archive is secured. If
   the leaving participant defaults on notification, the EGA MUST take over
   notification and MAY hold the participant liable; if it defaults on
-  revocation, the EGA MAY revoke its unexpired W3C credentials itself at
-  the end of the Grace Period through the ancestor path of the VPR's Revoke
-  Digest, under [⟨PREFIX⟩-SANC-11] (AnonCreds and SD-JWT credentials carry
-  no digest and stop verifying at termination).
+  revocation, the EGA MAY revoke its unexpired credentials of anchored
+  schemas itself at the end of the Grace Period through the ancestor path
+  of the VPR's Revoke Digest, under [⟨PREFIX⟩-SANC-11] (credentials of
+  non-anchored schemas carry no digest and stop verifying at termination).
 
 > **[DECISION]** The 90-day Grace Period default follows GLEIF's
 > production-tested `gracePeriod ≥ 90 days` (disable-then-migrate: the
-> terminated party is disabled immediately; downstream W3C credentials keep
-> verifying while holders migrate, AnonCreds and SD-JWT credentials stop at
-> termination). Shorter periods punish innocent holders;
+> terminated party is disabled immediately; downstream credentials of
+> anchored schemas keep verifying while holders migrate, those of
+> non-anchored schemas stop at termination). Shorter periods punish innocent holders;
 > longer ones prolong reliance on a terminated party. Founding Members
 > should confirm the default.
 
@@ -887,9 +898,10 @@ user-agent and wallet-user-agent reward shares on pay-per operations.
   reasoned decision within ⟨days — suggested: 15⟩ days.
 - [⟨PREFIX⟩-SANC-11] The VPR lets the EGA, as controller of the root
   `ECOSYSTEM` entries, and a grantor, as validator above an issuer and while
-  its own entry is active, revoke the digest of an individual W3C credential
-  anchored under an issuer of their branch (Revoke Digest, ancestor path;
-  AnonCreds and SD-JWT credentials carry no digest). The EGA and grantors MUST use this
+  its own entry is active, revoke the digest of an individual credential of
+  an anchored schema, anchored under an issuer of their branch (Revoke
+  Digest, ancestor path; credentials of non-anchored schemas carry no
+  digest). The EGA and grantors MUST use this
   power only ⟨on enumerated grounds — e.g. a verified revocation request
   the issuer has not honoured within the deadline of [⟨PREFIX⟩-SANC-10];
   the unexpired credentials of a terminated issuer that defaulted on
