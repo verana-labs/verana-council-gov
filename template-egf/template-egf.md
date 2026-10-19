@@ -675,7 +675,10 @@ VPR specification:
   ⟨Grace Period days — suggested: 90⟩ days; archive its qualification and
   issuance evidence; and destroy role keys after the archive is secured. If
   the leaving participant defaults on notification, the EGA MUST take over
-  notification and MAY hold the participant liable.
+  notification and MAY hold the participant liable; if it defaults on
+  revocation, the EGA MAY revoke its unexpired credentials itself at the
+  end of the Grace Period through the ancestor path of the VPR's Revoke
+  Digest, under [⟨PREFIX⟩-SANC-11].
 
 > **[DECISION]** The 90-day Grace Period default follows GLEIF's
 > production-tested `gracePeriod ≥ 90 days` (disable-then-migrate: the
@@ -870,6 +873,17 @@ user-agent and wallet-user-agent reward shares on pay-per operations.
   competent issuer or the EGA MUST verify the identity and standing of the
   requester and the stated ground, and MUST respond to the requester with a
   reasoned decision within ⟨days — suggested: 15⟩ days.
+- [⟨PREFIX⟩-SANC-11] The VPR lets the EGA, as controller of the root
+  `ECOSYSTEM` entries, and a grantor, as validator above an issuer, revoke
+  the digest of an individual credential anchored under an issuer of their
+  branch (Revoke Digest, ancestor path). The EGA and grantors MUST use this
+  power only ⟨on enumerated grounds — e.g. a verified revocation request
+  the issuer has not honoured within the deadline of [⟨PREFIX⟩-SANC-10];
+  the unexpired credentials of a terminated issuer that defaulted on
+  [⟨PREFIX⟩-LIFE-12]; a credential whose issuance breached this framework,
+  after the due process of T11.3⟩, with written reasons and an entry on the
+  public record, appealable per T11.4. Such a revocation leaves the
+  holder's `HOLDER` entry untouched.
 
 ## T12. Privacy and Data Handling
 

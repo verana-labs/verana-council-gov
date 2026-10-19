@@ -1242,7 +1242,11 @@ the Grace Period, attesting destruction to the Council.
 
 [ECS-LIFE-19] If a terminating issuer defaults on its notification duty,
 the Council MUST take over notification of affected holders and MAY hold
-the defaulting issuer liable for the cost.
+the defaulting issuer liable for the cost. If it defaults on its duty to
+revoke its unexpired credentials, the Council MAY revoke them itself at the
+end of the Grace Period, credential by credential, through the ancestor
+path of the VPR's Revoke Digest ([MOD-DI-MSG-2]), under the conditions of
+[ECS-SANC-14].
 
 [ECS-LIFE-20] An issuer MUST NOT transfer its holder portfolio to another
 issuer on its own initiative; migration is each holder's choice among
@@ -1475,6 +1479,21 @@ against an ECS credential or accreditation, stating one of the enumerated
 grounds of the relevant framework chapter with evidence; the competent
 issuer or the Council MUST verify the requester's identity and the ground,
 and MUST respond with a reasoned decision within 15 days.
+
+[ECS-SANC-14] The VPR lets the Council, as controller of the root
+`ECOSYSTEM` entries, and an Issuer Grantor, as validator above an issuer,
+revoke the digest of an individual credential anchored under an issuer of
+their branch (Revoke Digest, [MOD-DI-MSG-2], ancestor path). The Council
+and Issuer Grantors MUST use this power only: (a) to execute a verified
+revocation request per [ECS-SANC-9] that the competent issuer has not
+honoured within the Annex A response deadline; (b) to revoke the unexpired
+credentials of a terminated issuer that defaulted on [ECS-LIFE-18], at the
+end of the Grace Period ([ECS-LIFE-19]); or (c) as a measure against a
+credential whose issuance breached this framework, after the due process of
+§11.3. Every such revocation MUST be recorded on the public record with its
+ground and the requirement identifier, and is appealable per §11.5. It
+leaves the holder's `HOLDER` entry untouched: the relationship is ended
+only through §8.6.
 
 ### 11.5 Appeals and disputes
 
