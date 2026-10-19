@@ -473,7 +473,8 @@ deviation is an amendment to this framework (Chapter 13).
 > The alternative is `ECOSYSTEM_ONBOARDING_PROCESS` for verifiers of the
 > Persona schema, on the argument that personal-data-bearing credentials
 > deserve accountable verifiers; Founding Members should confirm or tighten.
-> Tightening later is a schema-configuration amendment under Chapter 13.
+> Tightening later is a schema-configuration amendment under Chapter 13,
+> executed through a new schema entry ([ECS-GEN-18]).
 
 A second configuration choice concerns the UserAgent holder side.
 
@@ -510,6 +511,10 @@ algorithm, or pricing asset is a governance act of the Council: it MUST be
 approved by the Council's ⅔ supermajority, MUST be announced at least 30
 days before taking effect, and MUST be reflected in an amendment of this
 framework whose change-log row names the on-chain acts that execute it.
+Because the VPR keeps these attributes immutable on an existing
+CredentialSchema entry, such a change is executed by creating a new entry,
+migrating participants and credentials to it, and archiving the former
+entry ([MOD-CS-MSG-3]).
 
 [ECS-GEN-19] Adoption of a new major version of the Verifiable Trust
 specification's ECS definitions (with new schema digests) MUST preserve
@@ -618,10 +623,12 @@ conditions stated in the revocation notice are met.
 
 #### 6.1.4 Holder policies
 
-[ECS-SVC-8] `HOLDER` entries are created by issuers through the issuer
-onboarding process; a holder MUST notify its issuer within 30 days of any
-change to the credential subject data, and immediately upon loss of DID
-control.
+[ECS-SVC-8] `HOLDER` entries are opened by the holder toward an `ISSUER`
+entry ([MOD-PP-MSG-1]) and validated by that issuer ([MOD-PP-MSG-3])
+before any Service credential is issued; a self-issuing VS opens and
+validates its own `HOLDER` entry under its own `ISSUER` entry. A holder
+MUST notify its issuer within 30 days of any change to the credential
+subject data, and immediately upon loss of DID control.
 
 #### 6.1.5 Verifier policies
 
@@ -1460,7 +1467,8 @@ the following ladder, each rung executed only after the due process of
 [ECS-SANC-5]: (a) written warning; (b) remediation order with a cure
 period per Annex A; (c) permission restriction (conditions on issuance, or
 shortening of `effective_until` via [MOD-PP-MSG-8], executed by the direct
-onboarding validator per [ECS-LIFE-14]); (d) suspension
+onboarding validator or, for a self-created entry, by the owner at the
+Council's request, per [ECS-LIFE-14]); (d) suspension
 (§8.5); (e) revocation of the permission ([MOD-PP-MSG-9]) with the Grace
 Period duties of §8.6; (f) ecosystem slash of the trust deposit
 ([MOD-PP-MSG-12], burned per [MOD-TD-MSG-7], return conditioned on
