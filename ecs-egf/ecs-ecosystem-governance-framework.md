@@ -1019,13 +1019,27 @@ Document.
 mandate → addressed role → control practice → required evidence →
 verification method (on-chain state, cryptographic proof, DIDComm evidence
 exchange, or human review), so that an onboarding validator can evaluate
-applications consistently.
+applications consistently; a VERIFIER policy additionally states its terms
+of reliance ([ECS-ACC-16]).
 
 [ECS-ACC-15] Where the published criteria for a (schema, role) define
 eligibility categories (for example legal form, sector, or jurisdiction),
 they MUST include a catch-all category admitting applicants outside the
 named categories on escalated evidence, so that no legitimate applicant is
 structurally excluded.
+
+[ECS-ACC-16] A VERIFIER SchemaAuthorizationPolicy MAY set a presentation
+validity period (the VPR `presentation_validity_period` of the policy
+version). While such a version is active, the VPR requires the digest of
+every presentation of a credential of the schema to be anchored in the
+verification session and stamps the receipt with a
+`presentation_valid_until`; a presentation is valid evidence of a
+verification only until that time, and a verifier that relies on the
+credential afterwards MUST obtain a new presentation and pay the
+applicable fees again. The policy document MUST state this effect in its
+terms of reliance. The period is an Annex A parameter per schema; at launch
+no ECS schema sets one, the Service, Organization and Persona schemas being
+PUBLIC and producing no receipts.
 
 [ECS-ACC-3] Where an active SchemaAuthorizationPolicy exists for a
 (schema, role), the granting corporation MUST issue the corresponding
@@ -1685,6 +1699,7 @@ period at 3650 days (GlobalVariables).
 | A29 | Key-rotation announcement deadline ([ECS-ROOT-7]) | 7 days | [ECS-AMND-5] |
 | A30 | Public-claim removal deadline ([ECS-TA-5]) | 5 days | [ECS-AMND-5] |
 | A31 | Sanction / appeal decision deadline ([ECS-SANC-13]) | 60 days | [ECS-AMND-5] |
+| A32 | Presentation validity period (VERIFIER policies, per schema, [ECS-ACC-16]) | none (0) | [ECS-AMND-5] + policy version |
 
 > **[DECISION]** *Annex A values A1–A7, A12–A31.* The validity periods
 > (365 days), Grace Period (90 days), proofing recency (30 days), and the

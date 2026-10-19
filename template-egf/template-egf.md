@@ -605,6 +605,14 @@ VPR specification:
   role and per schema before accepting applications, ⟨optionally: as
   on-chain SchemaAuthorizationPolicy documents ([MOD-CS-MSG-5] /
   [MOD-CS-MSG-6]), url + digest_sri⟩.
+- [⟨PREFIX⟩-LIFE-14] ⟨Optional.⟩ A VERIFIER SchemaAuthorizationPolicy MAY set
+  a presentation validity period (VPR `presentation_validity_period`,
+  ⟨days⟩). While such a version is active, every presentation of a
+  credential of the schema is anchored in its verification session and the
+  receipt is stamped with a `presentation_valid_until`: the presentation is
+  valid evidence of a verification only until that time, and a verifier that
+  relies on the credential afterwards MUST obtain a new presentation and pay
+  the applicable fees again. The policy document MUST state this effect.
 - [⟨PREFIX⟩-LIFE-2] The validating party (the EGA or the responsible
   grantor) MUST evaluate applicants against the published criteria only, and
   MUST NOT refuse an applicant that meets them. An applicant that meets all
