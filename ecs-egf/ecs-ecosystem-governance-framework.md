@@ -413,7 +413,7 @@ deviation is an amendment to this framework (Chapter 13).
 | Field | Service | Organization | Persona | UserAgent | Badge |
 | --- | --- | --- | --- | --- | --- |
 | `json_schema` | [ECS-SERVICE] | [ECS-ORG] | [ECS-PERSONA] | [ECS-UA] | [ECS-BADGE] |
-| `issuer_onboarding_mode` | `ECOSYSTEM_ONBOARDING_PROCESS` | `GRANTOR_ONBOARDING_PROCESS` | `GRANTOR_ONBOARDING_PROCESS` | `OPEN` | `OPEN` |
+| `issuer_onboarding_mode` | `OPEN` | `GRANTOR_ONBOARDING_PROCESS` | `GRANTOR_ONBOARDING_PROCESS` | `OPEN` | `OPEN` |
 | `verifier_onboarding_mode` | `OPEN` | `OPEN` | `OPEN` | `OPEN` | `OPEN` |
 | `holder_onboarding_mode` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `PERMISSIONLESS` | `PERMISSIONLESS` |
 | `issuer_grantor_validation_validity_period` | 0 | Annex A | Annex A | 0 | 0 |
@@ -440,13 +440,29 @@ deviation is an amendment to this framework (Chapter 13).
   Verifiable Service per [VS-REQ] can self-create its `ISSUER` entry and
   issue Badges to the humans it stands behind — trust in a Badge derives
   from trust-resolving its issuer, not from an onboarding gate.
-- Issuer modes: Service issuers are onboarded directly by the Council
-  (`ECOSYSTEM_ONBOARDING_PROCESS`); Organization and Persona issuers are
-  onboarded by accredited Issuer Grantors
-  (`GRANTOR_ONBOARDING_PROCESS`); UserAgent issuers are software vendors who
-  self-register (`OPEN`), subject to the normative vendor duties of §6.4;
-  Badge issuers are the Verifiable Services themselves, which self-register
-  (`OPEN`, spec-mandated), subject to the normative issuer duties of §6.5.
+- Issuer modes: Service issuers are the Verifiable Services themselves,
+  which self-register (`OPEN`), subject to the normative issuer duties of
+  §6.1; Organization and Persona issuers are onboarded by accredited Issuer
+  Grantors (`GRANTOR_ONBOARDING_PROCESS`); UserAgent issuers are software
+  vendors who self-register (`OPEN`), subject to the normative vendor
+  duties of §6.4; Badge issuers are the Verifiable Services themselves,
+  which self-register (`OPEN`, spec-mandated), subject to the normative
+  issuer duties of §6.5.
+- Service `issuer_onboarding_mode` = `OPEN` follows from the Verifiable
+  Trust specification's model of the Service credential: a Verifiable
+  Service issues its own Service credential ([VS-REQ-3]) and is held
+  accountable through the Organization or Persona credential bound to it,
+  which only an issuer accredited under §6.2 or §6.3 can issue. The
+  accreditation gate of the ECS ecosystem therefore sits on the
+  Organization and Persona schemas; a Service `ISSUER` entry is the
+  self-created anchor every Verifiable Service needs before it can exist,
+  not a trust decision. Gating it behind a Council-run onboarding process
+  would make the Council the onboarding validator of every service on the
+  network (and of every service a single Organization issuer brings, such
+  as a business registry identifying its whole population), would
+  duplicate the identity verification already performed by the
+  Organization or Persona issuer, and would add no trust that resolution
+  does not already derive from that credential.
 
 > **[DECISION]** *Verifier onboarding mode `OPEN` for all five schemas at
 > launch.* Rationale: verifying an ECS credential is the low-risk side of
@@ -457,7 +473,8 @@ deviation is an amendment to this framework (Chapter 13).
 > The alternative is `ECOSYSTEM_ONBOARDING_PROCESS` for verifiers of the
 > Persona schema, on the argument that personal-data-bearing credentials
 > deserve accountable verifiers; Founding Members should confirm or tighten.
-> Tightening later is a schema-configuration amendment under Chapter 13.
+> Tightening later is a schema-configuration amendment under Chapter 13,
+> executed through a new schema entry ([ECS-GEN-18]).
 
 A second configuration choice concerns the UserAgent holder side.
 
@@ -494,6 +511,10 @@ algorithm, or pricing asset is a governance act of the Council: it MUST be
 approved by the Council's ⅔ supermajority, MUST be announced at least 30
 days before taking effect, and MUST be reflected in an amendment of this
 framework whose change-log row names the on-chain acts that execute it.
+Because the VPR keeps these attributes immutable on an existing
+CredentialSchema entry, such a change is executed by creating a new entry,
+migrating participants and credentials to it, and archiving the former
+entry ([MOD-CS-MSG-3]).
 
 [ECS-GEN-19] Adoption of a new major version of the Verifiable Trust
 specification's ECS definitions (with new schema digests) MUST preserve
@@ -538,8 +559,10 @@ minimum-age requirement, and its terms-of-service and privacy-policy
 documents (each pinned by URI + SRI digest). Every VS must present a
 Service credential as a linked verifiable presentation, bound to an
 accountable entity via exactly one Organization or Persona credential
-(VT spec [VS-REQ]); Service-credential issuers must themselves be
-Verifiable Services, making the trust chain recursive.
+(VT spec [VS-REQ]). A Verifiable Service normally issues its own Service
+credential ([VS-REQ-3]); where another party issues it ([VS-REQ-4]), that
+issuer must itself present an Organization or Persona credential, so the
+accountable entity behind a service is always reachable by resolution.
 
 #### 6.1.2 Principles
 
@@ -550,31 +573,30 @@ accountability travels through the Organization or Persona credential.
 
 #### 6.1.3 Issuer policies
 
-[ECS-SVC-1] `ISSUER` Participant entries for the Service schema are
-created exclusively by the Council through the ecosystem onboarding
-process (`ECOSYSTEM_ONBOARDING_PROCESS`); the Council MUST act as the
-onboarding validator for every Service-issuer application.
+[ECS-SVC-1] `ISSUER` entries for the Service schema are self-created under
+`OPEN` mode ([MOD-PP-MSG-14]) by Corporations, subject to the issuer
+duties of this section, which are conditions of keeping the permission.
 
-[ECS-SVC-2] An applicant for Service issuer accreditation MUST satisfy the
-published accreditation criteria of the active SchemaAuthorizationPolicy
-for (Service, ISSUER), which MUST include at least: a registered
-Corporation entry with demonstrated control of its DID; operation of a
-conformant Verifiable Service; organizational identity verified to the
-same standard as an Organization credential subject (§6.2.4); and
-sustainable financing per [ECS-FEE-6].
+[ECS-SVC-2] A Service `ISSUER` entry confers no accreditation. A Service
+credential is trust-resolvable only through the Organization or Persona
+credential bound to it ([VS-REQ-3], [VS-REQ-4]), issued by an issuer
+accredited under §6.2 or §6.3; a Corporation MUST NOT present its Service
+`ISSUER` entry, or a Service credential, as an accreditation or an
+endorsement by the Council (see also [ECS-TA-5]).
 
-[ECS-SVC-3] Before issuing a Service credential, the issuer MUST validate
-that the applicant owns and controls the service described: proof of
-control of the service DID by challenge-response over the DIDComm
-onboarding session; resolvability and SRI-digest integrity of the declared
-terms-of-service, privacy-policy, and logo resources; and consistency of
-the declared service type and `minimumAgeRequired` with the service as
-operated.
+[ECS-SVC-3] A Corporation MUST issue Service credentials only for services
+it operates itself, or for services whose ownership and control it has
+validated: proof of control of the service DID by challenge-response over
+the DIDComm onboarding session; resolvability and SRI-digest integrity of
+the declared terms-of-service, privacy-policy, and logo resources; and
+consistency of the declared service type and `minimumAgeRequired` with
+the service as operated. The resource and consistency checks apply
+equally to a self-issued Service credential.
 
 [ECS-SVC-4] A Service-credential issuer MUST NOT rely, for ownership or
-control validation, solely on assertions or documents supplied by the
-applicant that are not corroborated by DID-control proof or by reliable
-third-party sources.
+control validation of a service it does not operate, solely on assertions
+or documents supplied by the service operator that are not corroborated
+by DID-control proof or by reliable third-party sources.
 
 [ECS-SVC-5] A Service-credential issuer MUST revoke a Service credential
 within 5 days of establishing any of: loss or transfer of the subject's
@@ -583,20 +605,30 @@ request per [ECS-SANC-9]; or revocation of the Organization or Persona
 credential that binds the service to its accountable entity.
 
 [ECS-SVC-6] Service credentials are issued at a single level of assurance,
-anchored to organizational identity verification per §6.2.4; future
-versions of this framework MAY define multiple levels.
+anchored to the identity verification of the bound Organization or
+Persona credential (§6.2.4, §6.3.4); future versions of this framework
+MAY define multiple levels.
 
 [ECS-SVC-7] A Service-credential issuer MUST monitor, at least monthly,
 the continued resolvability and digest integrity of the SRI-pinned
 resources of credentials it has issued, and MUST open a revocation review
 on persistent failure.
 
+[ECS-SVC-10] Breach of the duties of this section is a ground under
+Chapter 11; the Council, as ecosystem controller, MAY revoke a
+self-created Service `ISSUER` entry ([MOD-PP-MSG-9]) after the due process
+of that chapter, and a Corporation whose Service `ISSUER` entry has been
+revoked on that ground MUST NOT self-create a new one before the cure
+conditions stated in the revocation notice are met.
+
 #### 6.1.4 Holder policies
 
-[ECS-SVC-8] `HOLDER` entries are created by issuers through the issuer
-onboarding process; a holder MUST notify its issuer within 30 days of any
-change to the credential subject data, and immediately upon loss of DID
-control.
+[ECS-SVC-8] `HOLDER` entries are opened by the holder toward an `ISSUER`
+entry ([MOD-PP-MSG-1]) and validated by that issuer ([MOD-PP-MSG-3])
+before any Service credential is issued; a self-issuing VS opens and
+validates its own `HOLDER` entry under its own `ISSUER` entry. A holder
+MUST notify its issuer within 30 days of any change to the credential
+subject data, and immediately upon loss of DID control.
 
 #### 6.1.5 Verifier policies
 
@@ -1035,8 +1067,8 @@ process, as the VPR specification requires.
 
 ### 7.2 Evaluation and decision
 
-[ECS-ACC-4] Applications for Council-validated roles (Service issuers;
-Organization and Persona Issuer Grantors) MUST be evaluated by the
+[ECS-ACC-4] Applications for Council-validated roles (Organization and
+Persona Issuer Grantors) MUST be evaluated by the
 committee the Council charters for ECS accreditation, which delivers
 written recommendations only; the accreditation decision itself MUST be
 taken by the Council.
@@ -1200,7 +1232,11 @@ execute this act on an OP-managed entry, so where the Council is not the
 direct onboarding validator it MUST direct the competent Issuer Grantor to
 execute the shortening and, failing cooperation, MAY proceed to revocation
 ([MOD-PP-MSG-9]), which the Council as ecosystem controller can always
-execute; a suspension notice MUST state the grounds by requirement
+execute; for a self-created entry (`OPEN` mode: Service, UserAgent, and
+Badge issuers) the protocol permits only the owning Corporation to shorten
+its own `effective_until`, so the Council MUST request the shortening from
+the owner and, failing compliance within the cure period, MAY proceed to
+revocation; a suspension notice MUST state the grounds by requirement
 identifier, the cure conditions, and the review path.
 
 [ECS-LIFE-15] No suspension may be indefinite: a suspension review, on the
@@ -1431,7 +1467,8 @@ the following ladder, each rung executed only after the due process of
 [ECS-SANC-5]: (a) written warning; (b) remediation order with a cure
 period per Annex A; (c) permission restriction (conditions on issuance, or
 shortening of `effective_until` via [MOD-PP-MSG-8], executed by the direct
-onboarding validator per [ECS-LIFE-14]); (d) suspension
+onboarding validator or, for a self-created entry, by the owner at the
+Council's request, per [ECS-LIFE-14]); (d) suspension
 (§8.5); (e) revocation of the permission ([MOD-PP-MSG-9]) with the Grace
 Period duties of §8.6; (f) ecosystem slash of the trust deposit
 ([MOD-PP-MSG-12], burned per [MOD-TD-MSG-7], return conditioned on
@@ -1695,6 +1732,6 @@ listed; each has an owner and a target date.
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.3 | 2026-08-08 | Draft | Working draft — no changes yet relative to 0.2. |
+| 0.3 | 2026-10-15 | Draft | Working draft. Service schema `issuer_onboarding_mode` changed from `ECOSYSTEM_ONBOARDING_PROCESS` to `OPEN` (Table 2 and its notes); §6.1.3 rewritten as self-registration with issuer duties ([ECS-SVC-1]–[ECS-SVC-7] revised, [ECS-SVC-10] added); [ECS-ACC-4] and [ECS-LIFE-14] aligned for self-created entries. |
 | 0.2 | 2026-08-08 | Draft | (Archived under `v0.2/`.) Aligned with Verifiable Trust specification v4: added the Badge ECS (five schemas throughout), new §6.5 Badge Credential Framework ([ECS-BDG-1]–[ECS-BDG-12]), Badge VPR configuration in Table 2, Badge VTJSC fragment in [ECS-ROOT-2], Badge schema link and digest in Table 3, biometric-data rule [ECS-PRIV-6], and corrected the UserAgent schema digest in Table 3. |
 | 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`). |
