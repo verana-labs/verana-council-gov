@@ -394,11 +394,19 @@ never loosens a higher one.
 
 ### T2.4 Acceptance
 
-Acting as a group member or operator of this Corporation, or executing any
-VPR message signed by its `policy_address`, constitutes acceptance of the
-version of this framework active on-chain at the time of the relevant act.
-The registered organization accepts the Network GF, and the EGF of every
-ecosystem it participates in, by conduct, as those frameworks provide.
+The registered organization is bound by this framework as its author. Each
+operator it authorizes accepts the version of this framework in force
+before its first use of the authorization, through Accept Corporation
+Governance Framework ([MOD-GF-MSG-4]), and each later version within the
+grace period set at activation ([⟨PREFIX⟩-OPS-5], [⟨PREFIX⟩-AMND-5]); an
+authorization whose holder has not accepted is unusable (VPR [GF-CHECK-2]).
+Group members act through the group's decision policy and accept nothing
+on-chain; the registered organization binds them ⟨by its internal rules /
+by their mandate⟩. The registered organization accepted the Network GF
+version in force when it created its Corporation entry (`ngf_version`,
+[MOD-CO-MSG-1]) and accepts each later version, and the EGF of every
+ecosystem it participates in before its first act there, through Accept
+Governance Framework Version ([MOD-GF-MSG-3]), as those frameworks provide.
 
 ### T2.5 Legal safety
 
@@ -595,6 +603,14 @@ Total weight: ⟨sum⟩.
 - [⟨PREFIX⟩-OPS-4] The registered organization MUST review all active
   operator authorizations at least every ⟨months — suggested: 12⟩ months
   and record the review in ⟨its internal register⟩.
+- [⟨PREFIX⟩-OPS-5] An operator MUST accept the version of this framework in
+  force before its first use of its authorization ([MOD-GF-MSG-4]), and each
+  later version within the grace period the registered organization sets at
+  activation ([⟨PREFIX⟩-AMND-5]); until it does, its authorization is
+  unusable (VPR [GF-CHECK-2]). The network fee of the acceptance is paid
+  ⟨by the operator / by the registered organization through the operator's
+  fee grant, whose `msg_types` then list
+  `AcceptCorporationGovernanceFramework`⟩.
 
 ### T6.2 Fee grants
 
@@ -781,6 +797,12 @@ Suggested text:
   MAY be activated at any time. ⟨Optionally: material amendments are
   published for comment to ⟨audience⟩ at least ⟨days⟩ days before
   adoption — or:⟩ **No stipulation** on comment periods.
+- [⟨PREFIX⟩-AMND-5] Each activation sets an `acceptance_grace` of ⟨days —
+  suggested: 30, the network minimum⟩ days, during which operators that
+  accepted a former version keep using their authorizations; the registered
+  organization notifies its operators at activation. An operator that has
+  not accepted by the deadline is blocked until it does, without revocation
+  of its authorization.
 
 > *Instruction:* A CGF has no third-party participants to protect, so the
 > Template EGF's 30-day comment and notice runway is not needed by default.
@@ -830,8 +852,9 @@ every message named here.*
 2. **Create New Corporation ([MOD-CO-MSG-1]).** Any account submits: the
    initial group `members` (address, weight), the `decision_policy`
    (threshold or percentage), the Corporation `did`, its primary
-   `language`, and the `doc_url` + `doc_digest_sri` of this document. In one
-   transaction the chain creates the `x/group` group and its policy account
+   `language`, the `doc_url` + `doc_digest_sri` of this document, and the
+   `ngf_version` in force, the organization's acceptance of the Network GF
+   ([NGF-PART-1]). In one transaction the chain creates the `x/group` group and its policy account
    (which becomes the admin of both; the submitting account keeps no
    privilege), the `Corporation` entry with `active_version` 1, and the
    version-1 `GovernanceFrameworkVersion` and `GovernanceFrameworkDocument`.
@@ -911,4 +934,4 @@ every message named here.*
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.1 | 2026-10-14 | Draft | First draft for co-authoring by Founding Members. Written against VPR specification v5 (draft): Corporation entries anchored by an `x/group` policy address, mandatory version-1 CGF at creation ([MOD-CO-MSG-1]), operator and VS operator authorizations, fee grants, polymorphic Governance Framework module. One `[DECISION]` flag (whether the Network GF should gain a mandatory-contents chapter for CGFs). |
+| 0.1 | 2026-10-14 | Draft | First draft for co-authoring by Founding Members. Written against VPR specification v5 (draft): Corporation entries anchored by an `x/group` policy address, mandatory version-1 CGF at creation ([MOD-CO-MSG-1]), operator and VS operator authorizations, fee grants, polymorphic Governance Framework module. One `[DECISION]` flag (whether the Network GF should gain a mandatory-contents chapter for CGFs). Recorded acceptance: operators accept the framework before use (T2.4, [⟨PREFIX⟩-OPS-5], [⟨PREFIX⟩-AMND-5]); `ngf_version` at creation (Annex B). |
