@@ -415,18 +415,18 @@ deviation is an amendment to this framework (Chapter 13).
 | `issuer_onboarding_mode` | `ECOSYSTEM_ONBOARDING_PROCESS` | `GRANTOR_ONBOARDING_PROCESS` | `GRANTOR_ONBOARDING_PROCESS` | `OPEN` | `OPEN` |
 | `verifier_onboarding_mode` | `OPEN` | `OPEN` | `OPEN` | `OPEN` | `OPEN` |
 | `holder_onboarding_mode` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `PERMISSIONLESS` | `PERMISSIONLESS` |
-| `issuer_grantor_validation_validity_period` | 0 | Annex A | Annex A | 0 | 0 |
-| `verifier_grantor_validation_validity_period` | 0 | 0 | 0 | 0 | 0 |
-| `issuer_validation_validity_period` | Annex A | Annex A | Annex A | Annex A | Annex A |
-| `verifier_validation_validity_period` | Annex A | Annex A | Annex A | Annex A | Annex A |
-| `holder_validation_validity_period` | Annex A | Annex A | Annex A | 0 | 0 |
+| `issuer_grantor_accreditation_validity_period` | 0 | Annex A | Annex A | 0 | 0 |
+| `verifier_grantor_accreditation_validity_period` | 0 | 0 | 0 | 0 | 0 |
+| `issuer_accreditation_validity_period` | Annex A | Annex A | Annex A | Annex A | Annex A |
+| `verifier_accreditation_validity_period` | Annex A | Annex A | Annex A | Annex A | Annex A |
+| `holder_accreditation_validity_period` | Annex A | Annex A | Annex A | 0 | 0 |
 | `pricing_asset_type` | `TU` | `TU` | `TU` | `TU` | `TU` |
 | `pricing_asset` | `tu` | `tu` | `tu` | `tu` | `tu` |
 | `digest_algorithm` | `sha384` | `sha384` | `sha384` | `sha384` | `sha384` |
 
 *Non-normative notes on Table 2:*
 
-- Every `*_validation_validity_period` is a mandatory parameter of
+- Every `*_accreditation_validity_period` is a mandatory parameter of
   [MOD-CS-MSG-1]; `0` is the chain value written for roles a schema does
   not use (the protocol reads 0 as "never expire", which is inert for a
   role no onboarding path reaches).
@@ -1083,7 +1083,7 @@ without a cooldown period.
 [ECS-ACC-8] Each application MUST be evaluated against the uniform
 Evidence Checklist for its (schema, role); on validation, the onboarding
 validator MUST anchor the SRI digest of the completed checklist in the
-`op_summary_digest` field of the applicant's Participant entry when
+`onboarding_summary_digest` field of the applicant's Participant entry when
 executing Set Participant OP to Validated ([MOD-PP-MSG-3]), making the
 evidentiary basis of every accreditation verifiable.
 
@@ -1685,11 +1685,11 @@ period at 3650 days (GlobalVariables).
 
 | # | Parameter | Initial value | Change process |
 | --- | --- | --- | --- |
-| A1 | `issuer_grantor_validation_validity_period` (Organization, Persona) | 365 days | [ECS-AMND-5] + schema config |
-| A2 | `issuer_validation_validity_period` (all five schemas) | 365 days | [ECS-AMND-5] + schema config |
-| A3 | `verifier_validation_validity_period` (all five schemas) | 365 days | [ECS-AMND-5] + schema config |
-| A4 | `holder_validation_validity_period` (Service, Organization, Persona) | 365 days | [ECS-AMND-5] + schema config |
-| A5 | `holder_validation_validity_period` (UserAgent, Badge) | 0 (no holder onboarding; `PERMISSIONLESS`) | [ECS-AMND-5] + schema config |
+| A1 | `issuer_grantor_accreditation_validity_period` (Organization, Persona) | 365 days | [ECS-AMND-5] + schema config |
+| A2 | `issuer_accreditation_validity_period` (all five schemas) | 365 days | [ECS-AMND-5] + schema config |
+| A3 | `verifier_accreditation_validity_period` (all five schemas) | 365 days | [ECS-AMND-5] + schema config |
+| A4 | `holder_accreditation_validity_period` (Service, Organization, Persona) | 365 days | [ECS-AMND-5] + schema config |
+| A5 | `holder_accreditation_validity_period` (UserAgent, Badge) | 0 (no holder onboarding; `PERMISSIONLESS`) | [ECS-AMND-5] + schema config |
 | A6 | Credential lifetime (`validUntil` − `validFrom`): Organization, Persona, Service | ≤ 365 days | [ECS-AMND-5] |
 | A7 | Credential lifetime: UserAgent, Badge | no fixed expiry; revocation-based | [ECS-AMND-5] |
 | A8 | `validation_fees` (all schemas, all roles) | 0 TU | [ECS-AMND-5] |

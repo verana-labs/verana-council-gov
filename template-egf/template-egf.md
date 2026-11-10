@@ -478,7 +478,7 @@ The ⟨Ecosystem Name⟩ ecosystem exists on the Verana VPR as:
 >     cannot charge validation fees to candidate holders through the VPR).
 > - Validity periods, in days, per role (`issuer_grantor_`,
 >   `verifier_grantor_`, `issuer_`, `verifier_`,
->   `holder_validation_validity_period`): 0 means never expires; each is
+>   `holder_accreditation_validity_period`): 0 means never expires; each is
 >   capped by the network's GlobalVariables maxima (3650 days at Verana
 >   genesis, changeable by governance proposal). Shorter periods force
 >   requalification;
@@ -523,11 +523,11 @@ canonical form) is authoritative.
 | `issuer_onboarding_mode` | ⟨OPEN / GRANTOR_ONBOARDING_PROCESS / ECOSYSTEM_ONBOARDING_PROCESS⟩ |
 | `verifier_onboarding_mode` | ⟨OPEN / GRANTOR_ONBOARDING_PROCESS / ECOSYSTEM_ONBOARDING_PROCESS⟩ |
 | `holder_onboarding_mode` | ⟨ISSUER_ONBOARDING_PROCESS / PERMISSIONLESS⟩ |
-| `issuer_grantor_validation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
-| `verifier_grantor_validation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
-| `issuer_validation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
-| `verifier_validation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
-| `holder_validation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
+| `issuer_grantor_accreditation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
+| `verifier_grantor_accreditation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
+| `issuer_accreditation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
+| `verifier_accreditation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
+| `holder_accreditation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
 | `pricing_asset_type` | ⟨TU / COIN / FIAT — suggested: TU⟩ |
 | `pricing_asset` | ⟨"tu", denom, or currency code⟩ |
 | `digest_algorithm` | ⟨sha384 / sha512⟩ |
