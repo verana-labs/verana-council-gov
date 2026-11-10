@@ -494,12 +494,12 @@ The following local terms are defined for this document. Definitions carry no no
 | Parameter | Initial value | Change process |
 | --- | --- | --- |
 | `credential_schema_schema_max_size` | 8192 | Governance proposal ([NGF-ECON-10]) |
-| `credential_schema_issuer_grantor_validation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
-| `credential_schema_verifier_grantor_validation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
-| `credential_schema_issuer_validation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
-| `credential_schema_verifier_validation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
+| `credential_schema_issuer_grantor_accreditation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
+| `credential_schema_verifier_grantor_accreditation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
+| `credential_schema_issuer_accreditation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
+| `credential_schema_verifier_accreditation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
 | `gf_acceptance_grace_min` | 30 days (2,592,000 s) | Governance proposal ([NGF-ECON-10]) |
-| `credential_schema_holder_validation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
+| `credential_schema_holder_accreditation_validity_period_max_days` | 3650 | Governance proposal ([NGF-ECON-10]) |
 | `trust_deposit_rate` (deposit-bound share of trust fees) | 0.05 | Governance proposal ([NGF-ECON-10]) |
 | `tu_decay_rate` (per-epoch decline of the Trust Unit index) | half-life 24 months | Governance proposal ([NGF-ECON-10]); prospective only ([NGF-ECON-2]) |
 | `wallet_user_agent_reward_rate` | 0.05 | Governance proposal ([NGF-ECON-10]) |
