@@ -325,13 +325,21 @@ higher one.
 
 A corporation accepts the version of this framework in force before its
 first act in this ecosystem — starting an onboarding process, creating a
-root or self-created entry, issuing or verifying under a schema of this
-ecosystem — through Accept Governance Framework Version ([MOD-GF-MSG-3]),
+root or self-created entry, issuing under a schema of this ecosystem, or
+verifying under one with an entry or a recorded exchange — through Accept Governance Framework Version ([MOD-GF-MSG-3]),
 and each later version within the grace period set at activation
 ([⟨PREFIX⟩-AMND-2]). The VPR refuses the acts of a corporation that has not
 accepted (VPR [GF-CHECK-3]), and holders and relying parties refuse its
 credentials and presentation requests (Verifiable Trust specification
-[CIT-3], [PRT-3]). The EGA, author of this framework, accepts nothing.
+[CIT-3], [PRT-3]). A corporation that only verifies credentials of this ecosystem without an
+`Accreditation` entry and without recording a `CredentialExchange`, under a
+schema whose verifier mode is `OPEN` or `CREDENTIAL` (a service verifying
+User Agent credentials, a zero-fee presentation), records no acceptance
+(Verifiable Trust specification [PRT-3]): by relying on those credentials it
+accepts the obligations this framework places on verifiers (Verifier
+policies) and nothing else; its first act that records anything in the
+ecosystem requires the acceptance above. The EGA, author of this framework,
+accepts nothing.
 Natural persons holding credentials in their wallets have no corporation
 and accept nothing on-chain; ⟨state how they are bound, e.g. the terms
 shown at issuance⟩.

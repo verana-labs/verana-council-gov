@@ -272,13 +272,21 @@ digest version is canonical over any web copy.
 
 [ECS-GEN-8] A corporation accepts the version of this framework in force
 before its first act in the ECS ecosystem — submitting an onboarding
-process, creating a self-created entry, issuing or verifying any credential
-under an ECS — through Accept Governance Framework Version
+process, creating a self-created entry, issuing any credential under an
+ECS, or verifying one with an entry or a recorded exchange — through Accept Governance Framework Version
 ([MOD-GF-MSG-3]), and each later version within the grace period set at
 activation ([ECS-AMND-2]). The VPR refuses the acts of a corporation that
 has not accepted (VPR [GF-CHECK-3]); holders and relying parties refuse its
 credentials and presentation requests (Verifiable Trust specification
-[CIT-3], [PRT-3]). The Council, author of this framework and controller of
+[CIT-3], [PRT-3]). A corporation that only verifies ECS credentials without
+an `Accreditation` entry and without recording a `CredentialExchange`, under
+a schema whose verifier mode is `OPEN` or `CREDENTIAL` (every service
+verifying User Agent credentials, a zero-fee Badge presentation), records no
+acceptance (Verifiable Trust specification [PRT-3]): by relying on those
+credentials it accepts the obligations this framework places on verifiers
+(the verifier policies of sections 6.1.5, 6.2.8, 6.3.8, 6.4.5 and 6.5.5) and
+nothing else; its first act that records anything in the ecosystem requires
+the acceptance above. The Council, author of this framework and controller of
 the ecosystem, accepts nothing. Natural persons holding Badge credentials
 have no corporation and accept nothing on-chain; they are bound by the terms
 shown at issuance.
