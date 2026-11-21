@@ -364,7 +364,7 @@ This framework governs:
 
 - the registered organization's conduct as the controller of the
   Corporation entry identified in section T1;
-- the members of the Corporation's group and the delegates and VS delegates
+- the members of the Corporation's group and the delegates and VS accounts
   authorized by it, in that capacity; and
 - the registered organization's handling of the DID, keys, trust deposit,
   and governance documents attached to the Corporation entry.
