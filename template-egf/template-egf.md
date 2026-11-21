@@ -850,6 +850,20 @@ user-agent and wallet-user-agent reward shares on pay-per operations.
 - [⟨PREFIX⟩-SANC-4] Repetition of a violation within ⟨recidivism window —
   suggested: 12⟩ months of a closed sanction re-enters the ladder one rung
   higher.
+- [⟨PREFIX⟩-SANC-12] A trust-deposit slash (rung 6) bars the sanctioned
+  corporation in the whole ecosystem, and not only the participation that
+  was slashed: until the slashed amount is repaid, the VPR refuses the acts
+  of that corporation under every schema, role and service of the ecosystem
+  (VPR specification, [BAR-CHECK-1]), except repaying, withdrawing an
+  onboarding request and revoking its own entries. An exclusion of a
+  participation ([MOD-AC-MSG-13]) has the same effect for as long as it
+  stands. The EGA MUST take this effect into account when it sizes a
+  sanction, and MUST state it in the decision.
+
+> *Instruction:* the bar stops a corporation, not the persons behind it. A
+> barred party that returns as a new corporation is not stopped by the
+> protocol: say here how your onboarding validators are expected to
+> recognize it, or state that they are not.
 
 ### T11.3 Due process
 

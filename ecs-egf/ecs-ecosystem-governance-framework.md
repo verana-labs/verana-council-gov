@@ -1513,6 +1513,21 @@ Operational Annex, and MUST NOT be a first-resort measure absent fraud;
 repeat violations of the same Cause within 12 months escalate one rung
 above the previous sanction.
 
+[ECS-SANC-15] A slash under rung (f) bars the sanctioned Corporation in the
+whole ECS ecosystem, and not only the participation that was slashed: until
+the slashed amount is repaid ([MOD-TD-MSG-6]), the VPR refuses the acts of
+that Corporation under every schema, role and service of the ecosystem (VPR
+specification, [BAR-CHECK-1]), except repaying, withdrawing an onboarding
+request and revoking its own entries. An exclusion of a participation
+([MOD-AC-MSG-13]) has the same effect for as long as it stands. The Council
+MUST take this effect into account when it applies [ECS-SANC-4], and MUST
+state it in the notified decision.
+
+*Non-normative note:* the bar stops a Corporation, not the persons behind
+it. A barred party that returns as a new Corporation is not stopped by the
+protocol: it is for the onboarding validators to recognize it when they
+apply the accreditation criteria.
+
 ### 11.3 Due process
 
 [ECS-SANC-5] Before any on-chain sanction act, the respondent MUST
