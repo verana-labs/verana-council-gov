@@ -5,7 +5,7 @@
 | Document Name | ECS Ecosystem Governance Framework (ECS-EGF) |
 | Version | DRAFT 0.3 |
 | Status | Draft for co-authoring by Founding Members |
-| Governs | The ECS ecosystem: the five Essential Credential Schemas (Service, Organization, Persona, UserAgent, Badge) and every Participant in their permission trees |
+| Governs | The ECS ecosystem: the five Essential Credential Schemas (Service, Organization, Persona, User Agent, Badge) and every Participant in their Accreditation trees |
 | Governed By | The Verana Council Association (in formation), acting as the ecosystem governance authority (EGA) of the ECS ecosystem |
 | Approved By | Pending — Incorporation General Assembly, target Q4 2026 |
 | Approval Date | Pending |
@@ -38,7 +38,7 @@ independent cryptographic verification, five questions about a counterpart:
 2. **Who is accountable for it?** — answered by an Organization credential
    (a legal entity) or a Persona credential (an identified individual
    controller).
-3. **What software is the user running?** — answered by a UserAgent
+3. **What software is the user running?** — answered by a User Agent
    credential.
 4. **Which human is operating that user agent, and whom do they
    represent?** — answered by a Badge credential, issued to a human by the
@@ -48,7 +48,7 @@ independent cryptographic verification, five questions about a counterpart:
    published, digest-anchored governance framework.
 
 The five **Essential Credential Schemas (ECS)** — Service, Organization,
-Persona, UserAgent, Badge — are the minimum schema set that makes those five
+Persona, User Agent, Badge — are the minimum schema set that makes those five
 questions resolvable for *any* Verifiable Service (VS) or Verifiable User
 Agent (VUA), regardless of sector. The Verifiable Trust specification defines
 their content ([ECS-SERVICE], [ECS-ORG], [ECS-PERSONA], [ECS-UA],
@@ -133,7 +133,7 @@ documents are versioned independently.
 
 Bracketed anchors of the Verifiable Trust and VPR specifications (for
 example [ECS-SERVICE], [ECS-ORG], [ECS-PERSONA], [ECS-UA], [ECS-BADGE], or
-[MOD-PP-MSG-3]) are external citations into those specifications. They are
+[MOD-AC-MSG-3]) are external citations into those specifications. They are
 distinct from this document's own requirement identifiers, whose families
 always carry a numeric suffix (for example [ECS-ORG-14] is a requirement of
 this document; [ECS-ORG] is the VT specification's Organization schema
@@ -151,14 +151,14 @@ particular: *Corporation*, *Ecosystem*, *Participant*, *onboarding process*,
 unit (TU)*, the participant roles (`ECOSYSTEM`, `ISSUER_GRANTOR`,
 `VERIFIER_GRANTOR`, `ISSUER`, `VERIFIER`, `HOLDER`), and the onboarding
 modes (`OPEN`, `GRANTOR_ONBOARDING_PROCESS`, `ECOSYSTEM_ONBOARDING_PROCESS`,
-`ISSUER_ONBOARDING_PROCESS`, `PERMISSIONLESS`). Definitions below contain no
+`ISSUER_ONBOARDING_PROCESS`, `NO_ONBOARDING_PROCESS`). Definitions below contain no
 normative keywords.
 
 - **Accreditation** — the formal recognition, by the ecosystem governance
   authority or an Issuer/Verifier Grantor, of a party's competence to act in
   a permissioned role (issuer, verifier, grantor) for a given schema.
   Distinct from *certification*, which attests conformity of a product,
-  process, or service (the UserAgent framework is a certification at
+  process, or service (the User Agent framework is a certification at
   software-product-line level).
 - **Cause** — any of the enumerated grounds for sanction listed in
   [ECS-SANC-2].
@@ -181,7 +181,7 @@ normative keywords.
 - **Grace Period** — the defined transition window after an involuntary
   termination of an issuer during which the W3C credentials it issued
   (Service, Organization, Persona) continue to verify while holders
-  migrate; AnonCreds credentials (UserAgent, Badge) stop verifying at
+  migrate; AnonCreds credentials (User Agent, Badge) stop verifying at
   termination (see [ECS-LIFE-16]).
 - **Member** — an organization holding a seat in the Verana Council
   Association (a Verein member); per the Network GF ([NGF-TRAN-7]), the
@@ -192,7 +192,7 @@ normative keywords.
   network (a Council member duty). Distinct from an *onboarding validator*.
 - **Onboarding validator** — the Participant that validates an applicant in
   a VPR onboarding process (the `validator` of the VPR specification's
-  Participant module). The bare word "validator" is never used alone in this
+  Accreditation module). The bare word "validator" is never used alone in this
   document.
 - **Participant Candidate Agreement** — the uniform agreement executed by
   every applicant for a permissioned role in the ECS ecosystem; a Controlled
@@ -269,7 +269,7 @@ the tagged release history of `verana-labs/verana-council-gov`.
 
 [ECS-GEN-7] Every version of this framework and of its Controlled Documents
 MUST remain publicly resolvable without authentication for as long as any
-permission or credential issued under it can be valid; the chain-anchored
+accreditation or credential issued under it can be valid; the chain-anchored
 digest version is canonical over any web copy.
 
 [ECS-GEN-8] Participation in the ECS ecosystem — submitting or accepting
@@ -278,7 +278,7 @@ verifying any credential under an ECS — constitutes acceptance of the
 version of this framework active at the time of the act.
 
 [ECS-GEN-9] A Participant of the ECS ecosystem MUST NOT use its
-permissions, or credentials issued under this framework, for an unlawful
+accreditations, or credentials issued under this framework, for an unlawful
 purpose.
 
 [ECS-GEN-10] No party, including the Council, SHALL represent the creation
@@ -298,13 +298,13 @@ Verana Council Association ([MOD-CO-MSG-1]); the ECS Ecosystem entry
 version 1 of this framework as its governance framework document
 (url + digest_sri, activated at creation; subsequent versions via
 [MOD-GF-MSG-1] / [MOD-GF-MSG-2]); the five ECS CredentialSchema entries
-([MOD-CS-MSG-1]) configured per Chapter 5; the root `ECOSYSTEM` Participant
-entries ([MOD-PP-MSG-7]); and the accreditation criteria of every gated
+([MOD-CS-MSG-1]) configured per Chapter 5; the root `ECOSYSTEM` Accreditation
+entries ([MOD-AC-MSG-7]); and the accreditation criteria of every gated
 (schema, role) pair, published per [ECS-ACC-1].
 
 [ECS-ROOT-2] The Council MUST publish, in the ECS Ecosystem DID Document,
 one `LinkedVerifiablePresentation` service entry per ECS pointing to the
-self-issued Verifiable Trust Json Schema Credential (VTJSC) of that schema,
+self-issued Verifiable Trust JSON Schema Credential (VTJSC) of that schema,
 with the exact fragment names required by [VT-ECS-ECOSYSTEM-DIDDOC]
 (`#vpr-schemas-service-vtjsc-vp`, `#vpr-schemas-org-vtjsc-vp`,
 `#vpr-schemas-persona-vtjsc-vp`, `#vpr-schemas-ua-vtjsc-vp`,
@@ -359,7 +359,7 @@ describe that status as recognition freely granted, and freely revocable,
 by individual VS and VUA operators through their ECS whitelists per the
 Verifiable Trust specification ([WL]).
 
-[ECS-ROOT-10] The Council MUST NOT condition any accreditation, permission,
+[ECS-ROOT-10] The Council MUST NOT condition any accreditation,
 fee, or service under this framework on a party's whitelisting of the ECS
 Ecosystem DID, and MUST NOT penalize any party for recognizing additional
 or alternative ECS ecosystems.
@@ -374,7 +374,7 @@ ECS ecosystem.
 
 [ECS-GEN-12] For TRQP queries concerning the ECS ecosystem, the PARC
 mapping is fixed as follows: `authority_id` = the ECS Ecosystem DID (or the
-Ecosystem entry `id`); `entity_id` = the `did` of the Participant entry —
+Ecosystem entry `id`); `entity_id` = the `did` of the Accreditation entry —
 the DID of the Verifiable Service that appears as credential issuer or
 verifier (the owning Corporation is resolvable from the entry); `action` =
 `issue` or `verify`; `resource` = the CredentialSchema `id` of the ECS
@@ -395,7 +395,7 @@ unrepaid network-level slash ([MOD-TD-MSG-5]).
 from the ECS Ecosystem DID, satisfying TRQP's requirement that the
 ecosystem governance framework be discoverable via the `authority_id`.
 
-[ECS-GEN-15] Permission state for the five ECS MUST be reconstructible
+[ECS-GEN-15] Accreditation state for the five ECS MUST be reconstructible
 as-of any past time from public chain data, so that TRQP time-scoped
 queries and issuance-time authorization checks yield deterministic answers.
 
@@ -409,12 +409,12 @@ deviation is an amendment to this framework (Chapter 13).
 
 **Table 2 — ECS CredentialSchema configuration (normative):**
 
-| Field | Service | Organization | Persona | UserAgent | Badge |
+| Field | Service | Organization | Persona | User Agent | Badge |
 | --- | --- | --- | --- | --- | --- |
 | `json_schema` | [ECS-SERVICE] | [ECS-ORG] | [ECS-PERSONA] | [ECS-UA] | [ECS-BADGE] |
 | `issuer_onboarding_mode` | `OPEN` | `GRANTOR_ONBOARDING_PROCESS` | `GRANTOR_ONBOARDING_PROCESS` | `OPEN` | `OPEN` |
 | `verifier_onboarding_mode` | `OPEN` | `OPEN` | `OPEN` | `OPEN` | `OPEN` |
-| `holder_onboarding_mode` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `PERMISSIONLESS` | `PERMISSIONLESS` |
+| `holder_onboarding_mode` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `ISSUER_ONBOARDING_PROCESS` | `NO_ONBOARDING_PROCESS` | `NO_ONBOARDING_PROCESS` |
 | `issuer_grantor_accreditation_validity_period` | 0 | Annex A | Annex A | 0 | 0 |
 | `verifier_grantor_accreditation_validity_period` | 0 | 0 | 0 | 0 | 0 |
 | `issuer_accreditation_validity_period` | Annex A | Annex A | Annex A | Annex A | Annex A |
@@ -435,14 +435,14 @@ deviation is an amendment to this framework (Chapter 13).
   ([VT-ECS-JSON-SCHEMA-VPR-CONFIG]), and so is the **entire Badge
   configuration on the issuer and holder sides**: [ECS-BADGE] entries MUST
   set `issuer_onboarding_mode` to `OPEN` and `holder_onboarding_mode` to
-  `PERMISSIONLESS`, so that any Corporation whose service qualifies as a
+  `NO_ONBOARDING_PROCESS`, so that any Corporation whose service qualifies as a
   Verifiable Service per [VS-REQ] can self-create its `ISSUER` entry and
   issue Badges to the humans it stands behind — trust in a Badge derives
   from trust-resolving its issuer, not from an onboarding gate.
 - Issuer modes: Service issuers are the Verifiable Services themselves,
   which self-register (`OPEN`), subject to the normative issuer duties of
   §6.1; Organization and Persona issuers are onboarded by accredited Issuer
-  Grantors (`GRANTOR_ONBOARDING_PROCESS`); UserAgent issuers are software
+  Grantors (`GRANTOR_ONBOARDING_PROCESS`); User Agent issuers are software
   vendors who self-register (`OPEN`), subject to the normative vendor
   duties of §6.4; Badge issuers are the Verifiable Services themselves,
   which self-register (`OPEN`, spec-mandated), subject to the normative
@@ -475,13 +475,13 @@ deviation is an amendment to this framework (Chapter 13).
 > Tightening later is a schema-configuration amendment under Chapter 13,
 > executed through a new schema entry ([ECS-GEN-18]).
 
-A second configuration choice concerns the UserAgent holder side.
+A second configuration choice concerns the User Agent holder side.
 
-> **[DECISION]** *UserAgent `holder_onboarding_mode` = `PERMISSIONLESS`.*
-> The UserAgent credential is an AnonCreds credential ([VT-ECS-UA-CRED-ANON])
+> **[DECISION]** *User Agent `holder_onboarding_mode` = `NO_ONBOARDING_PROCESS`.*
+> The User Agent credential is an AnonCreds credential ([VT-ECS-UA-CRED-ANON])
 > held by end-user agent instances; unlinkability is its design goal, and
 > the credential is checked at reception time by the holder wallet. Creating
-> on-chain `HOLDER` Participant entries per agent instance would build a
+> on-chain `HOLDER` Accreditation entries per agent instance would build a
 > correlatable registry of user agents — contrary to the schema's privacy
 > purpose. The alternative (`ISSUER_ONBOARDING_PROCESS`) is rejected for
 > that reason, but Founding Members should confirm.
@@ -573,8 +573,8 @@ accountability travels through the Organization or Persona credential.
 #### 6.1.3 Issuer policies
 
 [ECS-SVC-1] `ISSUER` entries for the Service schema are self-created under
-`OPEN` mode ([MOD-PP-MSG-14]) by Corporations, subject to the issuer
-duties of this section, which are conditions of keeping the permission.
+`OPEN` mode ([MOD-AC-MSG-14]) by Corporations, subject to the issuer
+duties of this section, which are conditions of keeping the accreditation.
 
 [ECS-SVC-2] A Service `ISSUER` entry confers no accreditation. A Service
 credential is trust-resolvable only through the Organization or Persona
@@ -615,7 +615,7 @@ on persistent failure.
 
 [ECS-SVC-10] Breach of the duties of this section is a ground under
 Chapter 11; the Council, as ecosystem controller, MAY revoke a
-self-created Service `ISSUER` entry ([MOD-PP-MSG-9]) after the due process
+self-created Service `ISSUER` entry ([MOD-AC-MSG-9]) after the due process
 of that chapter, and a Corporation whose Service `ISSUER` entry has been
 revoked on that ground MUST NOT self-create a new one before the cure
 conditions stated in the revocation notice are met.
@@ -623,7 +623,7 @@ conditions stated in the revocation notice are met.
 #### 6.1.4 Holder policies
 
 [ECS-SVC-8] `HOLDER` entries are opened by the holder toward an `ISSUER`
-entry ([MOD-PP-MSG-1]) and validated by that issuer ([MOD-PP-MSG-3])
+entry ([MOD-AC-MSG-1]) and validated by that issuer ([MOD-AC-MSG-3])
 before any Service credential is issued; a self-issuing VS opens and
 validates its own `HOLDER` entry under its own `ISSUER` entry. A holder
 MUST notify its issuer within 30 days of any change to the credential
@@ -841,11 +841,11 @@ per [ECS-PRIV-5].
 linked to the Persona VTJSC, with subject fields exactly per the VT
 specification's [ECS-PERSONA] and digests computed with SHA-384.
 
-### 6.4 UserAgent Credential Framework
+### 6.4 User Agent Credential Framework
 
 #### 6.4.1 Purpose and scope
 
-*This section is non-normative.* The UserAgent credential lets a running
+*This section is non-normative.* The User Agent credential lets a running
 user-agent instance prove which software product and version it is,
 without identifying its user. The issuer DID identifies the software
 product line; the credential is issued per instance; and the format is
@@ -862,21 +862,21 @@ gatekeeper.
 
 #### 6.4.3 Issuer policies (vendor duties)
 
-[ECS-UA-1] `ISSUER` entries for the UserAgent schema are self-created by
-software vendors under `OPEN` mode ([MOD-PP-MSG-14]), subject to the
+[ECS-UA-1] `ISSUER` entries for the User Agent schema are self-created by
+software vendors under `OPEN` mode ([MOD-AC-MSG-14]), subject to the
 vendor duties of this section, which are conditions of keeping the
-permission.
+accreditation.
 
-[ECS-UA-2] A software vendor MUST hold exactly one UserAgent issuer
+[ECS-UA-2] A software vendor MUST hold exactly one User Agent issuer
 authorization per software product line, and the issuer DID of every
-UserAgent credential MUST uniquely identify that product line, per the
+User Agent credential MUST uniquely identify that product line, per the
 Verifiable Trust specification ([ECS-UA]).
 
-[ECS-UA-3] A vendor MUST NOT issue UserAgent credentials for software it
+[ECS-UA-3] A vendor MUST NOT issue User Agent credentials for software it
 does not produce and control, and MUST NOT issue under one product line's
 issuer DID for instances of a different product line.
 
-[ECS-UA-4] UserAgent credentials MUST be issued as AnonCreds Verifiable
+[ECS-UA-4] User Agent credentials MUST be issued as AnonCreds Verifiable
 Trust Credentials ([VT-ECS-UA-CRED-ANON]) with revocation support, and
 MUST NOT be published in any DID Document.
 
@@ -884,40 +884,40 @@ MUST NOT be published in any DID Document.
 accurately identify the software running in the instance at issuance; a
 vendor MUST NOT attest versions it has not released.
 
-[ECS-UA-6] A vendor MUST revoke the UserAgent credentials of instances of
+[ECS-UA-6] A vendor MUST revoke the User Agent credentials of instances of
 a release within 5 days of establishing that the release is compromised or
 materially misrepresents its identity, and MUST maintain the availability
 of its revocation registry per [ECS-LIFE-11].
 
 #### 6.4.4 Holder policies
 
-There are no holder onboarding requirements for the UserAgent schema
-(`holder_onboarding_mode` = `PERMISSIONLESS`; see the [DECISION] under
+There are no holder onboarding requirements for the User Agent schema
+(`holder_onboarding_mode` = `NO_ONBOARDING_PROCESS`; see the [DECISION] under
 Table 2): the holder wallet enforces issuer authorization at credential
 reception time, per the Verifiable Trust specification.
 
 #### 6.4.5 Verifier policies
 
-There are no additional verifier restrictions for the UserAgent schema.
+There are no additional verifier restrictions for the User Agent schema.
 
-[ECS-UA-7] A verifier of UserAgent credentials MUST NOT attempt to
-correlate UserAgent presentations across sessions or services.
+[ECS-UA-7] A verifier of User Agent credentials MUST NOT attempt to
+correlate User Agent presentations across sessions or services.
 
 #### 6.4.6 Credential definition
 
-[ECS-UA-8] UserAgent credentials MUST conform to the VT specification's
+[ECS-UA-8] User Agent credentials MUST conform to the VT specification's
 [ECS-UA] with the
-AnonCreds credential definition referencing the UserAgent VTJSC via
+AnonCreds credential definition referencing the User Agent VTJSC via
 `relatedJsonSchemaCredentialId`, and digests where applicable computed
 with SHA-384.
 
-[ECS-UA-9] UserAgent presentations are free of charge and never create a
-`ParticipantSession`: the `verification_fees` of every UserAgent
-Participant entry MUST be 0 whatever Annex A sets for other schemas, the
-schema's `presentation_validity_period` MUST be 0, and a verifier MUST NOT
-ask that a UserAgent presentation be anchored, since a verifying User Agent
-holds no Participant entry and cannot create a session (Verifiable Trust
-specification, [VT-ECS-JSON-SCHEMA-VPR-CONFIG]).
+[ECS-UA-9] User Agent presentations are free of charge and never lead to a
+`CredentialPresentation` transaction: the `verification_fees` of every User
+Agent Accreditation entry MUST be 0 whatever Annex A sets for other schemas,
+the schema's `presentation_validity_period` MUST be 0, and a verifier MUST
+NOT ask that a User Agent presentation be anchored, since a verifying User
+Agent has no verifiable service entry and can record no presentation
+(Verifiable Trust specification, [VT-ECS-JSON-SCHEMA-VPR-CONFIG]).
 
 ### 6.5 Badge Credential Framework
 
@@ -952,10 +952,10 @@ permissions: authorization decisions belong to the relying party.
 #### 6.5.3 Issuer policies
 
 [ECS-BDG-1] `ISSUER` entries for the Badge schema are self-created under
-`OPEN` mode ([MOD-PP-MSG-14]) by Corporations whose service qualifies as a
+`OPEN` mode ([MOD-AC-MSG-14]) by Corporations whose service qualifies as a
 Verifiable Service per the VT specification's [VS-REQ], subject to the
 issuer duties of this section, which are conditions of keeping the
-permission; a Corporation whose service ceases to qualify as a Verifiable
+accreditation; a Corporation whose service ceases to qualify as a Verifiable
 Service MUST cease issuing Badges until conformance is restored.
 
 [ECS-BDG-2] A Badge issuer MUST issue Badges only to natural persons it
@@ -994,7 +994,7 @@ of its revocation registry per [ECS-LIFE-11].
 #### 6.5.4 Holder policies
 
 There are no holder onboarding requirements for the Badge schema
-(`holder_onboarding_mode` = `PERMISSIONLESS`, spec-mandated; see the
+(`holder_onboarding_mode` = `NO_ONBOARDING_PROCESS`, spec-mandated; see the
 Table 2 notes): the holder wallet enforces issuer authorization at
 credential reception time, per the Verifiable Trust specification.
 
@@ -1034,7 +1034,7 @@ applicable computed with SHA-384.
 ## 7. Accreditation
 
 *Non-normative note:* this chapter is the machine that turns published
-criteria into on-chain permissions. Its design premises: criteria are
+criteria into on-chain accreditations. Its design premises: criteria are
 published before anyone applies; evaluation is separated from decision;
 admission is non-discretionary when criteria are met; every clock is
 day-counted and runs against the Council as much as against the applicant.
@@ -1065,23 +1065,23 @@ structurally excluded.
 [ECS-ACC-16] The Council MAY set a presentation validity period on a schema
 (the VPR `presentation_validity_period` attribute of the CredentialSchema
 entry, in seconds, set at creation or through Update Credential Schema,
-[MOD-CS-MSG-2]). While the period is greater than 0, the VPR requires the
-digest of every presentation of a credential of the schema to be anchored
-in the verification session and stamps the receipt with a
-`presentation_valid_until`; a presentation is valid evidence of a
-verification only until that time, and a verifier that relies on the
-credential afterwards MUST obtain a new presentation and pay the
-applicable fees again. These are the terms of reliance of this framework
+[MOD-CS-MSG-2]). While the period is greater than 0, the VPR requires
+every presentation of a credential of the schema to be recorded by a
+`CredentialPresentation` transaction that carries the digest of the
+presentation; a presentation is valid evidence of a verification only
+until the block time of that transaction plus the period, and a verifier
+that relies on the credential afterwards MUST obtain a new presentation
+and pay the applicable fees again. These are the terms of reliance of this framework
 for the schema. A change of the period is an Annex A amendment
 ([ECS-AMND-5]) executed on-chain by Update Credential Schema; it applies
-to the verifications that follow it and does not change receipts already
-stamped. The period is an Annex A parameter per schema; at launch no ECS
+to the verifications that follow it and does not change the presentations
+already recorded. The period is an Annex A parameter per schema; at launch no ECS
 schema sets one. The Service, Organization and Persona schemas are PUBLIC
-and produce no receipts, and the UserAgent schema MUST never set a period
+and produce no exchange records, and the User Agent schema MUST never set a period
 ([ECS-UA-9]); the Badge schema is the only ECS schema on which one can
 apply.
 
-[ECS-ACC-3] Accreditation is the on-chain `VALIDATED` Participant entry
+[ECS-ACC-3] Accreditation is the on-chain `VALIDATED` Accreditation entry
 ([ECS-LIFE-5]); no accreditation credential (IAC or VAC) is issued under
 this version of the framework, the VPR's SchemaAuthorizationPolicy and the
 accreditation credentials it implies being deferred to a later protocol
@@ -1115,8 +1115,8 @@ without a cooldown period.
 [ECS-ACC-8] Each application MUST be evaluated against the uniform
 Evidence Checklist for its (schema, role); on validation, the onboarding
 validator MUST anchor the SRI digest of the completed checklist in the
-`onboarding_summary_digest` field of the applicant's Participant entry when
-executing Set Participant OP to Validated ([MOD-PP-MSG-3]), making the
+`onboarding_summary_digest` field of the applicant's Accreditation entry when
+executing Validate Onboarding ([MOD-AC-MSG-3]), making the
 evidentiary basis of every accreditation verifiable.
 
 [ECS-ACC-9] Every applicant for the same (schema, role) MUST execute the
@@ -1173,13 +1173,13 @@ for the targeted (schema, role); the Council MUST keep both publicly
 resolvable per [ECS-GEN-7].
 
 [ECS-LIFE-2] An application is opened by the applicant executing Start
-Participant OP ([MOD-PP-MSG-1]) toward the competent onboarding validator,
+Onboarding ([MOD-AC-MSG-1]) toward the competent onboarding validator,
 paying the applicable `validation_fees` and the protocol's trust-deposit
-increment; the DIDComm validation session that follows is the venue for
+increment; the DIDComm onboarding session that follows is the venue for
 identity verification (Chapter 6) and evidence evaluation (Chapter 7).
 
 [ECS-LIFE-3] An applicant MAY cancel its pending onboarding process at any
-time via Cancel Participant OP Last Request ([MOD-PP-MSG-6]).
+time via Withdraw Onboarding Request ([MOD-AC-MSG-6]).
 
 ### 8.2 Agreement and activation
 
@@ -1188,8 +1188,8 @@ Participant Candidate Agreement for its role; the agreement's
 confidentiality and cooperation clauses bind from signature, and full
 participant status attaches only at activation.
 
-[ECS-LIFE-5] Activation is the onboarding validator's execution of Set
-Participant OP to Validated ([MOD-PP-MSG-3]), setting the `VALIDATED`
+[ECS-LIFE-5] Activation is the onboarding validator's execution of Validate
+Onboarding ([MOD-AC-MSG-3]), setting the `VALIDATED`
 state with `effective_from` / `effective_until` per the schema's validity
 periods, anchoring the completed Evidence Checklist digest per
 [ECS-ACC-8]; the on-chain `VALIDATED` state is the constitutive act of
@@ -1204,15 +1204,15 @@ close it, and the applicant may re-apply without prejudice.
 [ECS-LIFE-7] A validated Participant MUST operate in conformance with this
 framework, its Participant Candidate Agreement, and the
 published criteria under which it was accredited, for the entire
-validity of its permission.
+validity of its accreditation.
 
 [ECS-LIFE-8] A Participant whose validation is due to expire MUST renew it
-via Renew Participant OP ([MOD-PP-MSG-2]) with its existing onboarding
+via Renew Onboarding ([MOD-AC-MSG-2]) with its existing onboarding
 validator, which re-verifies the deltas against the then-active criteria;
 renewal is only possible with the same, still-active validator, so if the
 Participant's onboarding validator has itself been revoked, the
-Participant MUST obtain a new permission by starting a new onboarding
-process ([MOD-PP-MSG-1]) with another competent onboarding validator.
+Participant MUST obtain a new accreditation by starting a new onboarding
+process ([MOD-AC-MSG-1]) with another competent onboarding validator.
 
 [ECS-LIFE-9] Requalification at renewal is conducted under the criteria in
 effect at renewal time, not those of the original accreditation.
@@ -1225,7 +1225,7 @@ body's delay alone.
 
 [ECS-LIFE-11] Availability asymmetry: a Participant's issuance operations
 MAY degrade or pause, but its revocation capability, revocation-registry
-availability, and the accuracy of its on-chain permission state MUST NOT
+availability, and the accuracy of its on-chain accreditation state MUST NOT
 be allowed to degrade; a Participant unable to honor this MUST notify per
 [ECS-LIFE-12] and request suspension.
 
@@ -1247,13 +1247,13 @@ prompt notice and after-the-fact ratification per Chapter 13).
 
 [ECS-LIFE-14] A suspension is executed on-chain by the Participant's
 onboarding validator shortening the Participant's `effective_until` via
-Set Participant Effective Until ([MOD-PP-MSG-8]), after the due process of
+Set Accreditation Effective Until ([MOD-AC-MSG-8]), after the due process of
 Chapter 11 — the protocol permits only the direct onboarding validator to
 execute this act on an OP-managed entry, so where the Council is not the
 direct onboarding validator it MUST direct the competent Issuer Grantor to
 execute the shortening and, failing cooperation, MAY proceed to revocation
-([MOD-PP-MSG-9]), which the Council as ecosystem controller can always
-execute; for a self-created entry (`OPEN` mode: Service, UserAgent, and
+([MOD-AC-MSG-9]), which the Council as ecosystem controller can always
+execute; for a self-created entry (`OPEN` mode: Service, User Agent, and
 Badge issuers) the protocol permits only the owning Corporation to shorten
 its own `effective_until`, so the Council MUST request the shortening from
 the owner and, failing compliance within the cure period, MAY proceed to
@@ -1270,26 +1270,26 @@ the public record together with the fact and duration of the suspension.
 
 ### 8.6 Termination
 
-[ECS-LIFE-16] Termination of a permission is executed by Revoke
-Participant ([MOD-PP-MSG-9]) by an authorized actor (an ancestor
+[ECS-LIFE-16] Termination of an accreditation is executed by Revoke
+Accreditation ([MOD-AC-MSG-9]) by an authorized actor (an ancestor
 onboarding validator in the branch, the grantee itself, or the Council as
 ecosystem controller); an involuntary termination of an issuer opens the
-Grace Period of Annex A, during which: the terminated issuer's permission
+Grace Period of Annex A, during which: the terminated issuer's accreditation
 is dead immediately ("write death first" — it MUST NOT issue), the W3C
 credentials it issued (Service, Organization, Persona) continue to verify
 while holders migrate to a surviving issuer, and at the end of the Grace
 Period the issuer's unexpired credentials are revoked. AnonCreds
-credentials (UserAgent, Badge) stop verifying at termination, since their
+credentials (User Agent, Badge) stop verifying at termination, since their
 trust requires a currently authorized issuer: their holders obtain a new
 credential from a surviving issuer, without a migration window.
 
 [ECS-LIFE-17] Where a termination is grounded in fraud or in damage
 quantifiable against the Participant's trust deposit, the Council or the
 competent ancestor onboarding validator MAY additionally execute Slash
-Participant Trust Deposit ([MOD-PP-MSG-12]), under the constraints of
+Participation Trust Deposit ([MOD-AC-MSG-12]), under the constraints of
 Chapter 11; slashed amounts are burned by the protocol ([MOD-TD-MSG-7]),
-and the slashed Participant may return only after Repay Participant
-Slashed Trust Deposit ([MOD-PP-MSG-13]) and fresh accreditation.
+and the slashed Participant may return only after Repay
+Slash ([MOD-TD-MSG-6]) and fresh accreditation.
 
 [ECS-LIFE-18] A terminating issuer (voluntary or involuntary) MUST:
 notify every affected holder of the termination and of the migration
@@ -1326,7 +1326,7 @@ termination with its ground), symmetrically with accreditations.
 
 *Non-normative note:* the ECS ecosystem's economics are protocol
 mechanics, not commercial terms. Fees are denominated in trust units (TU)
-per the schema configuration of Table 2 and recorded per Participant entry
+per the schema configuration of Table 2 and recorded per Accreditation entry
 (`validation_fees`, `issuance_fees`, `verification_fees`); trust deposits
 accrue and behave exactly as the VPR specification defines — every
 increment is computed as the `trust_deposit_rate` share of the trust fees
@@ -1336,12 +1336,12 @@ how much deposit accrues.
 ### 9.1 Launch fee schedule
 
 [ECS-FEE-1] The `validation_fees`, `issuance_fees`, and
-`verification_fees` for every Council-held Participant entry in the five
+`verification_fees` for every Council-held Accreditation entry in the five
 ECS trees are set to the Annex A values (0 TU at launch); a Participant
 other than the Council MUST NOT charge fees for ECS operations except per
 [ECS-FEE-5]. Verification fees can be collected on presented credentials
 only: Service, Organization and Persona credentials are published, not
-presented, and UserAgent presentations are free ([ECS-UA-9]), so
+presented, and User Agent presentations are free ([ECS-UA-9]), so
 verification fees concern the Badge schema alone.
 
 > **[DECISION]** *Launch values of 0 TU for validation, issuance, and
@@ -1414,7 +1414,7 @@ Council's own assurance practice.
 exactly three classes, and the Council MUST name the class of every
 assurance claim it makes or relies on under this framework:
 (a) **cryptographic/automatic** — enforced by the VPR protocol or by
-cryptography (permission state and expiry, trust deposits, slashing,
+cryptography (accreditation state and expiry, trust deposits, slashing,
 digest-anchored documents, digest-anchored Evidence Checklists,
 issuance-time anchoring); (b) **attested** — self-certification against
 published criteria, reviewed before validation; (c) **assessed** —
@@ -1446,7 +1446,7 @@ volume, aggregate trust-deposit value at risk, and entry of regulated
 sectors relying on the schema — and any escalation applies only at
 renewal, never retroactively mid-validity.
 
-[ECS-TA-4] On-chain state proves registration and permission status; it
+[ECS-TA-4] On-chain state proves registration and accreditation status; it
 does not prove off-chain conduct. No party, including the Council, SHALL
 claim more than reasonable assurance from ECS mechanisms, and relying
 parties may infer less, but not more.
@@ -1455,15 +1455,15 @@ parties may infer less, but not more.
 
 [ECS-TA-6] The Council SHOULD monitor conformance signals derivable from
 public chain data via trust resolvers and indexers — including
-revocation-registry availability, permission-state divergence, and
-expired-but-unrenewed permissions — and MAY open a review under Chapter 11
+revocation-registry availability, accreditation-state divergence, and
+expired-but-unrenewed accreditations — and MAY open a review under Chapter 11
 on persistent anomalies.
 
 ### 10.4 Honest residuals
 
 *This section is non-normative.* Relying parties should know what this
 framework does **not** assure: (1) **revocation latency** — a verifier
-caching credential or permission state may honor a revoked credential
+caching credential or accreditation state may honor a revoked credential
 until its cache refreshes; (2) **whitelist centralization** — trust-root
 status is a social convention of VS/VUA operators ([WL]), and a widely
 shared default whitelist is a concentration risk this framework can
@@ -1498,14 +1498,14 @@ unreported change of control past its disclosure deadline.
 [ECS-SANC-3] Sanctions MUST proceed by the least severe sufficient rung of
 the following ladder, each rung executed only after the due process of
 [ECS-SANC-5]: (a) written warning; (b) remediation order with a cure
-period per Annex A; (c) permission restriction (conditions on issuance, or
-shortening of `effective_until` via [MOD-PP-MSG-8], executed by the direct
+period per Annex A; (c) accreditation restriction (conditions on issuance, or
+shortening of `effective_until` via [MOD-AC-MSG-8], executed by the direct
 onboarding validator or, for a self-created entry, by the owner at the
 Council's request, per [ECS-LIFE-14]); (d) suspension
-(§8.5); (e) revocation of the permission ([MOD-PP-MSG-9]) with the Grace
+(§8.5); (e) revocation of the accreditation ([MOD-AC-MSG-9]) with the Grace
 Period duties of §8.6; (f) ecosystem slash of the trust deposit
-([MOD-PP-MSG-12], burned per [MOD-TD-MSG-7], return conditioned on
-[MOD-PP-MSG-13]).
+([MOD-AC-MSG-12], burned per [MOD-TD-MSG-7], return conditioned on
+[MOD-TD-MSG-6]).
 
 [ECS-SANC-4] A slash under rung (f) MUST be proportionate to the gravity
 and gain of the violation, sized against a published schedule in the
@@ -1533,7 +1533,7 @@ reasons on the Council's public record, symmetrically with
 accreditations; publication MAY redact personal data and active-security
 detail.
 
-[ECS-SANC-8] A permission granted through a procedurally defective
+[ECS-SANC-8] An accreditation granted through a procedurally defective
 process is reviewable, not void: it remains effective until reviewed and
 ratified, amended, or revoked, so that defects do not cascade invalidity
 through credential chains onto innocent holders.
@@ -1597,14 +1597,14 @@ this framework if and only if the claim is true as a pure function of live
 on-chain state per the collapse rule of [ECS-GEN-13] (VALIDATED,
 unexpired, unrevoked, not slashed); any such claim MUST embed or link the
 DID that lets a relying party resolve live status, and a party whose
-permission ceases to satisfy the rule MUST remove the claim within
+accreditation ceases to satisfy the rule MUST remove the claim within
 5 days.
 
 ## 12. Privacy and Data Protection
 
 [ECS-PRIV-1] No personal data SHALL be written to the Verana network in
 connection with the ECS ecosystem: on-chain entries carry identifiers,
-digests, permission state, and fee data only, and evidence lives
+digests, accreditation state, and fee data only, and evidence lives
 off-chain with the party that collected it.
 
 [ECS-PRIV-2] Every Participant processing personal data in an ECS role
@@ -1623,7 +1623,7 @@ to every publication of personal data under this framework.
 
 [ECS-PRIV-5] Verifiers MUST NOT retain personal data from ECS credential
 presentations beyond the purpose and duration for which it was presented,
-and MUST NOT use UserAgent presentations for cross-context correlation
+and MUST NOT use User Agent presentations for cross-context correlation
 ([ECS-UA-7]).
 
 [ECS-PRIV-6] Photographs and biometric templates processed under the Badge
@@ -1640,7 +1640,7 @@ framework.
 credentials to establish objective issuance time. A digest is
 deliberately non-reversible and is anchored without the underlying data;
 the design intent is that anchored digests are not usable as personal
-data, and the UserAgent schema goes further by using AnonCreds, whose
+data, and the User Agent schema goes further by using AnonCreds, whose
 derived presentations are unlinkable by construction. The Council states
 this rationale here, in advance, rather than leaving the question to
 enforcement.
@@ -1726,9 +1726,9 @@ period at 3650 days (GlobalVariables).
 | A2 | `issuer_accreditation_validity_period` (all five schemas) | 365 days | [ECS-AMND-5] + schema config |
 | A3 | `verifier_accreditation_validity_period` (all five schemas) | 365 days | [ECS-AMND-5] + schema config |
 | A4 | `holder_accreditation_validity_period` (Service, Organization, Persona) | 365 days | [ECS-AMND-5] + schema config |
-| A5 | `holder_accreditation_validity_period` (UserAgent, Badge) | 0 (no holder onboarding; `PERMISSIONLESS`) | [ECS-AMND-5] + schema config |
+| A5 | `holder_accreditation_validity_period` (User Agent, Badge) | 0 (no holder onboarding; `NO_ONBOARDING_PROCESS`) | [ECS-AMND-5] + schema config |
 | A6 | Credential lifetime (`validUntil` − `validFrom`): Organization, Persona, Service | ≤ 365 days | [ECS-AMND-5] |
-| A7 | Credential lifetime: UserAgent, Badge | no fixed expiry; revocation-based | [ECS-AMND-5] |
+| A7 | Credential lifetime: User Agent, Badge | no fixed expiry; revocation-based | [ECS-AMND-5] |
 | A8 | `validation_fees` (all schemas, all roles) | 0 TU | [ECS-AMND-5] |
 | A9 | `issuance_fees` (all schemas) | 0 TU | [ECS-AMND-5] |
 | A10 | `verification_fees` (all schemas) | 0 TU | [ECS-AMND-5] |
@@ -1741,14 +1741,14 @@ period at 3650 days (GlobalVariables).
 | A17 | Concurrent substantive reviews workload cap ([ECS-ACC-10]) | 5 | [ECS-AMND-5] |
 | A18 | Activation window before an onboarding process lapses ([ECS-LIFE-6]) | 180 days | [ECS-AMND-5] |
 | A19 | Cure period, standard ([ECS-SANC-3] rung b) | 15 days | [ECS-AMND-5] |
-| A20 | Cure period, core duties (revocation availability, permission-state accuracy, fraud-adjacent) | 5 days | [ECS-AMND-5] |
+| A20 | Cure period, core duties (revocation availability, accreditation-state accuracy, fraud-adjacent) | 5 days | [ECS-AMND-5] |
 | A21 | Suspension auto-termination clock ([ECS-LIFE-15]) | 180 days | [ECS-AMND-5] |
 | A22 | Appeal window ([ECS-SANC-10]) | 30 days from notified decision | [ECS-AMND-5] |
 | A23 | Change-of-control disclosure period ([ECS-ACC-14]) | 30 days | [ECS-AMND-5] |
 | A24 | Incident / breach notice ([ECS-LIFE-12]) | 72 hours | [ECS-AMND-5] |
 | A25 | Key-compromise notice ([ECS-LIFE-12]) | 24 hours | [ECS-AMND-5] |
 | A26 | Notice of material framework changes ([ECS-LIFE-13]) | ≥ 30 days | [ECS-AMND-1] |
-| A27 | Evidence retention period ([ECS-ORG-12], [ECS-PER-9], [ECS-LIFE-18]) | validity period of the supported permission + 24 months | [ECS-AMND-5] |
+| A27 | Evidence retention period ([ECS-ORG-12], [ECS-PER-9], [ECS-LIFE-18]) | validity period of the supported accreditation + 24 months | [ECS-AMND-5] |
 | A28 | Revocation-request response deadline ([ECS-SANC-9]) | 15 days | [ECS-AMND-5] |
 | A29 | Key-rotation announcement deadline ([ECS-ROOT-7]) | 7 days | [ECS-AMND-5] |
 | A30 | Public-claim removal deadline ([ECS-TA-5]) | 5 days | [ECS-AMND-5] |
@@ -1783,5 +1783,5 @@ listed; each has an owner and a target date.
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
 | 0.3 | 2026-10-15 | Draft | Working draft. Service schema `issuer_onboarding_mode` changed from `ECOSYSTEM_ONBOARDING_PROCESS` to `OPEN` (Table 2 and its notes); §6.1.3 rewritten as self-registration with issuer duties ([ECS-SVC-1]–[ECS-SVC-7] revised, [ECS-SVC-10] added); [ECS-ACC-4] and [ECS-LIFE-14] aligned for self-created entries. |
-| 0.2 | 2026-08-08 | Draft | (Archived under `v0.2/`.) Aligned with Verifiable Trust specification v4: added the Badge ECS (five schemas throughout), new §6.5 Badge Credential Framework ([ECS-BDG-1]–[ECS-BDG-12]), Badge VPR configuration in Table 2, Badge VTJSC fragment in [ECS-ROOT-2], Badge schema link and digest in Table 3, biometric-data rule [ECS-PRIV-6], and corrected the UserAgent schema digest in Table 3. |
+| 0.2 | 2026-08-08 | Draft | (Archived under `v0.2/`.) Aligned with Verifiable Trust specification v4: added the Badge ECS (five schemas throughout), new §6.5 Badge Credential Framework ([ECS-BDG-1]–[ECS-BDG-12]), Badge VPR configuration in Table 2, Badge VTJSC fragment in [ECS-ROOT-2], Badge schema link and digest in Table 3, biometric-data rule [ECS-PRIV-6], and corrected the User Agent schema digest in Table 3. |
 | 0.1 | 2026-07-05 | Draft | First draft for co-authoring by Founding Members (archived under `v0.1/`). |
