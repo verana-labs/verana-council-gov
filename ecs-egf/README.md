@@ -14,14 +14,15 @@ The Council's own ecosystem-level framework. It is itself an EGF and MUST
 respect the [Network GF](../network-gf/) — it is the reference implementation
 of that document's requirements for EGFs, and the worked example of the
 [Template EGF](../template-egf/). It covers the five fixed **Essential
-Credential Schemas** and the rules under which the Council accredits Issuer
-Grantors and Issuers for each schema.
+Credential Schemas**, the rules under which the Council accredits Issuer
+Grantors and Issuers for the gated schemas, and the duties attached to the
+self-registered issuer roles (Service, UserAgent, Badge).
 
 ## The five Essential Credential Schemas
 
 | Schema | Identifies | Issuer onboarding mode | Definition |
 | --- | --- | --- | --- |
-| `Service` | Verifiable Services (including AI agents acting as services) | `ECOSYSTEM_ONBOARDING_PROCESS` | [service.json](https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/service.json) |
+| `Service` | Verifiable Services (including AI agents acting as services) | `OPEN` (with normative issuer duties) | [service.json](https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/service.json) |
 | `Organization` | Legal entities controlling services | `GRANTOR_ONBOARDING_PROCESS` | [org.json](https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/org.json) |
 | `Persona` | Individuals controlling services | `GRANTOR_ONBOARDING_PROCESS` | [persona.json](https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/persona.json) |
 | `UserAgent` | End-user wallets and applications | `OPEN` (with normative vendor duties) | [ua.json](https://verana-labs.github.io/verifiable-trust-spec/schemas/v4/ua.json) |

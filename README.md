@@ -18,6 +18,7 @@ SRI hash.
 | [ECS Ecosystem Governance Framework](./ecs-egf/ecs-ecosystem-governance-framework.md) | DRAFT 0.3 | The Council's own ecosystem framework covering the five Essential Credential Schemas. |
 | [Template EGF](./template-egf/template-egf.md) | DRAFT 0.3 | A working scaffold for ecosystems authoring their own sector EGF. Not an approval gate. |
 | [Template CGF](./template-cgf/template-cgf.md) | DRAFT 0.1 | A working scaffold for the Corporation Governance Framework every Corporation entry must anchor at creation. Not an approval gate. |
+| [Member onboarding sheet](./member-onboarding/) | informative | One-page summary for candidate organizations: the role of a Council member, its obligations, budget and distribution, and an onboarding checklist. |
 | [Bylaws](./bylaws/) | placeholder | The Verein statutes governing Council membership and operation. |
 | [Code of Conduct](./code-of-conduct/) | placeholder | Conduct rules binding on all Council participants. |
 

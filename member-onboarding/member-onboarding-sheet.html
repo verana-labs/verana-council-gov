@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Verana Council: member onboarding sheet</title>
+<!-- Source of member-onboarding-sheet.pdf. Content mirrors README.md in this
+     directory; change both together. Print to A4 with a headless Chromium:
+     chrome --headless=new --no-pdf-header-footer --print-to-pdf=member-onboarding-sheet.pdf member-onboarding-sheet.html -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 0; }
+  :root {
+    --indigo: #2e2a8f;
+    --ink: #111111;
+    --muted: #5b5b5b;
+    --rule: #e8e6e0;
+    --surface: #fafaf8;
+    --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --display: "Space Grotesk", "Inter", "Helvetica Neue", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 210mm; height: 297mm; }
+  body {
+    font-family: var(--sans);
+    font-size: 7.55pt;
+    line-height: 1.34;
+    color: var(--ink);
+    background: #ffffff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm; height: 297mm;
+    padding: 0 13mm 7mm;
+    display: flex; flex-direction: column;
+    border-top: 3mm solid var(--indigo);
+    overflow: hidden;
+  }
+
+  /* Header */
+  header {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 4.6mm 0 3.4mm;
+    border-bottom: 1px solid var(--rule);
+  }
+  .brand { display: flex; align-items: center; gap: 2.4mm; }
+  .brand svg { width: 7.4mm; height: 7.1mm; display: block; }
+  .wordmark { font-weight: 600; font-size: 14pt; letter-spacing: -0.02em; white-space: nowrap; }
+  .meta {
+    font-family: var(--mono); font-size: 6.5pt; line-height: 1.45;
+    color: var(--muted); text-align: right; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .meta b { color: var(--indigo); font-weight: 500; }
+
+  /* Title */
+  .title { padding: 3.8mm 0 3mm; }
+  h1 {
+    font-family: var(--display); font-weight: 600; font-size: 18pt;
+    letter-spacing: -0.02em; line-height: 1.1;
+  }
+  .lead { margin-top: 1.1mm; font-size: 8.8pt; color: var(--muted); }
+
+  /* Strips (key facts, payout order) */
+  .strip {
+    display: grid;
+    border: 1px solid var(--rule); border-radius: 1.5mm; background: var(--surface);
+  }
+  .facts { grid-template-columns: 1.55fr 0.8fr 1fr 1fr; }
+  .cell { padding: 2mm 3mm; border-left: 1px solid var(--rule); }
+  .cell:first-child { border-left: 0; }
+  .k {
+    font-family: var(--mono); font-size: 6.1pt; text-transform: uppercase;
+    letter-spacing: 0.05em; color: var(--muted);
+  }
+  .v { font-family: var(--display); font-weight: 600; font-size: 9.4pt; margin-top: 0.4mm; letter-spacing: -0.01em; white-space: nowrap; }
+
+  /* Sections */
+  h2 {
+    font-family: var(--mono); font-weight: 500; font-size: 6.9pt;
+    text-transform: uppercase; letter-spacing: 0.07em; color: var(--indigo);
+    padding-bottom: 1.1mm; margin-bottom: 1.5mm; border-bottom: 1.5px solid var(--indigo);
+  }
+  .cols { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 7mm; margin-top: 3.4mm; }
+  .block + .block { margin-top: 2.8mm; }
+  ul { list-style: none; }
+  ul li { position: relative; padding-left: 3.1mm; margin-bottom: 0.8mm; }
+  ul li::before {
+    content: ""; position: absolute; left: 0; top: 1.25mm;
+    width: 1.25mm; height: 1.25mm; background: var(--indigo);
+  }
+  ul.no li::before { background: transparent; border: 1px solid var(--muted); }
+  strong { font-weight: 600; }
+
+  table { width: 100%; border-collapse: collapse; }
+  td { vertical-align: top; padding: 1.15mm 0; border-bottom: 1px solid var(--rule); }
+  tr:last-child td { border-bottom: 0; }
+  td.when {
+    width: 22mm; padding-right: 2.5mm;
+    font-family: var(--mono); font-size: 6.5pt; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--muted); padding-top: 1.4mm;
+  }
+
+  /* Budget and distribution */
+  .section { margin-top: 3.2mm; }
+  .intro { margin-bottom: 1.6mm; }
+  .order { grid-template-columns: 1.25fr 1fr 1fr 1.1fr 0.9fr; }
+  .order .cell { padding: 1.7mm 2.6mm 1.9mm; }
+  .order .t { font-weight: 600; margin-top: 0.3mm; }
+  .order .d { color: var(--muted); font-size: 6.9pt; line-height: 1.3; margin-top: 0.2mm; }
+  .order .k { color: var(--indigo); }
+  .notes { display: grid; grid-template-columns: 1.12fr 1fr 1fr; gap: 6mm; margin-top: 1.9mm; }
+  .notes p b { font-weight: 600; }
+
+  /* Checklist */
+  .steps { display: grid; grid-template-columns: 1fr 1fr; column-gap: 7mm; grid-auto-flow: column; grid-template-rows: repeat(4, auto); }
+  .step { display: flex; gap: 1.9mm; padding: 1.15mm 0; border-bottom: 1px solid var(--rule); }
+  .step:nth-child(4n) { border-bottom: 0; }
+  .box { flex: none; width: 2.9mm; height: 2.9mm; border: 1.1px solid var(--ink); border-radius: 0.5mm; margin-top: 0.35mm; }
+  .n { flex: none; font-family: var(--mono); font-size: 6.7pt; color: var(--indigo); width: 2.4mm; padding-top: 0.2mm; }
+
+  /* Footer */
+  footer { margin-top: auto; padding-top: 2.2mm; border-top: 1px solid var(--rule); }
+  .note { font-size: 6.6pt; color: var(--muted); line-height: 1.4; }
+  .foot {
+    display: flex; justify-content: space-between; margin-top: 1.6mm;
+    font-family: var(--mono); font-size: 6.5pt; color: var(--muted);
+  }
+  .foot .r { color: var(--indigo); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="brand">
+      <svg viewBox="0 0 54 52" aria-hidden="true">
+        <path fill="#111111" d="M26.9932 51.6972L5.805 11.0977L2.91263 16.2161L0 10.6048L5.98725 0L26.9932 40.2483L47.9993 0L54 10.6217L51.0773 16.2161L48.1849 11.0977L26.9932 51.6972Z"/>
+        <path fill="#111111" d="M13.696 0L26.9935 25.4637L39.9367 0H13.696Z"/>
+      </svg>
+      <span class="wordmark">VeranaCouncil</span>
+    </div>
+    <div class="meta">
+      Member onboarding sheet<br>
+      Founding Member track<br>
+      <b>November 2026, draft values</b>
+    </div>
+  </header>
+
+  <div class="title">
+    <h1>Taking a seat on the Verana Council</h1>
+    <p class="lead">What a seat means, what it asks of your organization, how the network pays for itself, and the steps to take it.</p>
+  </div>
+
+  <div class="strip facts">
+    <div class="cell"><div class="k">One status</div><div class="v">One seat, one vote, one validator node</div></div>
+    <div class="cell"><div class="k">Size</div><div class="v">25 seats maximum</div></div>
+    <div class="cell"><div class="k">Cost of membership</div><div class="v">Free, no dues</div></div>
+    <div class="cell"><div class="k">Commitment starts</div><div class="v">Mainnet, Q1 2027</div></div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <div class="block">
+        <h2>The role</h2>
+        <ul>
+          <li>The Council is the <strong>only body that governs and secures</strong> the live Verana network. It is separate from the Verana Foundation (specifications, open-source software, token).</li>
+          <li>Each member holds <strong>one seat and one vote</strong> and operates <strong>one validator node</strong>. Seats span sectors and regions.</li>
+          <li>Members decide by a <strong>two-thirds majority of seated members</strong>: the governance frameworks, network parameters and budgets, software upgrades, network-level sanctions and admissions.</li>
+          <li>The Council does not write standards, sell products, give grants, issue the token or govern other ecosystems.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>What your organization receives</h2>
+        <ul>
+          <li>A vote on the rules of an open public trust infrastructure, with governments, standards bodies, enterprises and academia.</li>
+          <li><strong>Free membership</strong>: no dues, no capital contribution, and no liability for the association's debts.</li>
+          <li>After launch, a <strong>node budget</strong> sized to cover the cost of running the validator (see below).</li>
+          <li>A complimentary Verana Foundation Associate Membership.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h2>What a seat does not carry</h2>
+        <ul class="no">
+          <li>No token allocation, no revenue share, no economic claim of any kind. Token holdings give no vote.</li>
+          <li>No extra power for Board members: the Board holds no network authority.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <h2>Obligations of a member</h2>
+      <table>
+        <tr><td class="when">Formation</td><td>Co-author the governance frameworks. Vote in 14-day asynchronous ballots. Run a testnet validator node (recommended) to be ready for genesis.</td></tr>
+        <tr><td class="when">From mainnet</td><td><strong>Operate one validator node. This is mandatory</strong>: votes are cast through it. A member not ready at launch keeps its seat and joins within 90 days.</td></tr>
+        <tr><td class="when">Operations</td><td>Availability of at least 95% over any 30 days (target 99.5%). Adopted upgrades applied within 14 days. Keys kept separate and in the member's own custody.</td></tr>
+        <tr><td class="when">Reporting</td><td>Suspected key compromise within 24 hours. Material incident within 72 hours. Change of hosting or operator within 5 business days. Change of control within 14 days.</td></tr>
+        <tr><td class="when">People</td><td>One voting representative. Two emergency governance contacts able to vote on an urgent security proposal, reachable at all times, tested quarterly.</td></tr>
+        <tr><td class="when">Node</td><td>AGPL-3.0-or-later software; modified builds publish their source. Own data center, colocation or cloud, disclosed publicly. A contracted operator is allowed; the member stays fully accountable.</td></tr>
+        <tr><td class="when">Conduct</td><td>Statutes and Code of Conduct. Recusal on conflicts of interest. One seat per corporate group. Seatings, votes and departures are public.</td></tr>
+        <tr><td class="when">Term and exit</td><td>3-year terms with formal renewal. Orderly handover on departure. Breaches follow a graduated ladder, from warning to removal for cause, with due process and appeal.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Budget and distribution</h2>
+    <p class="intro">Every fee paid on the network enters a single pool. Once a day the protocol pays the pool out in a fixed order:</p>
+    <div class="strip order">
+      <div class="cell"><div class="k">1</div><div class="t">Validator node budgets</div><div class="d">The same amount for every active node, reduced when uptime is low</div></div>
+      <div class="cell"><div class="k">2</div><div class="t">Council budget</div><div class="d">Runs the association; accounts published every year</div></div>
+      <div class="cell"><div class="k">3</div><div class="t">Foundation budget</div><div class="d">Paid to the Foundation's treasury</div></div>
+      <div class="cell"><div class="k">4</div><div class="t">Yield on bonded tokens</div><div class="d">Capped; not active at launch</div></div>
+      <div class="cell"><div class="k">5</div><div class="t">Remainder</div><div class="d">Burned, never redistributed</div></div>
+    </div>
+    <div class="notes">
+      <p><b>What a member is paid.</b> The node budget is a cost target set in fiat currency and paid in the native token (VNA). It is paid in full when the node signs at least 99% of the day's blocks, pro-rated below that, and not paid under 90%.</p>
+      <p><b>Who sets the amounts.</b> The budgets are set at genesis, then changed only by a two-thirds Council vote with a published justification, and reviewed in public every year. The amounts are not set yet.</p>
+      <p><b>No new tokens.</b> Supply is fixed at 1 billion VNA and only shrinks. While fees are below the budgets, nodes are paid first and the shortfall comes from the founding treasuries and vesting grants.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Onboarding checklist</h2>
+    <div class="steps">
+      <div class="step"><span class="box"></span><span class="n">1</span><span>Name an internal sponsor and confirm who can represent the organization.</span></div>
+      <div class="step"><span class="box"></span><span class="n">2</span><span>Submit the <strong>non-binding expression of interest</strong> on veranacouncil.org (sector and region). Nothing is signed yet.</span></div>
+      <div class="step"><span class="box"></span><span class="n">3</span><span>Vetting by the Membership &amp; Seats Committee.</span></div>
+      <div class="step"><span class="box"></span><span class="n">4</span><span>Admission ballot: two-thirds of seated members, 14 days. The first three seats are designated by the steward.</span></div>
+      <div class="step"><span class="box"></span><span class="n">5</span><span>Legal review of the <strong>Council Membership Agreement</strong>, the single binding document, then authorized signature.</span></div>
+      <div class="step"><span class="box"></span><span class="n">6</span><span>Designate the voting representative and the two emergency governance contacts.</span></div>
+      <div class="step"><span class="box"></span><span class="n">7</span><span>Choose own hosting or an operator, then start a testnet validator node (4+ CPU cores, 32 GB RAM, 1 TB SSD, static IP).</span></div>
+      <div class="step"><span class="box"></span><span class="n">8</span><span>Join the framework co-authoring and the Incorporation General Assembly, which ratifies all seatings.</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <p class="note"><strong>Status.</strong> The Verana Council Association is a non-profit Swiss association (Verein, Art. 60 ZGB) in formation. Figures are initial parameters of the Network Governance Framework, draft 0.4 (Verifiable Public Registry specification, version 5), final once the Incorporation General Assembly ratifies it. This sheet is informative; the Council Membership Agreement and the statutes prevail. Sovereigns and multilateral bodies that cannot join a Swiss association may take part as Public-Sector Observers (voice, no vote, no validator).</p>
+    <div class="foot">
+      <span>Questions: veranacouncil.org/contact (Council membership)</span>
+      <span class="r">veranacouncil.org/join</span>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
