@@ -30,8 +30,8 @@ Every organization that acts on the Verana network does so through a
 **Corporation** entry on the Verifiable Public Registry (VPR). The
 Corporation is the registry's actor: it is anchored by a `policy_address`
 account that signs on its behalf, it controls zero or more Ecosystems, it
-owns zero or more Participant entries in its own or third-party ecosystems,
-it delegates day-to-day signing to operator accounts, and it holds the trust
+owns zero or more Accreditation entries in its own or third-party ecosystems,
+it delegates day-to-day signing to delegate accounts, and it holds the trust
 deposit that backs everything it does.
 
 Creating a Corporation is permissionless: any account can do it, no
@@ -54,7 +54,7 @@ This template exists to make that easy. It is a fill-in-the-blanks scaffold
 for writing a CGF that:
 
 - mirrors the VPR's on-chain Corporation mechanics out of the box (the
-  group and its decision policy, operator authorizations and fee grants, DID
+  group and its decision policy, delegate authorizations and fee grants, DID
   rotation, trust-deposit accounting, governance-framework anchoring);
 - satisfies, by construction, the few duties the Verana Network Governance
   Framework (Network GF) places on every corporation (chapter 6, section 6.2,
@@ -145,8 +145,8 @@ this convention heavily.
   Corporation controls; its sections T4 (ecosystem governance authority) and
   T14 (amendment) use the same patterns as sections T4 and T13 below.
 - The **VT and VPR specifications** define every protocol object this
-  template references: `Corporation`, `OperatorAuthorization`,
-  `VSOperatorAuthorization`, `FeeGrant`, `TrustDeposit`,
+  template references: `Corporation`, `DelegateAuthorization`,
+  `VerifiableService`, `FeeGrant`, `TrustDeposit`,
   `GovernanceFrameworkVersion`, `GovernanceFrameworkDocument`. This template
   never restates the specs; where it summarizes them, the specs prevail.
 
@@ -165,7 +165,7 @@ Normativity in this document has two distinct scopes:
   template is bound by them.
 - The suggested text in sections T1–T13 is **not normative as written
   here**. It becomes normative only inside the CGF a corporation publishes,
-  where it binds that corporation, its group members, and its operators
+  where it binds that corporation, its group members, and its delegates
   under that corporation's own authority.
 
 Sections marked "*This section is non-normative.*" contain no requirements in
@@ -176,10 +176,10 @@ either scope.
 Terms defined in the [Verifiable Trust specification](https://verana-labs.github.io/verifiable-trust-spec/)
 and the [VPR specification](https://verana-labs.github.io/verifiable-trust-vpr-spec/)
 are used with the meanings given there and are not redefined here. This
-includes: Corporation, Ecosystem, CredentialSchema, Participant, corporation
-governance framework (CGF), ecosystem governance framework (EGF), operator,
-VS operator, fee grant, trust deposit, trust unit, Verifiable Service,
-Verifiable User Agent, and the participant roles ECOSYSTEM, ISSUER_GRANTOR,
+includes: Corporation, Ecosystem, CredentialSchema, Accreditation, corporation
+governance framework (CGF), ecosystem governance framework (EGF), delegate,
+VS account, fee grant, trust deposit, trust unit, Verifiable Service,
+Verifiable User Agent, and the accreditation roles ECOSYSTEM, ISSUER_GRANTOR,
 VERIFIER_GRANTOR, ISSUER, VERIFIER, HOLDER.
 
 The following local terms are used in this document. Definitions contain no
@@ -198,17 +198,17 @@ normative keywords.
   managed through `x/group` directly, not through VPR messages.
 - **Group member**: an account listed in the group with a voting weight.
   Distinct from a *Member* of the Verana Council Association and from a
-  *Participant* in an ecosystem; this template never uses "member" alone.
+  *participant* in an ecosystem; this template never uses "member" alone.
 - **Decision policy**: the `x/group` rule (threshold or percentage, with its
   voting period and minimum execution period) under which the group adopts
   proposals that the `policy_address` then executes.
-- **Operator**: an account holding an `OperatorAuthorization` from the
+- **Delegate**: an account holding a `DelegateAuthorization` from the
   Corporation to sign enumerated VPR message types on its behalf, optionally
   with spend limits, a period, an expiration, and a fee grant.
-- **VS operator**: a Verifiable Service agent account holding a
-  `VSOperatorAuthorization` from the Corporation, scoped to specific
-  Participant entries. Operator and VS operator authorizations are mutually
-  exclusive for a given grantee.
+- **VS account**: the account that a Verifiable Service of the Corporation
+  signs VPR messages with. It is set on the `VerifiableService` entry of the
+  service, with the message types it may sign and its budget. An account
+  cannot be both a delegate and a VS account of the Corporation.
 - **Network GF**: the Verana Network Governance Framework, the constitutional
   layer that every governance framework on the Verana network supplements
   and must not contradict.
@@ -248,7 +248,7 @@ template or represents its CGF as conformant with this template.
 - **[TCGF-6]** The CGF MUST NOT loosen any requirement the Network GF places
   on corporations, and MUST NOT purport to govern any ecosystem, any other
   corporation, or any participant other than the corporation's own group
-  members and operators. Ecosystem rules belong in an EGF.
+  members and delegates. Ecosystem rules belong in an EGF.
 - **[TCGF-7]** Where a template section does not apply, the CGF MUST state
   "No stipulation." rather than omit the section, so that silence is
   distinguishable from oversight.
@@ -272,7 +272,7 @@ template or represents its CGF as conformant with this template.
   license per the CC-BY-SA 4.0 terms) and MUST attribute the Verana Council
   Association as the author of the template.
 - **[TCGF-13]** The CGF MUST NOT require any conduct that would cause the
-  corporation, a group member, or an operator to breach law applicable to
+  corporation, a group member, or a delegate to breach law applicable to
   them, and MUST state this (the legal-safety clause of section T2.5).
 - **[TCGF-14]** The CGF MUST NOT place personal data on-chain, MUST NOT
   require any party to do so ([NGF-PART-5]), and SHOULD identify natural
@@ -288,7 +288,7 @@ template or represents its CGF as conformant with this template.
 > maintained documents but not this template. Founding Members should decide
 > whether (a) to keep the CGF floor minimal and leave this template purely
 > voluntary, or (b) to add a short chapter to the Network GF making an
-> identified registered organization, a stated decision policy, an operator
+> identified registered organization, a stated decision policy, a delegate
 > disclosure rule, and a contact channel mandatory CGF contents, and to add
 > this template to [NGF-POW-2]. This draft assumes (a) and is written so that
 > (b) can be adopted later without changing the template's sections.
@@ -316,7 +316,7 @@ template or represents its CGF as conformant with this template.
 | Document Name | ⟨Organization Name⟩ Corporation Governance Framework |
 | Version | ⟨integer, starting at 1⟩ |
 | Status | ⟨Draft / Active⟩ |
-| Governs | The Corporation entry of ⟨Organization Name⟩ on the Verana network: its group, its operators, and its conduct as a corporation |
+| Governs | The Corporation entry of ⟨Organization Name⟩ on the Verana network: its group, its delegates, and its conduct as a corporation |
 | Governed By | ⟨Legal name of the registered organization⟩ |
 | Requirement-ID prefix | ⟨PREFIX⟩ |
 | Corporation DID | ⟨did:…⟩ |
@@ -364,7 +364,7 @@ This framework governs:
 
 - the registered organization's conduct as the controller of the
   Corporation entry identified in section T1;
-- the members of the Corporation's group and the operators and VS operators
+- the members of the Corporation's group and the delegates and VS delegates
   authorized by it, in that capacity; and
 - the registered organization's handling of the DID, keys, trust deposit,
   and governance documents attached to the Corporation entry.
@@ -395,7 +395,7 @@ never loosens a higher one.
 ### T2.4 Acceptance
 
 The registered organization is bound by this framework as its author. Each
-operator it authorizes accepts the version of this framework in force
+delegate it authorizes accepts the version of this framework in force
 before its first use of the authorization, through Accept Corporation
 Governance Framework ([MOD-GF-MSG-4]), and each later version within the
 grace period set at activation ([⟨PREFIX⟩-OPS-5], [⟨PREFIX⟩-AMND-5]); an
@@ -459,7 +459,7 @@ section T1 is:
 - [⟨PREFIX⟩-ORG-2] The registered organization MUST disclose, in this
   section, any change of control affecting it within ⟨days — suggested: 30⟩
   days of the change becoming effective, and MUST notify the ecosystem
-  governance authority of every ecosystem in which it holds a Participant
+  governance authority of every ecosystem in which it holds an Accreditation
   entry, where that ecosystem's EGF so requires.
 - [⟨PREFIX⟩-ORG-3] The registered organization MUST be a single legal or
   organizational entity. Where several affiliated entities act on Verana,
@@ -490,9 +490,9 @@ section T1 is:
   the rotation.
 
 > *Instruction:* The Corporation DID is what ecosystems resolve when they
-> validate you and what indexers display next to every Participant entry you
+> validate you and what indexers display next to every Accreditation entry you
 > own. The VPR forbids a DID from being claimed by two corporations, or by an
-> Ecosystem or Participant entry owned by another corporation; rotating to a
+> Ecosystem or Accreditation entry owned by another corporation; rotating to a
 > DID you do not control will abort. Say now what happens at genesis, on
 > rotation, and on compromise (section T9).
 
@@ -502,7 +502,7 @@ section T1 is:
 
 The registered organization answers for every message signed by its
 `policy_address`, whether executed through a group proposal or by an
-authorized operator, and for keeping this framework accurate. It does not
+authorized delegate, and for keeping this framework accurate. It does not
 answer for the rules of ecosystems it does not control, nor for the conduct
 of other participants in ecosystems it does control (the EGF of that
 ecosystem allocates that accountability). A Corporation entry records that an
@@ -561,8 +561,8 @@ Total weight: ⟨sum⟩.
   policy"⟩. A vote cast without that authorization binds the Corporation
   on-chain but is a breach of this framework by the group member.
 - [⟨PREFIX⟩-GOV-3] The following acts MUST be decided by group proposal and
-  MUST NOT be delegated to an operator: changes to group membership or the
-  decision policy; Grant and Revoke Operator Authorization ([MOD-DE-MSG-3],
+  MUST NOT be delegated to a delegate: changes to group membership or the
+  decision policy; Grant and Revoke Delegate Authorization ([MOD-DE-MSG-3],
   [MOD-DE-MSG-4]) except as section T6 allows; Update Corporation DID
   ([MOD-CO-MSG-2]); activation of a new version of this framework
   ([MOD-GF-MSG-2]); ⟨further reserved acts, e.g. creation or archiving of
@@ -573,42 +573,42 @@ Total weight: ⟨sum⟩.
   filled.
 
 > *Instruction:* [⟨PREFIX⟩-GOV-3] is where you draw the line between
-> governance and operations. Operators (section T6) are for routine,
+> governance and operations. Delegates (section T6) are for routine,
 > high-volume messages: starting and validating onboarding processes,
 > issuing and revoking, adjusting deposits. Acts that change who controls
 > the Corporation, or that are rare and consequential, stay with the group.
-> The VPR itself allows Grant Operator Authorization to be executed by an
-> existing operator; if you want it group-only, say so here and do not
-> include it in any operator's `msg_types`.
+> The VPR itself allows Grant Delegate Authorization to be executed by an
+> existing delegate; if you want it group-only, say so here and do not
+> include it in any delegate's `msg_types`.
 
-## T6. Operators and Delegation
+## T6. Delegates and VS Accounts
 
-### T6.1 Operator authorizations
+### T6.1 Delegate authorizations
 
-- [⟨PREFIX⟩-OPS-1] The on-chain `OperatorAuthorization` entries of this
-  Corporation (List Operator Authorizations, [MOD-DE-QRY-1]) are the
-  authoritative list of its operators. The registered organization MUST
-  grant operator authorizations only to ⟨eligible grantees, e.g. accounts
+- [⟨PREFIX⟩-OPS-1] The on-chain `DelegateAuthorization` entries of this
+  Corporation (List Delegate Authorizations, [MOD-DE-QRY-1]) are the
+  authoritative list of its delegates. The registered organization MUST
+  grant delegate authorizations only to ⟨eligible grantees, e.g. accounts
   controlled by its employees, its contracted Verifiable Service provider
   named in section T6.3, or its own infrastructure⟩.
-- [⟨PREFIX⟩-OPS-2] Every operator authorization MUST enumerate only the
-  `msg_types` the operator needs, MUST carry an `expiration` no later than
+- [⟨PREFIX⟩-OPS-2] Every delegate authorization MUST enumerate only the
+  `msg_types` the delegate needs, MUST carry an `expiration` no later than
   ⟨months — suggested: 12⟩ months after grant, and SHOULD carry a
   `spend_limit` with a `period` where the authorized messages move funds
   (trust-deposit adjustments, fees).
-- [⟨PREFIX⟩-OPS-3] The registered organization MUST revoke the operator
+- [⟨PREFIX⟩-OPS-3] The registered organization MUST revoke the delegate
   authorization of any account whose controller leaves the organization,
   changes function, or is suspected of compromise, within ⟨business days —
   suggested: 2⟩ business days of the event ([MOD-DE-MSG-4]).
 - [⟨PREFIX⟩-OPS-4] The registered organization MUST review all active
-  operator authorizations at least every ⟨months — suggested: 12⟩ months
+  delegate authorizations at least every ⟨months — suggested: 12⟩ months
   and record the review in ⟨its internal register⟩.
-- [⟨PREFIX⟩-OPS-5] An operator MUST accept the version of this framework in
+- [⟨PREFIX⟩-OPS-5] A delegate MUST accept the version of this framework in
   force before its first use of its authorization ([MOD-GF-MSG-4]), and each
   later version within the grace period the registered organization sets at
   activation ([⟨PREFIX⟩-AMND-5]); until it does, its authorization is
   unusable (VPR [GF-CHECK-2]). The network fee of the acceptance is paid
-  ⟨by the operator / by the registered organization through the operator's
+  ⟨by the delegate / by the registered organization through the delegate's
   fee grant, whose `msg_types` then list
   `AcceptCorporationGovernanceFramework`⟩.
 
@@ -616,29 +616,28 @@ Total weight: ⟨sum⟩.
 
 - [⟨PREFIX⟩-OPS-5] Fee grants (`with_feegrant` on [MOD-DE-MSG-3], or
   Grant Fee Allowance [MOD-DE-MSG-1]) MUST be limited to the `msg_types` of
-  the corresponding operator authorization and SHOULD carry a
+  the corresponding delegate authorization and SHOULD carry a
   `feegrant_spend_limit` per period. The `policy_address` balance that funds
   them is replenished by ⟨the organ or process that funds it⟩.
 
-### T6.3 Verifiable Service operators
+### T6.3 Verifiable Service accounts
 
-⟨Describe the Verifiable Service agents (VS operators) that act for this
-Corporation's Participant entries, the provider operating them if
-outsourced, and the scope of their `VSOperatorAuthorization` records — or:⟩
+⟨Describe the Verifiable Services that act for this Corporation, the VS
+account of each, the provider operating them if outsourced, and the message
+types and budgets set on their `VerifiableService` entries — or:⟩
 
 **No stipulation.**
 
 - [⟨PREFIX⟩-OPS-6] Where this Corporation's Verifiable Services are operated
   by a third party, the registered organization MUST name the provider in
-  this section, MUST keep the provider's `vs_operator` accounts distinct
-  from any operator account of section T6.1, and remains fully and
+  this section, MUST keep the VS accounts (`vs_account`) held by the provider
+  distinct from any delegate account of section T6.1, and remains fully and
   non-delegably responsible for every message those accounts sign.
 
-> *Instruction:* VS operator authorizations are created in the context of a
-> Participant entry (onboarding, root participant creation) and grouped per
-> (corporation, vs_operator); their spend and fee budgets are stored in
-> `ParticipantAuthorizationRecord` entries. A grantee cannot hold both an
-> Operator Authorization and a VS Operator Authorization from the same
+> *Instruction:* A VS Account Authorization is set on the
+> `VerifiableService` entry of a service ([MOD-DE-MSG-5]): the account, the
+> message types it may sign and its spend and fee budgets are stored on that
+> entry. An account cannot be both a delegate and a VS account of the same
 > Corporation — plan your accounts accordingly.
 
 ## T7. Ecosystems Controlled and Roles Held
@@ -655,14 +654,14 @@ outsourced, and the scope of their `VSOperatorAuthorization` records — or:⟩
   governed by its own Ecosystem Governance Framework, published per Network
   GF chapter [NGF-EGF]. This framework states no ecosystem rule.
 
-### T7.2 Participant roles in other ecosystems
+### T7.2 Accreditations in other ecosystems
 
 *This section is non-normative.*
 
-This Corporation owns Participant entries in ecosystems it does not control.
+This Corporation owns Accreditation entries in ecosystems it does not control.
 Each such entry is governed by the EGF of its ecosystem, which this
-organization accepted by conduct when it applied. The authoritative list is
-the on-chain Participant registry; ⟨optionally: a convenience list is
+organization accepted on-chain before it applied. The authoritative list is
+the `Accreditation` entries of its services in the VPR; ⟨optionally: a convenience list is
 maintained at ⟨URL⟩⟩.
 
 > *Instruction:* Do not copy your issuer or verifier obligations here; they
@@ -676,17 +675,18 @@ Suggested text:
 - [⟨PREFIX⟩-FIN-1] The registered organization acknowledges that trust
   deposits on the Verana network are non-withdrawable and that Trust Units
   are non-transferable and non-convertible (Network GF [NGF-ECON-1]), and
-  MUST fund the deposits required for its Participant entries from ⟨its
+  MUST fund the deposits required for its Accreditation entries from ⟨its
   own treasury / the process named here⟩.
 - [⟨PREFIX⟩-FIN-2] If any deposit of this Corporation is slashed by an
-  ecosystem ([MOD-PP-MSG-12]) or by the network ([MOD-TD-MSG-5]), ⟨the
+  ecosystem ([MOD-AC-MSG-12]) or by the network ([MOD-TD-MSG-5]), ⟨the
   accountable organ⟩ MUST decide within ⟨days — suggested: 30⟩ days whether
-  to repay ([MOD-PP-MSG-13], [MOD-TD-MSG-6]) or to contest through the
+  to repay ([MOD-TD-MSG-6]) or to contest through the
   appeal path of the sanctioning framework, and MUST record the decision in
-  ⟨its internal register⟩. While a network slash is unrepaid, all
-  permissions of this Corporation are non-trustable, as the VPR provides.
+  ⟨its internal register⟩. While a slash is unrepaid, the VPR refuses the
+  acts of this Corporation: in the whole ecosystem for an ecosystem slash
+  (the ecosystem bar), on the whole network for a network slash.
 - [⟨PREFIX⟩-FIN-3] The registered organization MUST keep the
-  `policy_address` and its operator accounts funded to meet the fees of the
+  `policy_address` and its delegate accounts funded to meet the fees of the
   messages it is obliged to execute under any EGF it is bound by (in
   particular revocations), so that an obligation never fails for want of
   fees.
@@ -697,11 +697,11 @@ Suggested text:
 
 ## T9. Keys, Security and Incident Handling
 
-- [⟨PREFIX⟩-SEC-1] Group member keys, operator keys, VS operator keys, and
+- [⟨PREFIX⟩-SEC-1] Group member keys, delegate keys, VS account keys, and
   the keys controlling the Corporation DID MUST be separate keys. Group
   member keys SHOULD be held in hardware or a remote signer and MUST NOT be
   held by a third-party service provider.
-- [⟨PREFIX⟩-SEC-2] On suspected or confirmed compromise of an operator key,
+- [⟨PREFIX⟩-SEC-2] On suspected or confirmed compromise of a delegate key,
   the registered organization MUST revoke the authorization ([MOD-DE-MSG-4])
   within ⟨hours — suggested: 24⟩ hours; on compromise of a group member
   key, it MUST replace the member through a group proposal within ⟨hours —
@@ -709,7 +709,7 @@ Suggested text:
   rotate the DID ([MOD-CO-MSG-2]) without the notice period of
   [⟨PREFIX⟩-ORG-5] and publish the rotation per [⟨PREFIX⟩-ORG-6].
 - [⟨PREFIX⟩-SEC-3] The registered organization MUST notify the ecosystem
-  governance authority of every ecosystem in which it holds a Participant
+  governance authority of every ecosystem in which it holds an Accreditation
   entry of any incident under [⟨PREFIX⟩-SEC-2] within ⟨hours — suggested:
   72⟩ hours, and MUST perform the revocation duties the applicable EGFs
   attach to such incidents.
@@ -726,7 +726,7 @@ Suggested text:
 - [⟨PREFIX⟩-LAW-2] The registered organization MUST NOT write personal data
   to the network, in any message, metadata field (including `group_metadata`
   and `group_policy_metadata`), DID document, or governance framework
-  document, and MUST NOT require any operator or group member to do so
+  document, and MUST NOT require any delegate or group member to do so
   ([NGF-PART-5], [TCGF-14]).
 - [⟨PREFIX⟩-LAW-3] Personal data the organization processes off-chain in
   connection with its Verana activities is governed by ⟨its privacy notice
@@ -754,10 +754,10 @@ Suggested text:
   on the Verana network, it MUST, in this order: publish a notice at the
   publication points of [⟨PREFIX⟩-ORG-5] at least ⟨days — suggested: 90⟩
   days in advance; for every Ecosystem it controls, execute the abandonment
-  or migration procedure of that ecosystem's EGF; for every Participant
+  or migration procedure of that ecosystem's EGF; for every Accreditation
   entry it owns, perform the exit and termination duties of the applicable
-  EGF (including revocation of unexpired credentials); revoke every operator
-  and VS operator authorization; and publish a final version of this
+  EGF (including revocation of unexpired credentials); revoke every delegate
+  and VS Account Authorization; and publish a final version of this
   framework recording the wind-down.
 - [⟨PREFIX⟩-END-2] The registered organization MUST keep every version of
   this framework that was ever active retrievable at its anchored URL for
@@ -773,7 +773,7 @@ Suggested text:
 
 > *Instruction:* The VPR has no message that deletes a Corporation entry or
 > transfers it to another organization. "Wind-down" therefore means leaving
-> the entry inert and truthful: operators revoked, participant entries
+> the entry inert and truthful: delegates revoked, Accreditation entries
 > terminated under their EGFs, documents still resolvable. Hosting your CGF
 > on a URL you can keep paying for after you stop operating (or on a
 > content-addressed archive) is the practical consequence of [TCGF-8].
@@ -798,9 +798,9 @@ Suggested text:
   published for comment to ⟨audience⟩ at least ⟨days⟩ days before
   adoption — or:⟩ **No stipulation** on comment periods.
 - [⟨PREFIX⟩-AMND-5] Each activation sets an `acceptance_grace` of ⟨days —
-  suggested: 30, the network minimum⟩ days, during which operators that
+  suggested: 30, the network minimum⟩ days, during which delegates that
   accepted a former version keep using their authorizations; the registered
-  organization notifies its operators at activation. An operator that has
+  organization notifies its delegates at activation. A delegate that has
   not accepted by the deadline is blocked until it does, without revocation
   of its authorization.
 
@@ -815,7 +815,7 @@ Suggested text:
 ## Annex A. Network GF Interface Checklist
 
 *This annex is non-normative for the corporation's group members and
-operators; it is the conformance-by-construction map for the CGF author.*
+delegates; it is the conformance-by-construction map for the CGF author.*
 
 > *Instruction:* Network GF chapter 6, section 6.2 states the duties
 > of every corporation on the network, and chapters [NGF-PRIN] and [NGF-EGF]
@@ -859,11 +859,11 @@ every message named here.*
    privilege), the `Corporation` entry with `active_version` 1, and the
    version-1 `GovernanceFrameworkVersion` and `GovernanceFrameworkDocument`.
    Record the assigned `id` and `policy_address` in section T1.
-3. **Grant Operator Authorization ([MOD-DE-MSG-3]).** By group proposal,
-   grant each operator of section T6.1 its enumerated `msg_types`, an
+3. **Grant Delegate Authorization ([MOD-DE-MSG-3]).** By group proposal,
+   grant each delegate of section T6.1 its enumerated `msg_types`, an
    `expiration`, optional spend limits and period, and `with_feegrant` as
    decided in section T6.2. Repeat Revoke ([MOD-DE-MSG-4]) and Grant as
-   operators change.
+   delegates change.
 4. **Later versions only — Add Governance Framework Document
    ([MOD-GF-MSG-1]) then Increase Active Governance Framework Version
    ([MOD-GF-MSG-2]), both without `ecosystem_id`.** For every version after
@@ -874,10 +874,10 @@ every message named here.*
    not happen while Instruction blocks or unresolved ⟨fields⟩ remain.
 5. **Update Corporation ([MOD-CO-MSG-2]).** Only on DID rotation (section
    T4.2 or T9). The new DID must not be held by any other Corporation nor by
-   an Ecosystem or Participant entry of another corporation.
+   an Ecosystem or Accreditation entry of another corporation.
 6. **Ecosystems and participation.** Create New Ecosystem ([MOD-ES-MSG-1])
    with the EGF from the Template EGF for each ecosystem of section T7.1;
-   start onboarding processes ([MOD-PP-MSG-1]) in third-party ecosystems for
+   start onboarding processes ([MOD-AC-MSG-1]) in third-party ecosystems for
    the roles of section T7.2. Those sequences are documented in the Template
    EGF, Annex B.
 
@@ -896,11 +896,11 @@ every message named here.*
 | DID rotation notice | T4.2 | ⟨days — suggested: 30⟩ | ⟨T13⟩ |
 | Group configuration mirror deadline | T5.2 | ⟨days — suggested: 30⟩ | ⟨T13⟩ |
 | Decision policy (type, threshold, voting period, execution period) | T5.2 | ⟨values⟩ | ⟨group proposal, then T13 mirror⟩ |
-| Operator authorization maximum lifetime | T6.1 | ⟨months — suggested: 12⟩ | ⟨T13⟩ |
-| Operator revocation deadline on departure | T6.1 | ⟨business days — suggested: 2⟩ | ⟨T13⟩ |
-| Operator review cadence | T6.1 | ⟨months — suggested: 12⟩ | ⟨T13⟩ |
+| Delegate authorization maximum lifetime | T6.1 | ⟨months — suggested: 12⟩ | ⟨T13⟩ |
+| Delegate revocation deadline on departure | T6.1 | ⟨business days — suggested: 2⟩ | ⟨T13⟩ |
+| Delegate review cadence | T6.1 | ⟨months — suggested: 12⟩ | ⟨T13⟩ |
 | Slash repay-or-contest decision deadline | T8 | ⟨days — suggested: 30⟩ | ⟨T13⟩ |
-| Operator key compromise revocation | T9 | ⟨hours — suggested: 24⟩ | ⟨T13⟩ |
+| Delegate key compromise revocation | T9 | ⟨hours — suggested: 24⟩ | ⟨T13⟩ |
 | Group key compromise replacement | T9 | ⟨hours — suggested: 72⟩ | ⟨T13⟩ |
 | Incident notification to EGAs | T9 | ⟨hours — suggested: 72⟩ | ⟨T13⟩ |
 | Report acknowledgement | T11 | ⟨business days — suggested: 5⟩ | ⟨T13⟩ |
@@ -921,17 +921,17 @@ every message named here.*
 | --- | --- |
 | Which legal entity stands behind this Corporation entry? | T4.1 identification; [⟨PREFIX⟩-ORG-3] one entity per entry |
 | How does the Corporation decide? | T5: group members by function, weights, decision policy mirrored from `x/group`; [⟨PREFIX⟩-GOV-2] off-chain authorization of votes |
-| Who may sign for it day to day, and within what limits? | T6: operator authorizations as the authoritative list, scoped `msg_types`, expiration, spend limits, review cadence |
+| Who may sign for it day to day, and within what limits? | T6: delegate authorizations as the authoritative list, scoped `msg_types`, expiration, spend limits, review cadence |
 | Which acts are reserved to the group? | [⟨PREFIX⟩-GOV-3] |
 | What happens if a key is compromised? | T9: revoke, replace, rotate, notify EGAs |
 | Which governance frameworks is this organization bound by? | T2.3 layering; T7 ecosystems controlled and roles held |
 | Who pays deposits and fees, and who decides on repayment after a slash? | T8 |
 | How do relying parties verify this document? | T1 metadata mirrors on-chain `url` + `digest_sri`; [TCGF-8] |
 | How do the rules change? | T13: new document, new version, on-chain activation as entry into force |
-| What happens if the organization disappears or is sold? | T12: notice, EGF wind-down duties, operator revocation, document retention, successor identification |
+| What happens if the organization disappears or is sold? | T12: notice, EGF wind-down duties, delegate revocation, document retention, successor identification |
 
 ## Version History
 
 | Version | Date | Status | Summary |
 | --- | --- | --- | --- |
-| 0.1 | 2026-10-14 | Draft | First draft for co-authoring by Founding Members. Written against VPR specification v5 (draft): Corporation entries anchored by an `x/group` policy address, mandatory version-1 CGF at creation ([MOD-CO-MSG-1]), operator and VS operator authorizations, fee grants, polymorphic Governance Framework module. One `[DECISION]` flag (whether the Network GF should gain a mandatory-contents chapter for CGFs). Recorded acceptance: operators accept the framework before use (T2.4, [⟨PREFIX⟩-OPS-5], [⟨PREFIX⟩-AMND-5]); `ngf_version` at creation (Annex B). |
+| 0.1 | 2026-10-14 | Draft | First draft for co-authoring by Founding Members. Written against VPR specification v5 (draft): Corporation entries anchored by an `x/group` policy address, mandatory version-1 CGF at creation ([MOD-CO-MSG-1]), delegate and VS Account Authorizations, fee grants, polymorphic Governance Framework module. One `[DECISION]` flag (whether the Network GF should gain a mandatory-contents chapter for CGFs). Recorded acceptance: delegates accept the framework before use (T2.4, [⟨PREFIX⟩-OPS-5], [⟨PREFIX⟩-AMND-5]); `ngf_version` at creation (Annex B). |
