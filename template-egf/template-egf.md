@@ -32,13 +32,13 @@ payable to the Council. Ecosystem creation is permissionless by protocol
 design: any organization that registers a Corporation entry on the Verifiable
 Public Registry (VPR) can create an Ecosystem entry, publish its own
 Ecosystem Governance Framework (EGF), define its own credential schemas, and
-operate its own participant tree — all without asking anybody.
+operate its own Accreditation trees — all without asking anybody.
 
 This template exists to make that easy. It is a fill-in-the-blanks scaffold
 for writing an EGF that:
 
 - works with the VPR's on-chain mechanics out of the box (onboarding modes,
-  permission trees, trust deposits, fees, slashing, governance-framework
+  Accreditation trees, trust deposits, fees, slashing, governance-framework
   anchoring);
 - satisfies, by construction, the mandatory-content requirements that the
   Verana Network Governance Framework (Network GF) chapter [NGF-EGF] places on
@@ -163,7 +163,7 @@ normative keywords.
 - **Network validator**: an operator of a consensus node securing the Verana
   network chain. Only Verana Council members operate network validators.
 - **Onboarding validator**: the Participant that validates an applicant in an
-  on-chain onboarding process (the "validator" of the VPR's Participant
+  on-chain onboarding process (the "validator" of the VPR's Accreditation
   module). Unrelated to network validators; the bare word "validator" is
   avoided throughout.
 - **Instruction block**: a blockquote beginning with "*Instruction:*",
@@ -180,7 +180,7 @@ normative keywords.
   EGF, revisable through the EGF's stated amendment process.
 - **Member**: a member of the Verana Council Association (a Swiss Verein).
   Distinct from **Participant**, which is strictly an on-chain role in an
-  ecosystem's permission tree. This template never uses "member" for
+  ecosystem's accreditation tree. This template never uses "member" for
   ecosystem roles.
 
 ## 5. Template Requirements
@@ -300,8 +300,8 @@ credential-based trust problem this ecosystem solves, for whom⟩.
 This framework governs:
 
 - the credential schemas listed in section T6 and no others;
-- the participants holding on-chain permissions in the ⟨Ecosystem Name⟩
-  permission tree, in the roles defined in section T7; and
+- the participants holding on-chain accreditations in the ⟨Ecosystem Name⟩
+  accreditation tree, in the roles defined in section T7; and
 - the conduct of the ecosystem governance authority itself, as stated in
   section T4.
 
@@ -405,7 +405,7 @@ is:
   suggested: 30⟩ days' notice before a migration takes effect.
 - [⟨PREFIX⟩-EGA-6] If the EGA permanently ceases to operate this ecosystem,
   it MUST publish an abandonment notice, revoke or wind down outstanding
-  permissions per section T8, and MUST NOT transfer control of the Ecosystem
+  accreditations per section T8, and MUST NOT transfer control of the Ecosystem
   DID to another party without publishing the transfer.
 
 ### T4.3 What the EGA answers for
@@ -414,7 +414,7 @@ is:
 
 Each role in this ecosystem answers for its own function. The EGA answers
 for the efficacy and fair administration of these rules — not for the
-conduct of every participant. A permission granted under this framework
+conduct of every participant. An accreditation granted under this framework
 records that published criteria were met at validation time; it is not a
 guarantee of ongoing good conduct. Relying parties retain their own
 obligation to decide, per purpose, whether a verified credential is valid
@@ -435,8 +435,8 @@ The ⟨Ecosystem Name⟩ ecosystem exists on the Verana VPR as:
   activated via [MOD-GF-MSG-2];
 - one CredentialSchema entry per schema in section T6, created via
   [MOD-CS-MSG-1]; and
-- a root ECOSYSTEM Participant entry per schema, created via Create Root
-  Participant [MOD-PP-MSG-7], anchoring the permission tree of section T7.
+- a root ECOSYSTEM Accreditation entry per schema, created via Create
+  Root Accreditation [MOD-AC-MSG-7], anchoring the accreditation tree of section T7.
 
 > *Instruction:* Annex B gives the exact message sequence with explanations.
 > Publish your objective accreditation criteria as digest-anchored
@@ -460,8 +460,8 @@ The ⟨Ecosystem Name⟩ ecosystem exists on the Verana VPR as:
 >     Lowest friction, no vetting; appropriate for low-risk schemas or where
 >     verification is meant to be universal. Note that OPEN does not mean
 >     free: per-operation fees may still apply. OPEN role-holders must still
->     self-create a Participant entry on-chain (Self Create Participant,
->     [MOD-PP-MSG-14]) before acting — the entry anchors their trust deposit
+>     self-create an Accreditation entry on-chain (Self Create Participant,
+>     [MOD-AC-MSG-14]) before acting — the entry anchors their trust deposit
 >     and remains subject to revocation and slashing by the ecosystem.
 >   - `GRANTOR_ONBOARDING_PROCESS` — candidates onboard with an intermediary
 >     grantor (ISSUER_GRANTOR / VERIFIER_GRANTOR) that your ecosystem has
@@ -471,10 +471,10 @@ The ⟨Ecosystem Name⟩ ecosystem exists on the Verana VPR as:
 >     ecosystem (you). Maximum control, no delegation; appropriate for small
 >     or high-assurance issuer sets.
 > - `holder_onboarding_mode`, one of:
->   - `ISSUER_ONBOARDING_PROCESS` — holders get a Participant entry through
+>   - `ISSUER_ONBOARDING_PROCESS` — holders get an Accreditation entry through
 >     an onboarding process with an issuer; enables on-chain revocation
 >     status checks and holder-side validation fees.
->   - `PERMISSIONLESS` — holders need no Participant entry (and issuers
+>   - `NO_ONBOARDING_PROCESS` — holders need no Accreditation entry (and issuers
 >     cannot charge validation fees to candidate holders through the VPR).
 > - Validity periods, in days, per role (`issuer_grantor_`,
 >   `verifier_grantor_`, `issuer_`, `verifier_`,
@@ -492,12 +492,12 @@ The ⟨Ecosystem Name⟩ ecosystem exists on the Verana VPR as:
 >   denom regardless of this choice.
 > - `digest_algorithm` for credentials issued under the schema, per the VT
 >   specification (`sha384` or `sha512`, lowercase tokens).
-> - `credential_anchoring` (`DIGEST` or `NONE`): whether the digest of every
+> - `credential_anchoring` (`DIGEST` or `NO_DIGEST`): whether the digest of every
 >   credential is anchored in the VPR at issuance. The VPR fixes `DIGEST` for
->   W3C JSON-LD schemas and `NONE` for AnonCreds schemas; for SD-JWT schemas
+>   W3C JSON-LD schemas and `NO_DIGEST` for AnonCreds schemas; for SD-JWT schemas
 >   you choose. `DIGEST` gives dated issuance, credentials that survive the
 >   issuer's termination (Grace Period, T8.7), revocation on the VPR with the
->   ancestor path of T11, and issuance fees enforced by the digest. `NONE`
+>   ancestor path of T11, and issuance fees enforced by the digest. `NO_DIGEST`
 >   gives herd privacy of revocation checks (Token Status List), cheap bulk
 >   revocation and compatibility with existing SD-JWT deployments, at the
 >   price of credentials that stop verifying when the issuer's entry ends.
@@ -522,7 +522,7 @@ canonical form) is authoritative.
 | --- | --- |
 | `issuer_onboarding_mode` | ⟨OPEN / GRANTOR_ONBOARDING_PROCESS / ECOSYSTEM_ONBOARDING_PROCESS⟩ |
 | `verifier_onboarding_mode` | ⟨OPEN / GRANTOR_ONBOARDING_PROCESS / ECOSYSTEM_ONBOARDING_PROCESS⟩ |
-| `holder_onboarding_mode` | ⟨ISSUER_ONBOARDING_PROCESS / PERMISSIONLESS⟩ |
+| `holder_onboarding_mode` | ⟨ISSUER_ONBOARDING_PROCESS / NO_ONBOARDING_PROCESS⟩ |
 | `issuer_grantor_accreditation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
 | `verifier_grantor_accreditation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
 | `issuer_accreditation_validity_period` | ⟨days, 0 to the network maximum — suggested: 365⟩ |
@@ -577,7 +577,7 @@ VPR specification:
 
 | Role | In this ecosystem |
 | --- | --- |
-| ECOSYSTEM | The EGA's own root Participant entries (one per schema), anchoring each permission tree |
+| ECOSYSTEM | The EGA's own root Accreditation entries (one per schema), anchoring each accreditation tree |
 | ISSUER_GRANTOR | ⟨who they are, per schema — or "not used"⟩ |
 | VERIFIER_GRANTOR | ⟨who they are, per schema — or "not used"⟩ |
 | ISSUER | ⟨eligibility summary, detailed in section T8⟩ |
@@ -592,7 +592,7 @@ VPR specification:
   routed to ⟨another grantor / the EGA⟩.
 
 > *Instruction:* Do not import corporate-membership vocabulary here: on
-> Verana, "member" belongs to associations, "Participant" to permission
+> Verana, "member" belongs to associations, "Participant" to accreditation
 > trees. If your ecosystem defines sub-bodies (committees, expert panels),
 > give each a one-page charter: purpose, composition, enumerated
 > responsibilities, and the statement that it recommends but does not bind
@@ -619,11 +619,12 @@ VPR specification:
   period on a schema (VPR `presentation_validity_period` of the
   CredentialSchema entry, ⟨duration in seconds⟩, set at creation or through
   Update Credential Schema). While the period is greater than 0, every
-  presentation of a credential of the schema is anchored in its verification
-  session and the receipt is stamped with a `presentation_valid_until`: the
-  presentation is valid evidence of a verification only until that time, and
-  a verifier that relies on the credential afterwards MUST obtain a new
-  presentation and pay the applicable fees again. This framework MUST state
+  presentation of a credential of the schema is recorded by a
+  `CredentialPresentation` transaction that carries the digest of the
+  presentation: the presentation is valid evidence of a verification only
+  until the block time of that transaction plus the period, and a verifier
+  that relies on the credential afterwards MUST obtain a new presentation
+  and pay the applicable fees again. This framework MUST state
   this effect as its terms of reliance; a change of the period applies to the
   verifications that follow it.
 - [⟨PREFIX⟩-LIFE-2] The validating party (the EGA or the responsible
@@ -643,9 +644,9 @@ VPR specification:
 ### T8.2 Application
 
 - [⟨PREFIX⟩-LIFE-4] Applicants apply by starting an on-chain onboarding
-  process (Start Participant OP, [MOD-PP-MSG-1]) with the designated
+  process (Start Onboarding, [MOD-AC-MSG-1]) with the designated
   onboarding validator for the role and schema, and by completing the
-  DIDComm validation session defined in ⟨the ecosystem's onboarding
+  DIDComm onboarding session defined in ⟨the ecosystem's onboarding
   procedure / operational annex⟩.
 - [⟨PREFIX⟩-LIFE-5] Refusals MUST state written reasons against the
   published criteria. A refused applicant MAY re-apply at any time; no
@@ -653,8 +654,8 @@ VPR specification:
 
 ### T8.3 Activation
 
-- [⟨PREFIX⟩-LIFE-6] Validation is effected on-chain by Set Participant OP to
-  Validated ([MOD-PP-MSG-3]). An approval not activated within ⟨activation
+- [⟨PREFIX⟩-LIFE-6] Validation is effected on-chain by Validate
+  Onboarding ([MOD-AC-MSG-3]). An approval not activated within ⟨activation
   window — suggested: 180⟩ days of the approval decision expires and the
   application lapses.
 
@@ -662,13 +663,13 @@ VPR specification:
 
 - [⟨PREFIX⟩-LIFE-7] Participants MUST requalify every ⟨requalification
   period — suggested: the schema's validation validity period⟩ by renewing
-  their onboarding process ([MOD-PP-MSG-2]) under the criteria in effect at
+  their onboarding process ([MOD-AC-MSG-2]) under the criteria in effect at
   renewal time.
 - [⟨PREFIX⟩-LIFE-8] A participant operating services on which relying
-  parties depend for revocation or permission-state information MUST keep
+  parties depend for revocation or accreditation-state information MUST keep
   that information available at least ⟨availability % — suggested: 99.0⟩ %
   measured monthly. Issuance capacity MAY degrade; revocation and
-  permission-state availability MUST NOT.
+  accreditation-state availability MUST NOT.
 
 ### T8.5 Notification
 
@@ -729,11 +730,11 @@ credential concerned; higher rungs are added, not substituted.
 
 | Rung | Mechanism | On-chain realization |
 | --- | --- | --- |
-| Financially backed pledge | Every participant's non-withdrawable trust deposit, growing with usage and slashable on violation | Trust deposit per Participant entry |
-| Vetting | Evaluation of the applicant against published criteria in a live validation session | DIDComm onboarding validation ([MOD-PP-MSG-1]/[MOD-PP-MSG-3]) |
-| Registration | The public, queryable record that a party holds a role under this framework | VALIDATED Participant entry with validity window |
-| Certification | A revocable credential attesting accreditation against published criteria | Deferred: the VALIDATED Participant entry is the accreditation until the VPR's accreditation credentials are available |
-| Discontinuance | Removal of a non-conforming party's status, visible to every relying party | Revocation [MOD-PP-MSG-9]; slash [MOD-PP-MSG-12]; repay [MOD-PP-MSG-13] |
+| Financially backed pledge | Every participant's non-withdrawable trust deposit, growing with usage and slashable on violation | Trust deposit per Accreditation entry |
+| Vetting | Evaluation of the applicant against published criteria in a live onboarding session | DIDComm onboarding validation ([MOD-AC-MSG-1]/[MOD-AC-MSG-3]) |
+| Registration | The public, queryable record that a party holds a role under this framework | VALIDATED Accreditation entry with validity window |
+| Certification | A revocable credential attesting accreditation against published criteria | Deferred: the VALIDATED Accreditation entry is the accreditation until the VPR's accreditation credentials are available |
+| Discontinuance | Removal of a non-conforming party's status, visible to every relying party | Revocation [MOD-AC-MSG-9]; slash [MOD-AC-MSG-12]; repay [MOD-TD-MSG-6] |
 | Referential trust | Recognition of this ecosystem by relying parties that choose to trust it | Whitelisting of the Ecosystem DID by Verifiable Services and User Agents |
 
 > *Instruction:* Select rungs per schema; do not mandate expensive
@@ -766,10 +767,10 @@ credential concerned; higher rungs are added, not substituted.
 
 Suggested text:
 
-Fees in this ecosystem are set per Participant entry in the schema's pricing
+Fees in this ecosystem are set per Accreditation entry in the schema's pricing
 asset (section T6): `validation_fees` (paid by an applicant to its
 onboarding validator per validation period), `issuance_fees` (paid to the
-issuer per issuance), and `verification_fees` (paid to the permission holder
+issuer per issuance), and `verification_fees` (paid to the accreditation holder
 per verification). A share of fees paid (`trust_deposit_rate`, a network
 parameter) accrues to trust deposits rather than being paid out; trust
 deposits are non-withdrawable by design. Where the network's agent-reward
@@ -825,21 +826,21 @@ user-agent and wallet-user-agent reward shares on pay-per operations.
      window days — suggested: 15⟩ days (⟨shorter cure days — suggested: 5⟩
      days for violations endangering relying parties) and day-counted
      milestones.
-  3. **Permission restriction** — conditions on the participant's activity
+  3. **Accreditation restriction** — conditions on the participant's activity
      (e.g. no new issuances) pending remediation.
   4. **Suspension** — the participant is publicly designated suspended and
      MUST NOT perform the suspended role; unresolved suspension
      auto-terminates after ⟨auto-termination days — suggested: 180⟩ days
      per [⟨PREFIX⟩-LIFE-11].
-  5. **Revocation** — the permission is revoked on-chain (Revoke
-     Participant, [MOD-PP-MSG-9]), triggering the termination duties of
+  5. **Revocation** — the accreditation is revoked on-chain (Revoke
+     Accreditation, [MOD-AC-MSG-9]), triggering the termination duties of
      T8.7.
   6. **Trust-deposit slash** — for grave or repeated violations, the
-     ecosystem slashes the participant's trust deposit (Slash Participant
-     Trust Deposit, [MOD-PP-MSG-12]). Slashed amounts are burned by the
+     ecosystem slashes the participant's trust deposit (Slash
+     Participation Trust Deposit, [MOD-AC-MSG-12]). Slashed amounts are burned by the
      protocol — the EGA gains nothing from punishing. Re-participation
-     requires repaying the slashed amount (Repay Participant Slashed Trust
-     Deposit, [MOD-PP-MSG-13]) and fresh qualification.
+     requires repaying the slashed amount (Repay
+     Slash, [MOD-TD-MSG-6]) and fresh qualification.
 
 - [⟨PREFIX⟩-SANC-3] Every sanction decision MUST be published with its
   grounds and reasons, and recorded symmetrically: suspension, lifting of
@@ -859,7 +860,7 @@ user-agent and wallet-user-agent reward shares on pay-per operations.
 - [⟨PREFIX⟩-SANC-6] Sanction decisions MUST be taken by decision-makers
   free of conflicts of interest in the matter; a conflicted decision-maker
   is excluded from the deliberation and the denominator.
-- [⟨PREFIX⟩-SANC-7] A permission granted through a procedurally defective
+- [⟨PREFIX⟩-SANC-7] An accreditation granted through a procedurally defective
   process is reviewable, not automatically void; the EGA MUST review it
   promptly and ratify, cure, or revoke it. Credentials issued in good faith
   under it before the review decision are not invalidated retroactively by
@@ -890,7 +891,7 @@ user-agent and wallet-user-agent reward shares on pay-per operations.
 ### T11.5 Revocation requests
 
 - [⟨PREFIX⟩-SANC-10] Any party MAY submit a revocation request against a
-  credential or permission of this ecosystem, stating one of the enumerated
+  credential or accreditation of this ecosystem, stating one of the enumerated
   grounds of ⟨the applicable revocation grounds, e.g. per
   [⟨PREFIX⟩-⟨SCH⟩-3]⟩ together with supporting evidence. Before acting, the
   competent issuer or the EGA MUST verify the identity and standing of the
@@ -914,7 +915,7 @@ user-agent and wallet-user-agent reward shares on pay-per operations.
 
 - [⟨PREFIX⟩-PRIV-1] No participant may place personal data on-chain, and
   nothing in this framework requires it. On-chain entries are limited to
-  registrations: DIDs, permissions, digests, fees, and timestamps.
+  registrations: DIDs, accreditations, digests, fees, and timestamps.
 - [⟨PREFIX⟩-PRIV-2] Qualification and issuance evidence containing personal
   data MUST be held off-chain by the party that collected it, protected per
   ⟨applicable data-protection law — e.g. GDPR⟩, retained no longer than
@@ -930,24 +931,24 @@ user-agent and wallet-user-agent reward shares on pay-per operations.
 ## T13. Public Claims and Trust Marks
 
 - [⟨PREFIX⟩-CLAIM-1] A party MAY publicly claim participation, accreditation,
-  or conformance under this framework if and only if its on-chain permission
+  or conformance under this framework if and only if its on-chain accreditation
   is VALIDATED, within its validity period, not revoked, and not slashed,
   and its Corporation is not subject to an unrepaid network-level
   trust-deposit slash (see Network GF [NGF-PART-9], which owns the
-  network-level collapse rule). A slashed permission permanently loses
-  claimable status; re-participation requires repayment and a new permission
+  network-level collapse rule). A slashed accreditation permanently loses
+  claimable status; re-participation requires repayment and a new accreditation
   per rung 6 of [⟨PREFIX⟩-SANC-2]. All such claims MUST cease
   while any of those conditions fails.
 - [⟨PREFIX⟩-CLAIM-2] No party is required to advertise participation; a
   party that chooses to MUST do so in the form prescribed here and MUST
   include ⟨its DID / a resolvable reference⟩ so relying parties can resolve
-  live on-chain status. The on-chain permission state is the authoritative
+  live on-chain status. The on-chain accreditation state is the authoritative
   status signal; any badge or listing is derivative.
 - [⟨PREFIX⟩-CLAIM-3] Discoverability: this framework is discoverable from
   the Ecosystem DID via the on-chain `GovernanceFrameworkDocument` entries.
   Authorization queries about this ecosystem's participants (per the ToIP
   Trust Registry Query Protocol supported by the VPR query API) resolve
-  against live permission state: authorized means VALIDATED, within
+  against live accreditation state: authorized means VALIDATED, within
   validity, not revoked, not slashed, and the Corporation not under an
   unrepaid network-level trust-deposit slash (Network GF [NGF-PART-9]).
 
@@ -1013,13 +1014,13 @@ conformance-by-construction map required for the EGF author.*
 | Scope defined | T2.2 | Schemas, participants, EGA self-binding; explicit non-scope |
 | Roles per schema defined | T6 + T7 | Per-schema configuration and role table on VPR role semantics |
 | Onboarding requirements per role | T8 (+ T6 issuer policies) | Published objective criteria, application, activation, requalification |
-| Sanctions and appeal defined | T11 | Graduated ladder pre-wired to [MOD-PP-MSG-9]/[-12]/[-13]; independent appeal |
+| Sanctions and appeal defined | T11 | Graduated ladder pre-wired to [MOD-AC-MSG-9]/[-12]/[-13]; independent appeal |
 | Fee schedule or its absence | T10 | Fee table incl. explicit zero-fee statement option |
 | Privacy and data-handling commitments | T12 | Off-chain evidence rules, retention, consent triple |
 | Amendment process with notice period | T14 | Comment window, notice runway, on-chain activation as entry into force |
 | Issuer termination duties | T8.7 ([⟨PREFIX⟩-LIFE-12]) | Revoke unexpired credentials, notify holders with Grace Period, archive evidence, destroy keys |
 | Verified revocation requests | T11.5 ([⟨PREFIX⟩-SANC-10]) | Enumerated grounds; requester identity and standing verified before acting; day-counted response deadline |
-| Revocation-availability asymmetry | T8.4 ([⟨PREFIX⟩-LIFE-8]) | Issuance may degrade; revocation and permission-state availability may not |
+| Revocation-availability asymmetry | T8.4 ([⟨PREFIX⟩-LIFE-8]) | Issuance may degrade; revocation and accreditation-state availability may not |
 | No personal data on-chain | T12 ([⟨PREFIX⟩-PRIV-1]) + [TEGF-14] | Registrations-only rule |
 | Lawful-purpose / legal-safety clause | T2.5 + [TEGF-13] | No requirement to breach applicable law |
 | No misrepresentation of Council endorsement | [TEGF-1] + T13 | Endorsement disclaimer; claims gated on live on-chain state |
@@ -1039,7 +1040,7 @@ every message named here.*
    `policy_address` signs for you thereafter. The message requires the
    initial group members, a decision policy, and the public URL +
    `digest_sri` of your version-1 Corporation governance framework (CGF)
-   document. Any account can submit this; no permission is needed.
+   document. Any account can submit this; no accreditation is needed.
 2. **Create New Ecosystem ([MOD-ES-MSG-1]).** Create the Ecosystem entry
    under your Corporation: your Ecosystem DID, primary language, and the
    public URL + `digest_sri` of your completed EGF (this document) in that
@@ -1065,9 +1066,9 @@ every message named here.*
    (JSON schema, onboarding modes, validity periods, pricing asset, digest
    algorithm). The on-chain schema identifiers assigned here MAY be pinned
    into a subsequent framework version.
-5. **Create Root Participant ([MOD-PP-MSG-7]).** Create the ECOSYSTEM root
-   Participant entry that anchors each schema's permission tree; all
-   grantor, issuer, and verifier permissions descend from it through
+5. **Create Root Accreditation ([MOD-AC-MSG-7]).** Create the ECOSYSTEM root
+   Accreditation entry that anchors each schema's accreditation tree; all
+   grantor, issuer, and verifier accreditations descend from it through
    onboarding processes.
 6. **Publish your accreditation criteria.** Publish the objective
    accreditation criteria per (schema, role) as digest-anchored Controlled
@@ -1095,7 +1096,7 @@ every message named here.*
 | Application decision service level | T8.1 | ⟨days — suggested: 30⟩ | ⟨T14⟩ |
 | Activation window (approval expiry) | T8.3 | ⟨days — suggested: 180⟩ | ⟨T14⟩ |
 | Requalification period | T8.4 | ⟨suggested: validity period⟩ | ⟨T14⟩ |
-| Availability floor (revocation / permission state) | T8.4 | ⟨% — suggested: 99.0⟩ | ⟨T14⟩ |
+| Availability floor (revocation / accreditation state) | T8.4 | ⟨% — suggested: 99.0⟩ | ⟨T14⟩ |
 | Participant notification deadline | T8.5 | ⟨days — suggested: 7⟩ | ⟨T14⟩ |
 | EGA notice of material changes | T8.5 / T14 | ⟨days — suggested: 30⟩ | ⟨T14⟩ |
 | Auto-termination of unresolved suspension | T8.6 / T11 | ⟨days — suggested: 180⟩ | ⟨T14⟩ |
@@ -1120,12 +1121,12 @@ every message named here.*
 | Question | Template answer |
 | --- | --- |
 | Who governs, and who governs the governor? | T4.1 identification; T4.3 accountability allocation; T2.3 Network GF as the floor |
-| How does a party join? | T8.1–T8.3: published objective criteria → onboarding process [MOD-PP-MSG-1] → validation [MOD-PP-MSG-3] |
+| How does a party join? | T8.1–T8.3: published objective criteria → onboarding process [MOD-AC-MSG-1] → validation [MOD-AC-MSG-3] |
 | How does a party leave, voluntarily or not? | T8.6–T8.8 and T11: suspension, termination, Grace Period, portfolio non-transfer |
-| How are rules enforced? | T11 ladder pre-wired to [MOD-PP-MSG-9]/[-12]/[-13]; deposits as the financial backstop |
+| How are rules enforced? | T11 ladder pre-wired to [MOD-AC-MSG-9]/[-12]/[-13]; deposits as the financial backstop |
 | Who pays whom, for what? | T10 fee table on `validation_fees` / `issuance_fees` / `verification_fees`; trust-deposit mechanics |
 | What incentive does anyone have to behave? | Non-withdrawable deposits (burned on slash), requalification, public symmetric record, referential trust |
-| How do relying parties check status? | T13: claims as a pure function of live on-chain permission state; TRQP-compatible queries |
+| How do relying parties check status? | T13: claims as a pure function of live on-chain accreditation state; TRQP-compatible queries |
 | How do the rules change? | T14: comment window, notice runway, on-chain activation as entry into force |
 | What happens if the EGA disappears? | T4.2 DID lifecycle and abandonment; [⟨PREFIX⟩-EGA-4] vacancy fallback |
 
