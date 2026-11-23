@@ -272,10 +272,26 @@ MUST remain publicly resolvable without authentication for as long as any
 accreditation or credential issued under it can be valid; the chain-anchored
 digest version is canonical over any web copy.
 
-[ECS-GEN-8] Participation in the ECS ecosystem — submitting or accepting
-any onboarding process, holding any Participant entry, or issuing or
-verifying any credential under an ECS — constitutes acceptance of the
-version of this framework active at the time of the act.
+[ECS-GEN-8] A corporation accepts the version of this framework in force
+before its first act in the ECS ecosystem — submitting an onboarding
+process, creating a self-created entry, issuing any credential under an
+ECS, or verifying one with an entry or a recorded exchange — through Accept Governance Framework Version
+([MOD-GF-MSG-3]), and each later version within the grace period set at
+activation ([ECS-AMND-2]). The VPR refuses the acts of a corporation that
+has not accepted (VPR [GF-CHECK-3]); holders and relying parties refuse its
+credentials and presentation requests (Verifiable Trust specification
+[CIT-3], [PRT-3]). A corporation that only verifies ECS credentials without
+an `Accreditation` entry and without recording a `CredentialExchange`, under
+a schema whose verifier mode is `OPEN` or `CREDENTIAL` (every service
+verifying User Agent credentials, a zero-fee Badge presentation), records no
+acceptance (Verifiable Trust specification [PRT-3]): by relying on those
+credentials it accepts the obligations this framework places on verifiers
+(the verifier policies of sections 6.1.5, 6.2.8, 6.3.8, 6.4.5 and 6.5.5) and
+nothing else; its first act that records anything in the ecosystem requires
+the acceptance above. The Council, author of this framework and controller of
+the ecosystem, accepts nothing. Natural persons holding Badge credentials
+have no corporation and accept nothing on-chain; they are bound by the terms
+shown at issuance.
 
 [ECS-GEN-9] A Participant of the ECS ecosystem MUST NOT use its
 accreditations, or credentials issued under this framework, for an unlawful
@@ -1183,8 +1199,9 @@ time via Withdraw Onboarding Request ([MOD-AC-MSG-6]).
 
 ### 8.2 Agreement and activation
 
-[ECS-LIFE-4] Before activation, the applicant MUST have executed the
-Participant Candidate Agreement for its role; the agreement's
+[ECS-LIFE-4] Before applying, the applicant MUST have accepted the version
+of this framework in force ([ECS-GEN-8]); before activation, it MUST have
+executed the Participant Candidate Agreement for its role; the agreement's
 confidentiality and cooperation clauses bind from signature, and full
 participant status attaches only at activation.
 
@@ -1671,7 +1688,10 @@ with a published disposition of comments.
 effect only through on-chain activation of a new
 `GovernanceFrameworkVersion` ([MOD-GF-MSG-1] / [MOD-GF-MSG-2]); for
 material changes the version's `active_since` MUST lie at least 30 days
-after adoption, and the active version is immutable.
+after adoption, and the active version is immutable. Each activation sets
+an `acceptance_grace` of 60 days (Annex A), at least the network minimum,
+during which participants that accepted a former version keep acting; the
+Council notifies participants at activation and publishes the deadline.
 
 [ECS-AMND-3] Each row of this document's version history MUST correspond
 one-to-one with an on-chain version activation (once live), naming the
@@ -1769,6 +1789,7 @@ period at 3650 days (GlobalVariables).
 | A30 | Public-claim removal deadline ([ECS-TA-5]) | 5 days | [ECS-AMND-5] |
 | A31 | Sanction / appeal decision deadline ([ECS-SANC-13]) | 60 days | [ECS-AMND-5] |
 | A32 | Presentation validity period (`presentation_validity_period`, per schema, [ECS-ACC-16]) | none (0); seconds when set, max 315,360,000 | [ECS-AMND-5] + [MOD-CS-MSG-2] |
+| A33 | Acceptance grace of each framework activation, `acceptance_grace` ([ECS-AMND-2]) | 60 days | [ECS-AMND-5] |
 
 > **[DECISION]** *Annex A values A1–A7, A12–A31.* The validity periods
 > (365 days), Grace Period (90 days), proofing recency (30 days), and the

@@ -325,10 +325,26 @@ higher one.
 
 ### T2.4 Acceptance
 
-Participation in this ecosystem — starting or renewing an onboarding process,
-holding a permission, issuing, verifying, or holding credentials under a
-schema of this ecosystem — constitutes acceptance of the version of this
-framework active on-chain at the time of the relevant act.
+A corporation accepts the version of this framework in force before its
+first act in this ecosystem — starting an onboarding process, creating a
+root or self-created entry, issuing under a schema of this ecosystem, or
+verifying under one with an entry or a recorded exchange — through Accept Governance Framework Version ([MOD-GF-MSG-3]),
+and each later version within the grace period set at activation
+([⟨PREFIX⟩-AMND-2]). The VPR refuses the acts of a corporation that has not
+accepted (VPR [GF-CHECK-3]), and holders and relying parties refuse its
+credentials and presentation requests (Verifiable Trust specification
+[CIT-3], [PRT-3]). A corporation that only verifies credentials of this ecosystem without an
+`Accreditation` entry and without recording a `CredentialExchange`, under a
+schema whose verifier mode is `OPEN` or `CREDENTIAL` (a service verifying
+User Agent credentials, a zero-fee presentation), records no acceptance
+(Verifiable Trust specification [PRT-3]): by relying on those credentials it
+accepts the obligations this framework places on verifiers (Verifier
+policies) and nothing else; its first act that records anything in the
+ecosystem requires the acceptance above. The EGA, author of this framework,
+accepts nothing.
+Natural persons holding credentials in their wallets have no corporation
+and accept nothing on-chain; ⟨state how they are bound, e.g. the terms
+shown at issuance⟩.
 
 ### T2.5 Legal safety
 
@@ -976,8 +992,11 @@ user-agent and wallet-user-agent reward shares on pay-per operations.
   `GovernanceFrameworkDocument` ([MOD-GF-MSG-1]) and enters into force only
   upon on-chain activation ([MOD-GF-MSG-2]). For material changes, the
   activation date MUST lie at least ⟨notice days — suggested: 30⟩ days
-  after adoption. Active versions are immutable; corrections are new
-  versions.
+  after adoption. Each activation sets an `acceptance_grace` of ⟨grace days
+  — suggested: 60; at least the network minimum, 30⟩ days, during which
+  participants that accepted a former version keep acting; the EGA notifies
+  participants at activation and publishes the deadline. Active versions are
+  immutable; corrections are new versions.
 - [⟨PREFIX⟩-AMND-3] Versions are sequential integers starting at 1,
   assigned by on-chain activation order. The change log in section T1 lists
   one row per activated version.
